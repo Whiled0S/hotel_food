@@ -1,11 +1,11 @@
 <template>
-	<div id="dishes"></div>
+	<div id="dishes">DISHES</div>
 </template>
 
 <script>
   export default {
     name: 'Dishes'
-  }
+  };
 </script>
 
 <style scoped>
