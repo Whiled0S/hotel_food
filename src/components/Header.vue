@@ -1,7 +1,7 @@
 <template>
-  <div id="header">
-    <span>HEADER</span>
-  </div>
+  <header class="header">
+
+  </header>
 </template>
 
 <script>
@@ -12,11 +12,13 @@
 </script>
 
 <style scoped lang="less">
-  #header {
-    height: 50px;
-    border-bottom: 1px solid #CCC;
+  .header {
+    position: sticky;
+    top: 0;
+    height: 70px;
+    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    z-index: 10;
+    background-color: #fff;
   }
 </style>
