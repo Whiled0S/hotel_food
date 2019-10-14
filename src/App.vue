@@ -1,15 +1,18 @@
 <template>
   <div id="app">
-    <div id="pages">
-      <router-view/>
-    </div>
+    <page>
+      <router-view />
+    </page>
 
-    <modal v-show="this.modal"/>
+    <transition name="slide">
+      <modal v-show="modal"/>
+    </transition>
   </div>
 </template>
 
 <script>
-  import Modal from './components/Modal';
+  import Page from './layouts/Page';
+  import Modal from './layouts/Modal';
 
   import { createNamespacedHelpers } from 'vuex';
 
@@ -18,23 +21,26 @@
   export default {
     name: 'App',
     components: {
+      Page,
       Modal
     },
     computed: {
-      ...mapGetters([
-        'modal'
-      ])
+      ...mapGetters(['modal'])
     }
   };
 </script>
 
 <style lang="less">
+  @import "helpers/transitions";
+
   html, body {
     width: 100%;
     height: 100%;
+    font-family: Tahoma, sans-serif;
   }
 
   #app {
+    display: flex;
     min-height: 100%;
   }
 </style>

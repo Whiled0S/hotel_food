@@ -20,8 +20,8 @@ export default {
   },
 
   actions: {
-    openModal({commit}, payload) {
-      commit('SET_MODAL', payload.name);
+    openModal({commit}, name) {
+      commit('SET_MODAL', name);
     },
 
     closeModal({commit}) {

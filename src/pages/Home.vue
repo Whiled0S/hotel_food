@@ -1,20 +1,22 @@
 <template>
   <div id="home">
     <Header />
-    <h1>HOME</h1>
-    <router-link to="/dishes">
-      <button>DISHES</button>
-    </router-link>
+    <h1 @click="openModal('terms')">HOME</h1>
   </div>
 </template>
 
 <script>
   import Header from '../components/Header';
+  import {mapActions} from 'vuex';
 
   export default {
     name: 'Home',
     components: {
       Header
+    },
+
+    methods: {
+      ...mapActions('modals', ['openModal']),
     }
   };
 </script>
