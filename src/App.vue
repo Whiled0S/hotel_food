@@ -11,8 +11,8 @@
 </template>
 
 <script>
-  import Page from './layouts/Page';
-  import Modal from './layouts/Modal';
+  import Page from './containers/Page';
+  import Modal from './containers/Modal';
 
   import { createNamespacedHelpers } from 'vuex';
 
