@@ -16,7 +16,7 @@
 
 <style lang="less" scoped>
   .menu-list-item {
-    padding: 11px 12px 11px 13px;
+    padding: 11px;
     list-style: none;
     font-weight: bold;
     border-radius: 10px;

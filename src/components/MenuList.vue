@@ -1,10 +1,12 @@
 <template>
   <ul class="menu-list">
+    <li class="scroll-padding"></li>
     <MenuListItem
       v-for="{id, text} in items"
       :key="id"
       :active="id === active"
     >{{ text }}</MenuListItem>
+    <li class="scroll-padding"></li>
   </ul>
 </template>
 
@@ -56,8 +58,14 @@
   .menu-list {
     width: 100%;
     display: flex;
+    padding: 0;
+    margin: 0 0 20px;
     flex-wrap: nowrap;
-    padding: 0 5px;
     overflow-x: scroll;
+  }
+
+  .scroll-padding {
+    list-style: none;
+    min-width: 5px;
   }
 </style>

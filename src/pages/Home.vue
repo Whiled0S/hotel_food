@@ -1,9 +1,20 @@
 <template>
   <div id="home">
     <Header/>
-    <SubHeader/>
+    <SubHeader
+      headline="Double room №24"
+      description="Get your food and drinks delivered to your room"
+    />
     <Main>
       <MenuList/>
+
+      <CardList
+        header="Hotel"
+      />
+
+      <CardList
+        header="Places in around"
+      />
     </Main>
   </div>
 </template>
@@ -13,6 +24,7 @@
   import SubHeader from '../components/SubHeader';
   import Main from '../containers/Main';
   import MenuList from '../components/MenuList';
+  import CardList from '../components/CardList';
 
   export default {
     name: 'Home',
@@ -20,7 +32,8 @@
       Header,
       SubHeader,
       Main,
-      MenuList
+      MenuList,
+      CardList
     },
   };
 </script>

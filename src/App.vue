@@ -43,6 +43,9 @@
 
   body {
     font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
   }
 
   #app {
