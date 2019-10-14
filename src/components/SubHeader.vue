@@ -25,8 +25,6 @@
   .subheader {
     display: flex;
     flex-wrap: nowrap;
-    position: sticky;
-    top: 70px;
     min-height: 85px;
     padding: 14px 27px 13px 16px;
     background-color: #f0f0f0;
