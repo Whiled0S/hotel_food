@@ -2,6 +2,7 @@
   <div id="home">
     <Header />
     <h1 @click="openModal('terms')">HOME</h1>
+    <router-link to="/dish">to dish</router-link>
   </div>
 </template>
 
