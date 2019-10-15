@@ -34,8 +34,11 @@
       margin-bottom: 10px;
       background-color: #f5f5f5;
       border-radius: 11px;
+      overflow: hidden;
 
       img {
+        width: 100%;
+        height: 100%;
         object-fit: contain;
       }
     }

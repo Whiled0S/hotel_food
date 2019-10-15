@@ -18,6 +18,8 @@
 <script>
   import Card from './Card';
 
+  import img from '../assets/MacDonalds.png';
+
   export default {
     name: 'CardList',
     components: {
@@ -31,17 +33,17 @@
         cards: [
           {
             id: 0,
-            img: null,
+            img: img,
             name: 'Cafe Radisson'
           },
           {
             id: 1,
-            img: null,
+            img: img,
             name: 'Lobbi-Bar Radisson'
           },
           {
             id: 2,
-            img: null,
+            img: img,
             name: 'Lobbi-Bar Radisson'
           }
         ]

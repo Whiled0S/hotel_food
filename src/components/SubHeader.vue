@@ -33,6 +33,12 @@
     &__image {
       width: 75px;
       margin-right: 13px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
     }
 
     &__content {

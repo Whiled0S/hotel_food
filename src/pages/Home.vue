@@ -4,6 +4,7 @@
     <SubHeader
       headline="Double room №24"
       description="Get your food and drinks delivered to your room"
+      :img="img"
     />
     <Main>
       <MenuList/>
@@ -26,6 +27,8 @@
   import MenuList from '../components/MenuList';
   import CardList from '../components/CardList';
 
+  import radisson from '../assets/Radisson.png';
+
   export default {
     name: 'Home',
     components: {
@@ -35,6 +38,11 @@
       MenuList,
       CardList
     },
+    data() {
+      return {
+        img: radisson
+      };
+    }
   };
 </script>
 
