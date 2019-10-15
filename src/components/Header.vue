@@ -62,6 +62,9 @@
         font-weight: bold;
         padding: 0;
         margin: 0;
+        border: none;
+        outline: none;
+        background-color: transparent;
       }
 
       .ti-angle-down {
