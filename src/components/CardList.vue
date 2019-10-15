@@ -5,10 +5,11 @@
     <div class="card-list__container">
       <div class="scroll-padding"></div>
       <Card
-        v-for="{id, img, name} in cards"
+        v-for="{id, img, name, price} in cards"
         :key="id"
         :name="name"
         :img="img"
+        :price="price"
       />
       <div class="scroll-padding"></div>
     </div>
@@ -18,37 +19,15 @@
 <script>
   import Card from './Card';
 
-  import img from '../assets/MacDonalds.png';
-
   export default {
     name: 'CardList',
     components: {
       Card
     },
     props: {
-      header: String
+      header: String,
+      cards: Array
     },
-    data () {
-      return {
-        cards: [
-          {
-            id: 0,
-            img: img,
-            name: 'Cafe Radisson'
-          },
-          {
-            id: 1,
-            img: img,
-            name: 'Lobbi-Bar Radisson'
-          },
-          {
-            id: 2,
-            img: img,
-            name: 'Lobbi-Bar Radisson'
-          }
-        ]
-      };
-    }
   };
 </script>
 

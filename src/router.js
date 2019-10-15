@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import Home from './pages/Home';
-import Dishes from './pages/Dishes';
+import Restaurant from './pages/Restaurant';
 import Dish from './pages/Dish';
 
 Vue.use(Router);
@@ -17,9 +17,9 @@ export default new Router({
       component: Home
     },
     {
-      path: '/dishes',
-      name: 'dishes',
-      component: Dishes
+      path: '/restaurant',
+      name: 'restaurant',
+      component: Restaurant
     },
     {
       path: '/dish',

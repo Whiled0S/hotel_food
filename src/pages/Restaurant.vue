@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <div id="restaurant">
     <Header/>
     <SubHeader
       headline="Double room №24"
@@ -7,16 +7,17 @@
       :img="img"
     />
     <Main>
-      <MenuList/>
-
-      <CardList
-        header="Hotel"
-        :cards="hotels"
+      <HomeLink
+        text="Restorante Via D’Argento"
       />
-
+      <MenuList/>
       <CardList
-        header="Places in around"
-        :cards="hotels"
+        header="Salads"
+        :cards="dishes"
+      />
+      <CardList
+        header="Pizza"
+        :cards="dishes"
       />
     </Main>
   </div>
@@ -30,11 +31,13 @@
   import CardList from '../components/CardList';
 
   import radisson from '../assets/Radisson.png';
-  import hotel from '../assets/MacDonalds.png';
+  import dish from '../assets/Dish.png';
+  import HomeLink from '../components/HomeLink';
 
   export default {
     name: 'Home',
     components: {
+      HomeLink,
       Header,
       SubHeader,
       Main,
@@ -44,21 +47,24 @@
     data() {
       return {
         img: radisson,
-        hotels: [
+        dishes: [
           {
             id: 0,
-            img: hotel,
-            name: 'Cafe Radisson'
+            img: dish,
+            name: 'Cafe Radisson',
+            price: 200
           },
           {
             id: 1,
-            img: hotel,
-            name: 'Lobbi-Bar Radisson'
+            img: dish,
+            name: 'Lobbi-Bar Radisson',
+            price: 100
           },
           {
             id: 2,
-            img: hotel,
-            name: 'Lobbi-Bar Radisson'
+            img: dish,
+            name: 'Lobbi-Bar Radisson',
+            price: 150
           }
         ]
       };
