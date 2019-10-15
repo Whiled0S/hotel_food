@@ -12,11 +12,13 @@
       <CardList
         header="Hotel"
         :cards="hotels"
+        link="restaurant"
       />
 
       <CardList
         header="Places in around"
         :cards="hotels"
+        link="restaurant"
       />
     </Main>
   </div>
@@ -48,12 +50,12 @@
           {
             id: 0,
             img: hotel,
-            name: 'Cafe Radisson'
+            name: 'Cafe Radisson',
           },
           {
             id: 1,
             img: hotel,
-            name: 'Lobbi-Bar Radisson'
+            name: 'Lobbi-Bar Radisson',
           },
           {
             id: 2,

@@ -10,6 +10,7 @@
         :name="name"
         :img="img"
         :price="price"
+        :link="link"
       />
       <div class="scroll-padding"></div>
     </div>
@@ -26,7 +27,8 @@
     },
     props: {
       header: String,
-      cards: Array
+      cards: Array,
+      link: String
     },
   };
 </script>

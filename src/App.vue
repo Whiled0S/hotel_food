@@ -20,6 +20,7 @@
 <style lang="less">
   @import "helpers/transitions";
   @import "helpers/fonts";
+  @import "helpers/carousel";
   @import "assets/fonts/Themify/themify-icons.css";
 
   html {

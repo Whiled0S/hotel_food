@@ -1,6 +1,6 @@
 <template>
   <router-link
-    to="/restaurant"
+    :to="link"
     tag="div"
     class="card"
   >
@@ -19,7 +19,8 @@
     props: {
       name: String,
       img: String,
-      price: Number
+      price: Number,
+      link: String
     }
   };
 </script>

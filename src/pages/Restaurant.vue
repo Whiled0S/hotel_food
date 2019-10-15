@@ -14,10 +14,12 @@
       <CardList
         header="Salads"
         :cards="dishes"
+        link="dish"
       />
       <CardList
         header="Pizza"
         :cards="dishes"
+        link="dish"
       />
     </Main>
   </div>
