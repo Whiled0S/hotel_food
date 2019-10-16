@@ -5,13 +5,15 @@
     </div>
 
     <ul class="header__items">
-      <li
+      <router-link
+        tag="li"
+        v-for="{icon, link} in items"
+        :to="link"
         class="header__item"
-        v-for="{icon} in items"
         :key="icon"
       >
         <img :src="icon" alt="icon">
-      </li>
+      </router-link>
     </ul>
   </header>
 </template>
@@ -28,13 +30,16 @@
         language: 'Eng',
         items: [
           {
-            icon: book
+            icon: book,
+            link: '/history'
           },
           {
-            icon: basket
+            icon: basket,
+            link: '/cart'
           },
           {
-            icon: user
+            icon: user,
+            link: '/profile'
           }
         ]
       };

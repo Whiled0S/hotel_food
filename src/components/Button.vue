@@ -1,7 +1,8 @@
 <template>
 	<button
     @click="emitClick"
-    class="button">
+    class="button"
+  >
     <slot/>
   </button>
 </template>

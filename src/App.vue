@@ -48,10 +48,16 @@
     font-size: 16px;
     font-weight: normal;
     font-style: normal;
+    color: #2b2423;
   }
 
   #app {
     display: flex;
     min-height: 100%;
+  }
+
+  .container {
+    width: 100%;
+    padding: 0 16px;
   }
 </style>
