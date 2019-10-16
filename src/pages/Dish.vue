@@ -4,22 +4,13 @@
 
     <Carousel class="dish__carousel" :perPage="1">
       <Slide>
-        <div
-          class="dish__slide"
-          :style="{ backgroundImage: `url(${img})`}"
-        ></div>
+        <img class="dish__slide" :src="img" alt="img">
       </Slide>
       <Slide>
-        <div
-          class="dish__slide"
-          :style="{ backgroundImage: `url(${img})`}"
-        ></div>
+        <img class="dish__slide" :src="img" alt="img">
       </Slide>
       <Slide>
-        <div
-          class="dish__slide"
-          :style="{ backgroundImage: `url(${img})`}"
-        ></div>
+        <img class="dish__slide" :src="img" alt="img">
       </Slide>
     </Carousel>
 
@@ -74,9 +65,7 @@
     &__slide {
       width: 100%;
       height: 100%;
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
+      object-fit: cover;
     }
 
     &__info {
