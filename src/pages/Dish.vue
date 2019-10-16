@@ -37,6 +37,10 @@
         Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
         of Lorem Ipsum.
       </article>
+
+      <div class="dish__add">
+        <Button>Add to cart</Button>
+      </div>
     </div>
   </div>
 </template>
@@ -45,10 +49,11 @@
   import Header from '../components/Header';
   import { Carousel, Slide } from 'vue-carousel';
   import dish from '../assets/Salad.jpg';
+  import Button from '../components/Button';
 
   export default {
     name: 'Dish',
-    components: { Header, Carousel, Slide },
+    components: { Button, Header, Carousel, Slide },
     data() {
       return {
         img: dish
@@ -103,8 +108,13 @@
     }
 
     &__description {
+      margin-bottom: 20px;
       font-size: 13px;
       line-height: 1.3;
+    }
+
+    &__add {
+      margin-bottom: 20px;
     }
   }
 </style>
