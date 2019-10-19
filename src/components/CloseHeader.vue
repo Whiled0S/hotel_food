@@ -23,8 +23,11 @@
   .close-header {
     display: flex;
     align-items: center;
-    position: relative;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
     padding: 25px 16px;
+    z-index: 1;
 
     &__text {
       width: 100%;

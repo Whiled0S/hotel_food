@@ -46,6 +46,10 @@
   .order {
     margin-bottom: 20px;
 
+    &:last-child {
+      margin-bottom: 0;
+    }
+
     &__header {
       margin: 0;
       padding-bottom: 5px;
