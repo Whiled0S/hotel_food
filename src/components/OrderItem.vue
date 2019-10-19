@@ -1,14 +1,14 @@
 <template>
   <div class="order-item">
-    <span class="order-item__number">1.</span>
+    <span class="order-item__number">{{ number }}.</span>
 
     <div class="order-item__info">
       <div class="order-item__left">
-        <p class="order-item__name">Buffalo burrata with cherry tomatoes and pesto</p>
-        <span class="order-item__parameters">140g, 250 cal</span>
+        <p class="order-item__name">{{ name }}</p>
+        <span class="order-item__parameters">{{ parameters | commaSeparated }}</span>
       </div>
       <div class="order-item__right">
-        <p class="order-item__price">4 x 35 AED</p>
+        <p class="order-item__price">{{ price }} x {{ amount }} AED</p>
       </div>
     </div>
   </div>
@@ -16,7 +16,19 @@
 
 <script>
   export default {
-    name: 'OrderItem'
+    name: 'OrderItem',
+    props: {
+      name: String,
+      parameters: Array,
+      price: Number,
+      amount: Number,
+      number: Number
+    },
+    filters: {
+      commaSeparated(stringArray) {
+        return stringArray.join(', ');
+      }
+    }
   };
 </script>
 
@@ -24,6 +36,7 @@
   .order-item {
     position: relative;
     padding-left: 20px;
+    margin-bottom: 15px;
     font-size: 13px;
 
     &__number {
@@ -56,6 +69,7 @@
     &__price {
       margin: 0;
       white-space: nowrap;
+      text-align: right;
     }
   }
 </style>
