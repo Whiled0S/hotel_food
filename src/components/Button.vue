@@ -1,7 +1,8 @@
 <template>
-	<button
+  <button
     @click="emitClick"
     class="button"
+    :class="{disabled}"
   >
     <slot/>
   </button>
@@ -10,15 +11,21 @@
 <script>
   export default {
     name: 'Button',
+    props: {
+      disabled: {
+        type: Boolean,
+        default: false
+      }
+    },
     methods: {
-      emitClick() {
+      emitClick () {
         this.$emit('click');
       }
     }
   };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
   .button {
     padding: 12px 0;
     font-size: 15px;
@@ -29,5 +36,9 @@
     width: 100%;
     outline: none;
     border: none;
+
+    &.disabled {
+      background-color: #d8d8d8;
+    }
   }
 </style>

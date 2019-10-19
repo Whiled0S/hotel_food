@@ -6,6 +6,7 @@ import Restaurant from './pages/Restaurant';
 import Dish from './pages/Dish';
 import History from './pages/History';
 import Terms from './pages/Terms';
+import Translate from './pages/Translate';
 
 Vue.use(Router);
 
@@ -37,6 +38,11 @@ export default new Router({
       path: '/terms',
       name: 'terms',
       component: Terms
+    },
+    {
+      path: '/translate',
+      name: 'translate',
+      component: Translate
     }
   ]
 });

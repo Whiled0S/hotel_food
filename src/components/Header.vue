@@ -1,7 +1,12 @@
 <template>
   <header class="header">
     <div class="header__language">
-      <button>{{ language }} <span class="ti-angle-down"></span></button>
+      <router-link
+        tag="button"
+        to="/translate"
+      >
+        {{ language }} <span class="ti-angle-down"></span>
+      </router-link>
     </div>
 
     <ul class="header__items">
@@ -25,7 +30,7 @@
 
   export default {
     name: 'Header',
-    data() {
+    data () {
       return {
         language: 'Eng',
         items: [
