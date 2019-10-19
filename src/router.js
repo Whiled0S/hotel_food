@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Restaurant from './pages/Restaurant';
 import Dish from './pages/Dish';
 import History from './pages/History';
+import Terms from './pages/Terms';
 
 Vue.use(Router);
 
@@ -31,6 +32,11 @@ export default new Router({
       path: '/history',
       name: 'history',
       component: History
+    },
+    {
+      path: '/terms',
+      name: 'terms',
+      component: Terms
     }
   ]
 });
