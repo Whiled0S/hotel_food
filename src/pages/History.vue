@@ -125,7 +125,6 @@
     &__container {
       margin-bottom: 20px;
       flex-grow: 1;
-      overflow-y: scroll;
     }
 
     &__terms {
