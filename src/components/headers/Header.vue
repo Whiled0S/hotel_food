@@ -24,9 +24,9 @@
 </template>
 
 <script>
-  import book from '../assets/icons/book-light.svg';
-  import basket from '../assets/icons/basket-light.svg';
-  import user from '../assets/icons/user-light.svg';
+  import book from '../../assets/icons/book-light.svg';
+  import basket from '../../assets/icons/basket-light.svg';
+  import user from '../../assets/icons/user-light.svg';
 
   export default {
     name: 'Header',

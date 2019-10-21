@@ -1,6 +1,8 @@
 <template>
   <li class="menu-list-item"
-      :class="{'active': active}">
+      :class="{'active': active}"
+      @click="emitClick"
+  >
     <slot/>
   </li>
 </template>
@@ -10,6 +12,11 @@
     name: 'MenuListItem',
     props: {
       active: Boolean
+    },
+    methods: {
+      emitClick() {
+        this.$emit('click');
+      }
     }
   };
 </script>

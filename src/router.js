@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Home from './pages/Home';
-import Restaurant from './pages/Restaurant';
-import Dish from './pages/Dish';
-import History from './pages/History';
-import Terms from './pages/Terms';
-import Translate from './pages/Translate';
+import Home from './pages/Home/Home';
+import Restaurant from './pages/Restaurant/Restaurant';
+import Dish from './pages/DIsh/Dish';
+import History from './pages/History/History';
+import Terms from './pages/Terms/Terms';
+import Translate from './pages/Translation/Translate';
 
 Vue.use(Router);
 

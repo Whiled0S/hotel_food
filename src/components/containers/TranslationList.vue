@@ -3,16 +3,23 @@
     <h4 class="translation-list__header">{{ header }}</h4>
 
     <ul class="translation-list__item-container">
-      <slot/>
+      <TranslationListItem
+        v-for="(language, index) in languages"
+        :key="index"
+        :text="language"
+      />
     </ul>
   </div>
 </template>
 
 <script>
+  import TranslationListItem from '../../pages/Translation/components/TranslationListItem';
   export default {
     name: 'TranslationList',
+    components: { TranslationListItem },
     props: {
-      header: String
+      header: String,
+      languages: Array
     }
   };
 </script>

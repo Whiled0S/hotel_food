@@ -1,27 +1,17 @@
 <template>
   <div class="translate">
-    <BackHeader text="Translate Menu"/>
+    <HeaderBack text="Translate Menu"/>
 
     <div class="translate__container container">
       <TranslationList
         header="Interface Language"
-      >
-        <TranslationListItem
-          v-for="(language, index) in interfaceLanguages"
-          :key="index"
-          :text="language"
-        />
-      </TranslationList>
+        :languages="interfaceLanguages"
+      />
 
       <TranslationList
         header="Menu auto Translation"
-      >
-        <TranslationListItem
-          v-for="(language, index) in menuLanguages"
-          :key="index"
-          :text="language"
-        />
-      </TranslationList>
+        :languages="menuLanguages"
+      />
     </div>
 
     <TranslationButtonsContainer>
@@ -32,15 +22,19 @@
 </template>
 
 <script>
-  import BackHeader from '../components/BackHeader';
-  import TranslationList from '../components/TranslationList';
-  import TranslationListItem from '../components/TranslationListItem';
-  import TranslationButtonsContainer from '../components/TranslationButtonsContainer';
-  import Button from '../components/Button';
+  import HeaderBack from '../../components/headers/HeaderBack';
+  import TranslationList from '../../components/containers/TranslationList';
+  import TranslationButtonsContainer from './components/TranslationButtonsContainer';
+  import Button from '../../components/Button';
 
   export default {
     name: 'Translate',
-    components: { Button, TranslationButtonsContainer, TranslationListItem, TranslationList, BackHeader },
+    components: {
+      Button,
+      TranslationButtonsContainer,
+      TranslationList,
+      HeaderBack
+    },
     data () {
       return {
         interfaceLanguages: [

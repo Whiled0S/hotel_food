@@ -1,21 +1,26 @@
 <template>
   <div id="restaurant">
     <Header/>
-    <SubHeader
+    <SubheaderHotel
       headline="Double room №24"
       description="Get your food and drinks delivered to your room"
       :img="img"
     />
     <Main>
-      <HomeLink
+      <SubheaderBack
         text="Restorante Via D’Argento"
       />
-      <MenuList/>
+
+      <MenuList
+        :items="items"
+      />
+
       <CardList
         header="Salads"
         :cards="dishes"
         link="dish"
       />
+
       <CardList
         header="Pizza"
         :cards="dishes"
@@ -26,27 +31,27 @@
 </template>
 
 <script>
-  import Header from '../components/Header';
-  import SubHeader from '../components/SubHeader';
-  import Main from '../containers/Main';
-  import MenuList from '../components/MenuList';
-  import CardList from '../components/CardList';
+  import Header from '../../components/headers/Header';
+  import SubheaderHotel from '../../components/subheaders/SubheaderHotel';
+  import Main from '../../containers/Main';
+  import MenuList from '../../components/containers/MenuList';
+  import CardList from '../../components/containers/CardList';
 
-  import radisson from '../assets/Radisson.png';
-  import dish from '../assets/Dish.png';
-  import HomeLink from '../components/HomeLink';
+  import radisson from '../../assets/Radisson.png';
+  import dish from '../../assets/Dish.png';
+  import SubheaderBack from '../../components/subheaders/SubheaderBack';
 
   export default {
     name: 'Home',
     components: {
-      HomeLink,
+      SubheaderBack,
       Header,
-      SubHeader,
+      SubheaderHotel,
       Main,
       MenuList,
       CardList
     },
-    data() {
+    data () {
       return {
         img: radisson,
         dishes: [
@@ -68,6 +73,15 @@
             name: 'Lobbi-Bar Radisson',
             price: 150
           }
+        ],
+        items: [
+          'All',
+          'Starters',
+          'Salads',
+          'Desserts',
+          'Italian',
+          'Other',
+          'More'
         ]
       };
     }

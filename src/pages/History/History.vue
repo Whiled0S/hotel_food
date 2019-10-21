@@ -1,6 +1,6 @@
 <template>
-	<div class="order-history">
-    <CloseHeader/>
+  <div class="order-history">
+    <HeaderClose/>
 
     <div class="order-history__container container">
       <Order
@@ -21,12 +21,16 @@
 </template>
 
 <script>
-  import CloseHeader from '../components/CloseHeader';
-  import Order from '../components/Order';
+  import HeaderClose from '../../components/headers/HeaderClose';
+  import Order from './components/Order';
+
   export default {
     name: 'OrderHistory',
-    components: { Order, CloseHeader },
-    data() {
+    components: {
+      Order,
+      HeaderClose
+    },
+    data () {
       return {
         orders: [
           {

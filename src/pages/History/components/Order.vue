@@ -27,7 +27,7 @@
 </template>
 
 <script>
-  import OrderItem from './OrderItem';
+  import OrderItem from '../../../components/OrderItem';
 
   export default {
     name: 'Order',

@@ -1,6 +1,6 @@
 <template>
 	<div class="terms">
-    <BackHeader text="Terms of use"/>
+    <HeaderBack text="Terms of use"/>
 
     <article class="terms__content container">
       <h4 class="terms__header">Your acceptance of<br>Terms and Conditions</h4>
@@ -10,10 +10,10 @@
 </template>
 
 <script>
-  import BackHeader from '../components/BackHeader';
+  import HeaderBack from '../../components/headers/HeaderBack';
   export default {
     name: 'Terms',
-    components: { BackHeader }
+    components: { HeaderBack }
   };
 </script>
 

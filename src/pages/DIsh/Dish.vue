@@ -37,10 +37,10 @@
 </template>
 
 <script>
-  import Header from '../components/Header';
+  import Header from '../../components/headers/Header';
   import { Carousel, Slide } from 'vue-carousel';
-  import dish from '../assets/Salad.jpg';
-  import Button from '../components/Button';
+  import dish from '../../assets/Salad.jpg';
+  import Button from '../../components/Button';
 
   export default {
     name: 'Dish',
