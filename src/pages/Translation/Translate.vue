@@ -23,7 +23,7 @@
 
 <script>
   import HeaderBack from '../../components/headers/HeaderBack';
-  import TranslationList from '../../components/containers/TranslationList';
+  import TranslationList from './containers/TranslationList';
   import TranslationButtonsContainer from './components/TranslationButtonsContainer';
   import Button from '../../components/Button';
 

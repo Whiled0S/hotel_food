@@ -32,8 +32,8 @@
   import Header from '../../components/headers/Header';
   import SubheaderHotel from '../../components/subheaders/SubheaderHotel';
   import Main from '../../containers/Main';
-  import MenuList from '../../components/containers/MenuList';
-  import CardList from '../../components/containers/CardList';
+  import MenuList from '../../containers/MenuList';
+  import CardList from '../../containers/CardList';
 
   import radisson from '../../assets/Radisson.png';
   import hotel from '../../assets/MacDonalds.png';

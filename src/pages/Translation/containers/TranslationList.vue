@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import TranslationListItem from '../../pages/Translation/components/TranslationListItem';
+  import TranslationListItem from '../components/TranslationListItem';
   export default {
     name: 'TranslationList',
     components: { TranslationListItem },

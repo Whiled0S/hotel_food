@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import MenuListItem from '../MenuListItem';
+  import MenuListItem from '../components/MenuListItem';
 
   export default {
     name: 'Menu',
