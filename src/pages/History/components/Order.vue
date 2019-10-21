@@ -2,17 +2,7 @@
   <div class="order">
     <h5 class="order__header">Order #{{ number }}</h5>
 
-    <div class="order__container">
-      <OrderItem
-        v-for="({ name, parameters, price, amount }, index) in items"
-        :key="index"
-        :name="name"
-        :parameters="parameters"
-        :price="price"
-        :amount="amount"
-        :number="index + 1"
-      />
-    </div>
+    <slot/>
 
     <div class="order-bill">
       <div class="order-bill__info">
@@ -27,17 +17,13 @@
 </template>
 
 <script>
-  import OrderItem from '../../../components/OrderItem';
-
   export default {
     name: 'Order',
-    components: { OrderItem },
     props: {
       number: String,
       date: String,
       address: String,
       cost: Number,
-      items: Array
     }
   };
 </script>

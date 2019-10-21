@@ -1,5 +1,5 @@
 <template>
-  <div class="order-item">
+  <li class="order-item">
     <span class="order-item__number">{{ number }}.</span>
 
     <div class="order-item__info">
@@ -11,12 +11,12 @@
         <p class="order-item__price">{{ price }} x {{ amount }} AED</p>
       </div>
     </div>
-  </div>
+  </li>
 </template>
 
 <script>
   export default {
-    name: 'OrderItem',
+    name: 'OrderListItem',
     props: {
       name: String,
       parameters: Array,
@@ -38,6 +38,10 @@
     padding-left: 20px;
     margin-bottom: 15px;
     font-size: 13px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
 
     &__number {
       position: absolute;

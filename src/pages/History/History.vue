@@ -11,7 +11,11 @@
         :address="address"
         :cost="cost"
         :items="items"
-      />
+      >
+        <OrderList
+          :items="items"
+        />
+      </Order>
     </div>
 
     <router-link class="order-history__terms" tag="button" to="/terms">
@@ -23,10 +27,12 @@
 <script>
   import HeaderClose from '../../components/headers/HeaderClose';
   import Order from './components/Order';
+  import OrderList from '../../containers/OrderList';
 
   export default {
     name: 'OrderHistory',
     components: {
+      OrderList,
       Order,
       HeaderClose
     },
