@@ -10,7 +10,7 @@
 
 <script>
   export default {
-    name: 'BackHeader',
+    name: 'HeaderBack',
     props: {
       text: String
     },

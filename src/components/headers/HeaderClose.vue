@@ -4,13 +4,16 @@
       class="ti-close"
       @click="goToPreviousPage"
     ></button>
-    <h4 class="close-header__text">Order history</h4>
+    <h4 class="close-header__text">{{ text }}</h4>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'CloseHeader',
+    name: 'HeaderClose',
+    props: {
+      text: String
+    },
     methods: {
       goToPreviousPage() {
         this.$router.go(-1);

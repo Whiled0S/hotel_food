@@ -1,6 +1,8 @@
 <template>
   <div class="order-history">
-    <HeaderClose/>
+    <HeaderClose
+      text="Order history"
+    />
 
     <div class="order-history__container container">
       <Order
@@ -12,9 +14,11 @@
         :cost="cost"
         :items="items"
       >
-        <OrderList
-          :items="items"
-        />
+        <div class="order-history__list-container">
+          <OrderList
+            :items="items"
+          />
+        </div>
       </Order>
     </div>
 
@@ -135,6 +139,12 @@
     &__container {
       margin-bottom: 20px;
       flex-grow: 1;
+    }
+
+    &__list-container {
+      padding: 10px 0;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #d8d8d8;
     }
 
     &__terms {

@@ -7,6 +7,7 @@ import Dish from './pages/DIsh/Dish';
 import History from './pages/History/History';
 import Terms from './pages/Terms/Terms';
 import Translate from './pages/Translation/Translate';
+import Receipt from './pages/Receipt/Receipt';
 
 Vue.use(Router);
 
@@ -43,6 +44,11 @@ export default new Router({
       path: '/translate',
       name: 'translate',
       component: Translate
+    },
+    {
+      path: '/receipt',
+      name: 'receipt',
+      component: Receipt
     }
   ]
 });

@@ -25,10 +25,8 @@
 
 <style scoped>
   .order-list {
-    padding: 10px 0;
-    margin-top: 0;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #d8d8d8;
+    margin: 0;
+    padding: 0;
     list-style: none;
   }
 </style>
