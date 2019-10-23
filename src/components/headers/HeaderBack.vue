@@ -32,6 +32,7 @@
     display: flex;
     align-items: center;
     background-color: #ffffff;
+    z-index: 10;
 
     &__text {
       width: 100%;
