@@ -15,6 +15,8 @@
 </template>
 
 <script>
+  import {commaSeparated} from '../helpers/common';
+
   export default {
     name: 'OrderListItem',
     props: {
@@ -25,9 +27,7 @@
       number: Number
     },
     filters: {
-      commaSeparated(stringArray) {
-        return stringArray.join(', ');
-      }
+      commaSeparated
     }
   };
 </script>

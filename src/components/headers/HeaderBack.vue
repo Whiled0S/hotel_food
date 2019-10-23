@@ -5,6 +5,8 @@
       @click="goToPreviousPage"
     ></button>
     <h4 class="back-header__text">{{ text }}</h4>
+
+    <slot/>
   </div>
 </template>
 
