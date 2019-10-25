@@ -41,6 +41,16 @@
             <Button>Credit Card</Button>
           </div>
         </div>
+
+        <div class="cart-offers">
+          <p class="cart-offers__title">You might also like</p>
+          <div class="cart-offers__container">
+            <MiniCard
+              v-for="i in 3"
+              :key="i"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -52,10 +62,11 @@
 
   import img from '../../assets/Dish.png';
   import Button from '../../components/Button';
+  import MiniCard from './components/MiniCard';
 
   export default {
     name: 'Cart',
-    components: { Button, ProductList, HeaderBack },
+    components: { MiniCard, Button, ProductList, HeaderBack },
     data () {
       return {
         isAgreementChecked: true,
@@ -206,6 +217,21 @@
       &:last-child {
         grid-area: credit-card;
       }
+    }
+  }
+
+  .cart-offers {
+    margin-bottom: 10px;
+
+    &__title {
+      font-size: 13px;
+    }
+
+    &__container {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
     }
   }
 </style>
