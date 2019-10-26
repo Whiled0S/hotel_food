@@ -1,7 +1,7 @@
 <template>
 	<div class="receipt-comment">
     <h5 class="receipt-comment__header">Comments</h5>
-    <p class="receipt-comment__text">{{ comment }}</p>
+    <p class="receipt-comment__text"><span class="ti-quote-left"></span>{{ comment }}</p>
   </div>
 </template>
 
@@ -25,9 +25,18 @@
     }
 
     &__text {
+      position: relative;
       padding-left: 35px;
       font-size: 12px;
       font-weight: 500;
+
+      span {
+        position: absolute;
+        top: 0;
+        left: 16px;
+        font-weight: bolder;
+        font-size: 11px;
+      }
     }
   }
 </style>

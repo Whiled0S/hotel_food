@@ -27,7 +27,7 @@
 
 <style lang="less" scoped>
   .card {
-    margin-right: 4px;
+    margin-right: 10px;
     width: 142px;
     flex-shrink: 0;
 

@@ -38,6 +38,10 @@
 </script>
 
 <style scoped>
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   .menu-list {
     width: 100%;
     display: flex;

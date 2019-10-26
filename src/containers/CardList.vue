@@ -34,6 +34,10 @@
 </script>
 
 <style lang="less" scoped>
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   .card-list {
     margin-bottom: 10px;
 
