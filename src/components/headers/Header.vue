@@ -9,45 +9,24 @@
       </router-link>
     </div>
 
-    <ul class="header__items">
-      <router-link
-        tag="li"
-        v-for="{icon, link} in items"
-        :to="link"
-        class="header__item"
-        :key="icon"
-      >
-        <img :src="icon" alt="icon">
-      </router-link>
-    </ul>
+    <div class="header__items">
+      <button @click="openMenu" class="header__menu-button ti-menu"></button>
+    </div>
   </header>
 </template>
 
 <script>
-  import book from '../../assets/icons/book-light.svg';
-  import basket from '../../assets/icons/basket-light.svg';
-  import user from '../../assets/icons/user-light.svg';
+  import { mapActions } from 'vuex';
 
   export default {
     name: 'Header',
     data () {
       return {
-        language: 'Eng',
-        items: [
-          {
-            icon: book,
-            link: '/history'
-          },
-          {
-            icon: basket,
-            link: '/cart'
-          },
-          {
-            icon: user,
-            link: '/profile'
-          }
-        ]
+        language: 'Eng'
       };
+    },
+    methods: {
+      ...mapActions(['openMenu'])
     }
   };
 </script>
@@ -93,18 +72,12 @@
       padding: 0;
     }
 
-    &__item {
-      height: 22px;
-      list-style: none;
-      margin-right: 15px;
-
-      &:last-child {
-        margin-right: 0;
-      }
-
-      img {
-        height: 100%;
-      }
+    &__menu-button {
+      padding: 5px;
+      margin: 0 -5px 0;
+      border: none;
+      outline: none;
+      background-color: transparent;
     }
   }
 </style>

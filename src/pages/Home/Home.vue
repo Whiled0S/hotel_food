@@ -25,6 +25,10 @@
         link="restaurant"
       />
     </Main>
+
+    <transition name="fade">
+      <MainMenu v-show="isMenuOpened"/>
+    </transition>
   </div>
 </template>
 
@@ -37,17 +41,21 @@
 
   import radisson from '../../assets/Radisson.png';
   import hotel from '../../assets/MacDonalds.png';
+  import MainMenu from '../../components/MainMenu';
+
+  import { mapState } from 'vuex';
 
   export default {
     name: 'Home',
     components: {
+      MainMenu,
       Header,
       SubheaderHotel,
       Main,
       MenuList,
       CardList
     },
-    data() {
+    data () {
       return {
         img: radisson,
         hotels: [
@@ -77,6 +85,9 @@
           'More'
         ]
       };
+    },
+    computed: {
+      ...mapState(['isMenuOpened'])
     }
   };
 </script>
