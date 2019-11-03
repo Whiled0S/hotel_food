@@ -1,7 +1,7 @@
 <template>
 	<div class="receipt-comment">
     <h5 class="receipt-comment__header">Comments</h5>
-    <p class="receipt-comment__text"><span class="ti-quote-left"></span>{{ comment }}</p>
+    <p class="receipt-comment__text"><img :src="require('../../../assets/icons/quotes.svg')" alt="quotes">{{ comment }}</p>
   </div>
 </template>
 
@@ -30,7 +30,9 @@
       font-size: 12px;
       font-weight: 500;
 
-      span {
+      img {
+        width: 10px;
+        height: 10px;
         position: absolute;
         top: 0;
         left: 16px;
