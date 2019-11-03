@@ -29,8 +29,19 @@
         of Lorem Ipsum.
       </article>
 
-      <div class="dish__add">
-        <Button>Add to cart</Button>
+      <div class="dish__buttons">
+        <div
+          :style="{ width: isAdded ? '130px' : '0', opacity: isAdded ? '1' : '0' }"
+          class="dish__buttons-control"
+        >
+          <button class="dish__buttons-control-minus"></button>
+          <span class="dish__buttons-control-amount">1</span>
+          <button class="dish__buttons-control-plus"></button>
+        </div>
+        <div @click="isAdded = !isAdded" class="dish__buttons-add"
+             :style="{ width: isAdded ? 'calc(100% - 130px)' : '100%' }">
+          <Button>{{ isAdded ? 'Go to cart' : 'Add to cart' }}</Button>
+        </div>
       </div>
     </div>
   </div>
@@ -47,7 +58,8 @@
     components: { Button, Header, Carousel, Slide },
     data () {
       return {
-        img: dish
+        img: dish,
+        isAdded: false
       };
     }
   };
@@ -102,8 +114,61 @@
       line-height: 1.3;
     }
 
-    &__add {
+    &__buttons {
+      display: flex;
       margin-bottom: 20px;
+    }
+
+    &__buttons-control {
+      display: grid;
+      grid-template-columns: repeat(3, 40px);
+      grid-template-rows: 40px;
+      transition: width .3s, opacity .3s;
+      overflow: hidden;
+
+      button {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        background-color: #f0f0f0;
+
+        &::before {
+          position: absolute;
+          content: '';
+          width: 13px;
+          height: 1px;
+          background-color: #979797;
+        }
+      }
+    }
+
+    &__buttons-control-plus {
+
+      &::after {
+        position: absolute;
+        content: '';
+        height: 13px;
+        width: 1px;
+        background-color: #979797;
+      }
+    }
+
+    &__buttons-control-amount {
+      text-align: center;
+      line-height: 40px;
+      font-size: 12.7px;
+      color: #333333;
+    }
+
+    &__buttons-add {
+      width: 100%;
+      transition: width .3s;
     }
   }
 </style>

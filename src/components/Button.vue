@@ -30,6 +30,7 @@
     padding: 12px 0;
     font-size: 15px;
     font-weight: 500;
+    line-height: 16px;
     color: #ffffff;
     background-color: #000000;
     border-radius: 10px;
