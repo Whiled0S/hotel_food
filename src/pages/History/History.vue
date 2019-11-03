@@ -2,6 +2,7 @@
   <div class="order-history">
     <HeaderClose
       text="Order history"
+      @close="goToPreviousPage"
     />
 
     <div class="container order-history__container">
@@ -122,6 +123,11 @@
           }
         ]
       };
+    },
+    methods: {
+      goToPreviousPage() {
+        this.$router.go(-1);
+      }
     }
   };
 </script>

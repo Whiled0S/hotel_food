@@ -2,6 +2,7 @@
   <div class="receipt">
     <HeaderClose
       text="Order Receipt #20"
+      @close="goHome"
     />
 
     <div class="container">
@@ -26,10 +27,6 @@
       <ReceiptComment
         :comment="comment"
       />
-
-      <div class="receipt__button-container">
-        <Button>Go to my orders</Button>
-      </div>
     </div>
   </div>
 </template>
@@ -39,11 +36,10 @@
   import OrderList from '../../containers/OrderList';
   import ReceiptInfo from './components/ReceiptInfo';
   import ReceiptComment from './components/ReceiptComment';
-  import Button from '../../components/Button';
 
   export default {
     name: 'Receipt',
-    components: { Button, ReceiptComment, ReceiptInfo, OrderList, HeaderClose },
+    components: { ReceiptComment, ReceiptInfo, OrderList, HeaderClose },
     data() {
       return {
         point: 'Room 404',
@@ -72,6 +68,11 @@
           }
         ]
       };
+    },
+    methods: {
+      goHome() {
+        this.$router.push('/');
+      }
     }
   };
 </script>

@@ -2,7 +2,7 @@
 	<div class="close-header">
     <button
       class="ti-close"
-      @click="goToPreviousPage"
+      @click="emitClose"
     ></button>
     <h4 class="close-header__text">{{ text }}</h4>
   </div>
@@ -17,6 +17,9 @@
     methods: {
       goToPreviousPage() {
         this.$router.go(-1);
+      },
+      emitClose() {
+        this.$emit('close');
       }
     }
   };
