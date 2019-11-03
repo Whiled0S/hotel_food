@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import {commaSeparated} from '../helpers/common';
+  import { commaSeparated } from '../helpers/common';
 
   export default {
     name: 'OrderListItem',
@@ -37,7 +37,7 @@
     position: relative;
     padding-left: 20px;
     margin-bottom: 15px;
-    font-size: 13px;
+    font-size: 14px;
 
     &:last-child {
       margin-bottom: 0;

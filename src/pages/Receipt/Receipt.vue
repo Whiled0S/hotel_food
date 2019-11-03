@@ -81,8 +81,8 @@
   .receipt {
 
     &__list-container {
-      padding-bottom: 10px;
-      margin-bottom: 10px;
+      padding-bottom: 20px;
+      margin-bottom: 30px;
       border-bottom: 4px solid #d8d8d8;
     }
 
