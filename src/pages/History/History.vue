@@ -4,7 +4,7 @@
       text="Order history"
     />
 
-    <div class="order-history__container container">
+    <div class="container order-history__container">
       <Order
         v-for="{ id, number, date, address, cost, items } in orders"
         :key="id"
@@ -21,10 +21,6 @@
         </div>
       </Order>
     </div>
-
-    <router-link class="order-history__terms" tag="button" to="/terms">
-      Terms of use
-    </router-link>
   </div>
 </template>
 
@@ -138,7 +134,6 @@
 
     &__container {
       margin-bottom: 20px;
-      flex-grow: 1;
     }
 
     &__list-container {
