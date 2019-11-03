@@ -45,7 +45,7 @@
   export default {
     name: 'Dish',
     components: { Button, Header, Carousel, Slide },
-    data() {
+    data () {
       return {
         img: dish
       };

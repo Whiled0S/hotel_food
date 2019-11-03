@@ -1,12 +1,24 @@
 <template>
   <div class="page">
-    <slot />
+    <slot/>
+
+    <transition name="fade">
+      <MainMenu v-show="isMenuOpened"/>
+    </transition>
   </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex';
+
+  import MainMenu from '../components/MainMenu';
+
   export default {
-    name: 'Page'
+    name: 'Page',
+    components: { MainMenu },
+    computed: {
+      ...mapState(['isMenuOpened'])
+    }
   };
 </script>
 
