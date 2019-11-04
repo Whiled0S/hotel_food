@@ -2,46 +2,51 @@
   <div class="dish">
     <Header/>
 
-    <Carousel class="dish__carousel" :perPage="1">
-      <Slide>
-        <img class="dish__slide" :src="img" alt="img">
-      </Slide>
-      <Slide>
-        <img class="dish__slide" :src="img" alt="img">
-      </Slide>
-      <Slide>
-        <img class="dish__slide" :src="img" alt="img">
-      </Slide>
-    </Carousel>
+    <div class="dish__content">
+      <Carousel class="dish__carousel" :perPage="1">
+        <Slide>
+          <img class="dish__slide" :src="img" alt="img">
+        </Slide>
+        <Slide>
+          <img class="dish__slide" :src="img" alt="img">
+        </Slide>
+        <Slide>
+          <img class="dish__slide" :src="img" alt="img">
+        </Slide>
+      </Carousel>
 
-    <div class="dish__info">
-      <div class="dish__main">
-        <span class="dish__price">EUR 110</span>
-        <span class="dish__parameters">140g, 250 cal</span>
+      <div class="dish__info">
+        <div class="dish__main">
+          <span class="dish__price">EUR 110</span>
+          <span class="dish__parameters">140g, 250 cal</span>
+        </div>
+        <h3 class="dish__name">Burrata with sticky roasted tomatoes, pine nuts and basil</h3>
+        <article class="dish__description">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+          make
+          a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+          remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+          containing
+          Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
+          versions
+          of Lorem Ipsum.
+        </article>
       </div>
-      <h3 class="dish__name">Burrata with sticky roasted tomatoes, pine nuts and basil</h3>
-      <article class="dish__description">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-        a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-        Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-        of Lorem Ipsum.
-      </article>
+    </div>
 
-      <div class="dish__buttons">
-        <div
-          :style="{ width: isAdded ? '130px' : '0', opacity: isAdded ? '1' : '0' }"
-          class="dish__buttons-control"
-        >
-          <button class="dish__buttons-control-minus"></button>
-          <span class="dish__buttons-control-amount">1</span>
-          <button class="dish__buttons-control-plus"></button>
-        </div>
-        <div @click="isAdded = !isAdded" class="dish__buttons-add"
-             :style="{ width: isAdded ? 'calc(100% - 130px)' : '100%' }">
-          <Button>{{ isAdded ? 'Go to cart' : 'Add to cart' }}</Button>
-        </div>
+    <div class="container dish__buttons">
+      <div
+        :style="{ width: isAdded ? '130px' : '0', opacity: isAdded ? '1' : '0' }"
+        class="dish__buttons-control"
+      >
+        <button class="dish__buttons-control-minus"></button>
+        <span class="dish__buttons-control-amount">1</span>
+        <button class="dish__buttons-control-plus"></button>
+      </div>
+      <div @click="isAdded = !isAdded" class="dish__buttons-add"
+           :style="{ width: isAdded ? 'calc(100% - 130px)' : '100%' }">
+        <Button>{{ isAdded ? 'Go to cart' : 'Add to cart' }}</Button>
       </div>
     </div>
   </div>
@@ -72,6 +77,10 @@
 
     &__carousel {
       margin-bottom: 20px;
+    }
+
+    &__content {
+      flex-grow: 1;
     }
 
     &__slide {
@@ -109,14 +118,17 @@
     }
 
     &__description {
-      margin-bottom: 20px;
       font-size: 13px;
       line-height: 1.3;
     }
 
     &__buttons {
       display: flex;
-      margin-bottom: 20px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      position: sticky;
+      bottom: 0;
+      background-color: #fff;
     }
 
     &__buttons-control {
