@@ -8,7 +8,7 @@
       class="main-menu__fade"
     ></div>
 
-    <transition name="slide" mode="out-in">
+    <transition name="slide">
       <ul v-if="isMenuOpened" class="main-menu__list">
         <router-link
           v-for="{ icon, title, link } in items"
@@ -73,6 +73,8 @@
     right: 0;
     bottom: 0;
     left: 0;
+    display: flex;
+    justify-content: flex-end;
     z-index: 100;
 
     &__fade {
