@@ -23,7 +23,11 @@
 
 <style lang="less" scoped>
   .mini-card {
-    width: 100%;
+    min-width: 30vw;
+
+    &:not(:last-of-type) {
+      margin-right: 20px;
+    }
 
     &__media-container {
       position: relative;

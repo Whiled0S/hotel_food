@@ -41,16 +41,18 @@
             <Button>Credit Card</Button>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="cart-offers">
-          <p class="cart-offers__title">You might also like</p>
-          <div class="cart-offers__container">
-            <MiniCard
-              v-for="i in 3"
-              :key="i"
-            />
-          </div>
-        </div>
+    <div class="cart-offers">
+      <p class="cart-offers__title">You might also like</p>
+      <div class="cart-offers__container">
+        <span class="scroll-padding"></span>
+        <MiniCard
+          v-for="i in 5"
+          :key="i"
+        />
+        <span class="scroll-padding"></span>
       </div>
     </div>
   </div>
@@ -224,14 +226,22 @@
     margin-bottom: 10px;
 
     &__title {
+      padding: 0 16px;
       font-size: 13px;
     }
 
     &__container {
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-gap: 20px;
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: scroll;
     }
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-padding {
+    min-width: 16px;
   }
 </style>
