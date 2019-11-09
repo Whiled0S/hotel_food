@@ -10,6 +10,10 @@ export default class Worker {
     return localStorage.getItem('sessionId');
   }
 
+  static getResponseMessage(type, response) {
+    return response.messages.find(message => message.type === type);
+  }
+
   static createMessage(type, payload) {
     return {type, payload};
   }

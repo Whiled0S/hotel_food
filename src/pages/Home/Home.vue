@@ -1,27 +1,24 @@
 <template>
-  <div id="home">
+  <div v-if="!isLoading" id="home">
     <Header/>
 
     <SubheaderHotel
-      headline="Double room №24"
-      description="Get your food and drinks delivered to your room"
-      :img="img"
+      v-if="location && company"
+      :headline="location.name"
+      :description="location.description"
+      :img="company.image.src"
     />
 
     <Main>
       <MenuList
-        :items="items"
+        :items="categories"
       />
 
       <CardList
-        header="Hotel"
-        :cards="hotels"
-        link="restaurant"
-      />
-
-      <CardList
-        header="Places in around"
-        :cards="hotels"
+        v-for="{ name, items } in blocks"
+        :key="name"
+        :header="name"
+        :cards="items"
         link="restaurant"
       />
     </Main>
@@ -35,9 +32,7 @@
   import MenuList from '../../containers/MenuList';
   import CardList from '../../containers/CardList';
 
-  import radisson from '../../assets/Radisson.png';
-  import hotel from '../../assets/MacDonalds.png';
-  import RPC from "../../rpc";
+  import {mapActions, mapState, mapMutations} from 'vuex';
 
   export default {
     name: 'Home',
@@ -48,39 +43,19 @@
       MenuList,
       CardList
     },
-    mounted() {
-      RPC.getIndexData('c4ca4238a0b923820dcc509a6f75849b');
+    async created() {
+      this.SET_LOADING(true);
+
+      await this.getIndexData();
+
+      this.SET_LOADING(false);
     },
-    data() {
-      return {
-        img: radisson,
-        hotels: [
-          {
-            id: 0,
-            img: hotel,
-            name: 'Cafe Radisson',
-          },
-          {
-            id: 1,
-            img: hotel,
-            name: 'Lobbi-Bar Radisson',
-          },
-          {
-            id: 2,
-            img: hotel,
-            name: 'Lobbi-Bar Radisson'
-          }
-        ],
-        items: [
-          'All',
-          'Starters',
-          'Salads',
-          'Desserts',
-          'Italian',
-          'Other',
-          'More'
-        ]
-      };
+    computed: {
+      ...mapState('home', ['company', 'location', 'categories', 'blocks', 'isLoading'])
+    },
+    methods: {
+      ...mapActions('home', ['getIndexData']),
+      ...mapMutations('home', ['SET_LOADING'])
     }
   };
 </script>

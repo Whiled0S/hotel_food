@@ -3,12 +3,19 @@
     <li class="scroll-padding"></li>
 
     <MenuListItem
-      v-for="(item, index) in items"
-      :key="index"
-      :active="item === active"
-      @click="setActive(item)"
+      :active="!~active"
+      @click="setActive(-1)"
     >
-      {{ item }}
+      <span>All</span>
+    </MenuListItem>
+
+    <MenuListItem
+      v-for="{ id, name } in items"
+      :key="id"
+      :active="id === active"
+      @click="setActive(id)"
+    >
+      <span>{{ name }}</span>
     </MenuListItem>
 
     <li class="scroll-padding"></li>
@@ -20,13 +27,13 @@
 
   export default {
     name: 'Menu',
-    components: { MenuListItem },
+    components: {MenuListItem},
     props: {
       items: Array,
     },
     data() {
       return {
-        active: this.items[0]
+        active: -1
       };
     },
     methods: {

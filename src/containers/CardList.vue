@@ -5,10 +5,10 @@
     <div class="card-list__container">
       <div class="scroll-padding"></div>
       <Card
-        v-for="{id, img, name, price} in cards"
+        v-for="{id, image: { src }, name, price} in cards"
         :key="id"
         :name="name"
-        :img="img"
+        :img="src"
         :price="price"
         :link="link"
       />

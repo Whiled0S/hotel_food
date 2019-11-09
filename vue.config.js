@@ -5,6 +5,9 @@ module.exports = {
         '/api/rpc': {
           target: 'https://quar.beskhlebnyy.ru',
           changeOrigin: true
+        },
+        '/_projects/site': {
+          target: 'https://quar.beskhlebnyy.ru'
         }
       }
     }
