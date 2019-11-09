@@ -37,6 +37,7 @@
 
   import radisson from '../../assets/Radisson.png';
   import hotel from '../../assets/MacDonalds.png';
+  import RPC from "../../rpc";
 
   export default {
     name: 'Home',
@@ -47,7 +48,10 @@
       MenuList,
       CardList
     },
-    data () {
+    mounted() {
+      RPC.getIndexData('c4ca4238a0b923820dcc509a6f75849b');
+    },
+    data() {
       return {
         img: radisson,
         hotels: [
