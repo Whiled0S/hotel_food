@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import router from "./router";
 
 import home from './store/home';
 
@@ -7,8 +8,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: () => ({
-    isMenuOpened: false
+    isMenuOpened: false,
   }),
+
+  getters: {
+    location: () => router.history.current.params.location
+  },
 
   mutations: {
     SET_MENU_STATUS (state, status) {

@@ -3,17 +3,10 @@
     <li class="scroll-padding"></li>
 
     <MenuListItem
-      :active="!~active"
-      @click="setActive(-1)"
-    >
-      <span>All</span>
-    </MenuListItem>
-
-    <MenuListItem
       v-for="{ id, name } in items"
       :key="id"
-      :active="id === active"
-      @click="setActive(id)"
+      :active="id === selected"
+      @click="select(id)"
     >
       <span>{{ name }}</span>
     </MenuListItem>
@@ -33,12 +26,14 @@
     },
     data() {
       return {
-        active: -1
+        selected: this.items[0].id
       };
     },
     methods: {
-      setActive(item) {
-        this.active = item;
+      select(itemId) {
+        this.selected = itemId;
+
+        this.$emit('select', this.selected);
       }
     }
   };

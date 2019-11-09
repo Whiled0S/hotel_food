@@ -27,17 +27,12 @@
 
 <style lang="less" scoped>
   .card {
-    margin-right: 10px;
-    width: 142px;
+    width: 100%;
     flex-shrink: 0;
-
-    &:last-child {
-      margin-right: 0;
-    }
 
     &__image {
       width: 100%;
-      height: 142px;
+      padding-top: 100%;
       position: relative;
       margin-bottom: 10px;
       background-color: #f5f5f5;
@@ -45,6 +40,9 @@
       overflow: hidden;
 
       img {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;

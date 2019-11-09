@@ -1,5 +1,7 @@
 import RPC from "../rpc";
 
+const defaultCategories = [{name: 'All', id: -1}];
+
 export default {
   namespaced: true,
 
@@ -8,11 +10,15 @@ export default {
     location: null,
     categories: null,
     blocks: null,
+    businesses: null,
 
-    isLoading: true
+    defaultCategories,
+    loading: true
   }),
 
-  getters: {},
+  getters: {
+    categories: state => [...state.defaultCategories, ...state.categories]
+  },
 
   mutations: {
     SET_COMPANY(state, company) {
@@ -31,14 +37,18 @@ export default {
       state.blocks = blocks;
     },
 
+    SET_BUSINESSES(state, businesses) {
+      state.businesses = businesses;
+    },
+
     SET_LOADING(state, status) {
-      state.isLoading = status;
+      state.loading = status;
     }
   },
 
   actions: {
-    async getIndexData({commit}) {
-      const responseMessage = await RPC.getIndexData('c4ca4238a0b923820dcc509a6f75849b');
+    async getIndexData({commit, rootGetters}) {
+      const responseMessage = await RPC.getIndexData(rootGetters.location);
 
       RPC.preventError(responseMessage, () => {
         const {
@@ -51,6 +61,31 @@ export default {
         commit('SET_LOCATION', location);
         commit('SET_CATEGORIES', categories);
         commit('SET_BLOCKS', blocks);
+      });
+    },
+
+    cleanRestaurants({commit}) {
+      commit('SET_BLOCKS', null);
+      commit('SET_BUSINESSES', null);
+    },
+
+    async getBlocks({commit, rootGetters}) {
+      const responseMessage = await RPC.getIndexData(rootGetters.location);
+
+      RPC.preventError(responseMessage, () => {
+        const {payload: {blocks}} = responseMessage;
+
+        commit('SET_BLOCKS', blocks);
+      });
+    },
+
+    async getBusinessesByCategory({commit, rootGetters}, {categoryId}) {
+      const responseMessage = await RPC.getBusinessesByCategory(rootGetters.location, categoryId);
+
+      RPC.preventError(responseMessage, () => {
+        const {payload: {items}} = responseMessage;
+
+        commit('SET_BUSINESSES', items);
       });
     }
   }

@@ -4,14 +4,18 @@
 
     <div class="card-list__container">
       <div class="scroll-padding"></div>
-      <Card
-        v-for="{id, image: { src }, name, price} in cards"
-        :key="id"
-        :name="name"
-        :img="src"
-        :price="price"
-        :link="link"
-      />
+
+      <div class="card-list__cards">
+        <Card
+          v-for="{id, image: { src }, name, price} in cards"
+          :key="id"
+          :name="name"
+          :img="src"
+          :price="price"
+          :link="link"
+        />
+      </div>
+
       <div class="scroll-padding"></div>
     </div>
   </div>
@@ -53,6 +57,14 @@
       display: flex;
       flex-wrap: nowrap;
       overflow-x: scroll;
+    }
+
+    &__cards {
+      display: grid;
+      grid-template-rows: 1fr;
+      grid-auto-columns: 142px;
+      grid-auto-flow: column;
+      grid-column-gap: 10px;
     }
   }
 

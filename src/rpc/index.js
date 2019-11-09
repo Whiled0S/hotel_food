@@ -22,4 +22,13 @@ export default class RPC {
 
     return Worker.getResponseMessage('getIndexData', response);
   }
+
+  static async getBusinessesByCategory(location, categoryId) {
+    const message = Worker.createMessage('getBusinessesByCategory', {location, categoryId});
+    const request = Worker.createRequest([message]);
+
+    const response = await Worker.sendRequest(request);
+
+    return Worker.getResponseMessage('getBusinessesByCategory', response);
+  }
 }

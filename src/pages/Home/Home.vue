@@ -1,9 +1,8 @@
 <template>
-  <div v-if="!isLoading" id="home">
+  <div v-if="!loading" id="home">
     <Header/>
 
     <SubheaderHotel
-      v-if="location && company"
       :headline="location.name"
       :description="location.description"
       :img="company.image.src"
@@ -12,15 +11,25 @@
     <Main>
       <MenuList
         :items="categories"
+        @select="getBusinesses"
       />
 
-      <CardList
-        v-for="{ name, items } in blocks"
-        :key="name"
-        :header="name"
-        :cards="items"
-        link="restaurant"
-      />
+      <template v-if="blocks">
+        <CardList
+          v-for="{ name, items } in blocks"
+          :key="name"
+          :header="name"
+          :cards="items"
+          link="restaurant"
+        />
+      </template>
+
+      <template v-else-if="businesses">
+        <CardTiles
+          :tiles="businesses"
+          link="restaurant"
+        />
+      </template>
     </Main>
   </div>
 </template>
@@ -32,11 +41,13 @@
   import MenuList from '../../containers/MenuList';
   import CardList from '../../containers/CardList';
 
-  import {mapActions, mapState, mapMutations} from 'vuex';
+  import {mapActions, mapState, mapMutations, mapGetters} from 'vuex';
+  import CardTiles from "../../containers/CardTiles";
 
   export default {
     name: 'Home',
     components: {
+      CardTiles,
       Header,
       SubheaderHotel,
       Main,
@@ -51,11 +62,22 @@
       this.SET_LOADING(false);
     },
     computed: {
-      ...mapState('home', ['company', 'location', 'categories', 'blocks', 'isLoading'])
+      ...mapState('home', ['company', 'location', 'blocks', 'businesses', 'loading']),
+      ...mapGetters('home', ['categories'])
     },
     methods: {
-      ...mapActions('home', ['getIndexData']),
-      ...mapMutations('home', ['SET_LOADING'])
+      ...mapActions('home', ['getIndexData', 'getBlocks', 'getBusinessesByCategory', 'cleanRestaurants']),
+      ...mapMutations('home', ['SET_LOADING']),
+
+      getBusinesses(categoryId) {
+        this.cleanRestaurants().then(() => {
+          if (categoryId === -1) {
+            this.getBlocks();
+          } else {
+            this.getBusinessesByCategory({categoryId});
+          }
+        });
+      }
     }
   };
 </script>
