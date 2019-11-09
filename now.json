@@ -1,12 +1,8 @@
 {
   "routes": [
     {
-      "src": "/api/rpc",
-      "dest": "https://quar.beskhlebnyy.ru/api/rpc"
-    },
-    {
-      "src": "/_projects/site",
-      "dest": "https://quar.beskhlebnyy.ru/_projects/site"
+      "src": "/",
+      "dest": "https://quar.beskhlebnyy.ru"
     }
   ]
 }
