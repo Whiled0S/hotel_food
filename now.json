@@ -6,7 +6,7 @@
     },
     {
       "src": "/_projects/site",
-      "dest": "https://quar.beskhlebnyy.ru/api/rpc"
+      "dest": "https://quar.beskhlebnyy.ru/_projects/site"
     }
   ]
 }
