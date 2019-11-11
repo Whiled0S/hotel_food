@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="link"
+    :to="`${link}/${id}`"
     tag="div"
     class="card"
   >
@@ -17,6 +17,7 @@
   export default {
     name: 'Card',
     props: {
+      id: Number,
       name: String,
       img: String,
       price: Number,

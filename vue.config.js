@@ -8,6 +8,9 @@ module.exports = {
         },
         '/_projects/site': {
           target: 'https://quar.beskhlebnyy.ru'
+        },
+        '/uploads/products/images': {
+          target: 'https://quar.beskhlebnyy.ru'
         }
       }
     }

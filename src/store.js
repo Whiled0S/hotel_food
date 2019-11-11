@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import router from "./router";
 
 import home from './store/home';
+import restaurant from "./store/restaurant";
 
 Vue.use(Vuex);
 
@@ -32,6 +33,7 @@ export default new Vuex.Store({
   },
 
   modules: {
-    home
+    home,
+    restaurant
   }
 });

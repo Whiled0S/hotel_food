@@ -31,4 +31,22 @@ export default class RPC {
 
     return Worker.getResponseMessage('getBusinessesByCategory', response);
   }
+
+  static async getProductsByBusiness(businessId) {
+    const message = Worker.createMessage('getProductsByBusiness', {businessId});
+    const request = Worker.createRequest([message]);
+
+    const response = await Worker.sendRequest(request);
+
+    return Worker.getResponseMessage('getProductsByBusiness', response);
+  }
+
+  static async getProductByCategory(businessId, categoryId) {
+    const message = Worker.createMessage('getProductByCategory', {businessId, categoryId});
+    const request = Worker.createRequest([message]);
+
+    const response = await Worker.sendRequest(request);
+
+    return Worker.getResponseMessage('getProductByCategory', response);
+  }
 }

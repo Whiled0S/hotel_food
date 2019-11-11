@@ -17,7 +17,7 @@ export default {
   }),
 
   getters: {
-    categories: state => [...state.defaultCategories, ...state.categories]
+    categories: state => state.categories ? [...state.defaultCategories, ...state.categories] : []
   },
 
   mutations: {
@@ -52,9 +52,7 @@ export default {
 
       RPC.preventError(responseMessage, () => {
         const {
-          payload: {
-            company, location, categories, blocks
-          }
+          payload: {company, location, categories, blocks}
         } = responseMessage;
 
         commit('SET_COMPANY', company);

@@ -1,10 +1,10 @@
 <template>
-  <div id="restaurant">
+  <div v-if="!loading" id="restaurant">
     <Header/>
     <SubheaderHotel
       headline="Double room №24"
       description="Get your food and drinks delivered to your room"
-      :img="img"
+      img="img"
     />
     <Main>
       <SubheaderBack
@@ -12,33 +12,40 @@
       />
 
       <MenuList
-        :items="items"
+        :items="categories"
+        @select="getDishes"
       />
 
-      <CardList
-        header="Salads"
-        :cards="dishes"
-        link="dish"
-      />
+      <template v-if="blocks">
+        <CardList
+          v-for="{ name, items } in blocks"
+          :key="name"
+          :header="name"
+          :cards="items"
+          link="/dish"
+        />
+      </template>
 
-      <CardList
-        header="Pizza"
-        :cards="dishes"
-        link="dish"
-      />
+      <template v-else-if="products">
+        <CardTiles
+          :tiles="products"
+          link="/dish"
+        />
+      </template>
     </Main>
   </div>
 </template>
 
 <script>
+  import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
+
   import Header from '../../components/headers/Header';
   import SubheaderHotel from '../../components/subheaders/SubheaderHotel';
   import Main from '../../containers/Main';
   import MenuList from '../../containers/MenuList';
   import CardList from '../../containers/CardList';
+  import CardTiles from "../../containers/CardTiles";
 
-  import radisson from '../../assets/Radisson.png';
-  import dish from '../../assets/Dish.png';
   import SubheaderBack from '../../components/subheaders/SubheaderBack';
 
   export default {
@@ -49,41 +56,37 @@
       SubheaderHotel,
       Main,
       MenuList,
-      CardList
+      CardList,
+      CardTiles
     },
-    data () {
-      return {
-        img: radisson,
-        dishes: [
-          {
-            id: 0,
-            img: dish,
-            name: 'Cafe Radisson',
-            price: 200
-          },
-          {
-            id: 1,
-            img: dish,
-            name: 'Lobbi-Bar Radisson',
-            price: 100
-          },
-          {
-            id: 2,
-            img: dish,
-            name: 'Lobbi-Bar Radisson',
-            price: 150
+    async created() {
+      this.SET_LOADING(true);
+
+      await this.getProductsByBusiness({businessId: this.businessId});
+
+      this.SET_LOADING(false);
+    },
+    computed: {
+      ...mapState('restaurant', ['loading', 'blocks', 'products']),
+      ...mapGetters('restaurant', ['categories']),
+
+      businessId() {
+        return this.$route.params.id;
+      }
+    },
+    methods: {
+      ...mapActions('restaurant', ['getProductsByBusiness', 'cleanDishes', 'getBlocks', 'getProductByCategory']),
+      ...mapMutations('restaurant', ['SET_LOADING']),
+
+      getDishes(categoryId) {
+        this.cleanDishes().then(() => {
+          if (categoryId === -1) {
+            this.getBlocks({businessId: this.businessId});
+          } else {
+            this.getProductByCategory({businessId: this.businessId, categoryId});
           }
-        ],
-        items: [
-          'All',
-          'Starters',
-          'Salads',
-          'Desserts',
-          'Italian',
-          'Other',
-          'More'
-        ]
-      };
+        });
+      }
     }
   };
 </script>
