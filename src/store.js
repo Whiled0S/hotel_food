@@ -13,7 +13,7 @@ export default new Vuex.Store({
   }),
 
   getters: {
-    location: () => router.history.current.params.location
+    locationHash: () => router.history.current.params.location
   },
 
   mutations: {

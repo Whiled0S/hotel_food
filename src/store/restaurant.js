@@ -6,6 +6,7 @@ export default {
   namespaced: true,
 
   state: () => ({
+    location: null,
     blocks: null,
     business: null,
     categories: null,
@@ -20,6 +21,10 @@ export default {
   },
 
   mutations: {
+    SET_LOCATION(state, location) {
+      state.location = location;
+    },
+
     SET_BLOCKS(state, blocks) {
       state.blocks = blocks;
     },
@@ -42,6 +47,26 @@ export default {
   },
 
   actions: {
+    async getRestaurantData({commit, rootGetters}, {businessId}) {
+      const [productsMessage, locationMessage] = await RPC.getRestaurantData(businessId, rootGetters.locationHash);
+
+      RPC.preventError(productsMessage, () => {
+        const {
+          payload: {blocks, business, categories}
+        } = productsMessage;
+
+        commit('SET_BLOCKS', blocks);
+        commit('SET_BUSINESS', business);
+        commit('SET_CATEGORIES', categories);
+      });
+
+      RPC.preventError(locationMessage, () => {
+        const {payload} = locationMessage;
+
+        commit('SET_LOCATION', payload);
+      });
+    },
+
     async getProductsByBusiness({commit}, {businessId}) {
       const responseMessage = await RPC.getProductsByBusiness(businessId);
 

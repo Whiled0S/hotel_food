@@ -32,6 +32,20 @@ export default class RPC {
     return Worker.getResponseMessage('getBusinessesByCategory', response);
   }
 
+  static async getRestaurantData(businessId, location) {
+    const productsMessage = Worker.createMessage('getProductsByBusiness', {businessId});
+    const locationMessage = Worker.createMessage('getLocationInfo', {location});
+
+    const request = Worker.createRequest([productsMessage, locationMessage]);
+
+    const response = await Worker.sendRequest(request);
+
+    return [
+      Worker.getResponseMessage('getProductsByBusiness', response),
+      Worker.getResponseMessage('getLocationInfo', response)
+    ];
+  }
+
   static async getProductsByBusiness(businessId) {
     const message = Worker.createMessage('getProductsByBusiness', {businessId});
     const request = Worker.createRequest([message]);

@@ -20,14 +20,14 @@
           :key="name"
           :header="name"
           :cards="items"
-          :link="`${location}/restaurant`"
+          :link="`/${locationHash}/restaurant`"
         />
       </template>
 
       <template v-else-if="businesses">
         <CardTiles
           :tiles="businesses"
-          :link="`${location}/restaurant`"
+          :link="`/${locationHash}/restaurant`"
         />
       </template>
     </Main>
@@ -64,7 +64,7 @@
     computed: {
       ...mapState('home', ['company', 'location', 'blocks', 'businesses', 'loading']),
       ...mapGetters('home', ['categories']),
-      ...mapGetters(['location'])
+      ...mapGetters(['locationHash'])
     },
     methods: {
       ...mapActions('home', ['getIndexData', 'getBlocks', 'getBusinessesByCategory', 'cleanRestaurants']),

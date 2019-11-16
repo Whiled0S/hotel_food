@@ -1,11 +1,13 @@
 <template>
   <div v-if="!loading" id="restaurant">
     <Header/>
+
     <SubheaderHotel
-      headline="Double room №24"
-      description="Get your food and drinks delivered to your room"
-      img="img"
+      :headline="location.name"
+      :description="location.description"
+      :img="location.image.src"
     />
+
     <Main>
       <SubheaderBack
         text="Restorante Via D’Argento"
@@ -22,14 +24,14 @@
           :key="name"
           :header="name"
           :cards="items"
-          link="/dish"
+          :link="`/${locationHash}/dish`"
         />
       </template>
 
       <template v-else-if="products">
         <CardTiles
           :tiles="products"
-          link="/dish"
+          :link="`/${locationHash}/dish`"
         />
       </template>
     </Main>
@@ -62,20 +64,21 @@
     async created() {
       this.SET_LOADING(true);
 
-      await this.getProductsByBusiness({businessId: this.businessId});
+      await this.getRestaurantData({businessId: this.businessId});
 
       this.SET_LOADING(false);
     },
     computed: {
-      ...mapState('restaurant', ['loading', 'blocks', 'products']),
+      ...mapState('restaurant', ['location', 'loading', 'blocks', 'products']),
       ...mapGetters('restaurant', ['categories']),
+      ...mapGetters(['locationHash']),
 
       businessId() {
         return this.$route.params.id;
       }
     },
     methods: {
-      ...mapActions('restaurant', ['getProductsByBusiness', 'cleanDishes', 'getBlocks', 'getProductByCategory']),
+      ...mapActions('restaurant', ['getRestaurantData', 'cleanDishes', 'getBlocks', 'getProductByCategory']),
       ...mapMutations('restaurant', ['SET_LOADING']),
 
       getDishes(categoryId) {
