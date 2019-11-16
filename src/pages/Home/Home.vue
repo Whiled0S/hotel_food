@@ -63,8 +63,8 @@
     },
     computed: {
       ...mapState('home', ['company', 'location', 'blocks', 'businesses', 'loading']),
-      ...mapGetters('home', ['categories']),
-      ...mapGetters(['locationHash'])
+      ...mapState(['locationHash']),
+      ...mapGetters('home', ['categories'])
     },
     methods: {
       ...mapActions('home', ['getIndexData', 'getBlocks', 'getBusinessesByCategory', 'cleanRestaurants']),

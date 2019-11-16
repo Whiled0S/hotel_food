@@ -70,8 +70,8 @@
     },
     computed: {
       ...mapState('restaurant', ['location', 'loading', 'blocks', 'products']),
+      ...mapState(['locationHash']),
       ...mapGetters('restaurant', ['categories']),
-      ...mapGetters(['locationHash']),
 
       businessId() {
         return this.$route.params.id;

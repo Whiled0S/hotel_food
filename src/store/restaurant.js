@@ -47,8 +47,8 @@ export default {
   },
 
   actions: {
-    async getRestaurantData({commit, rootGetters}, {businessId}) {
-      const [productsMessage, locationMessage] = await RPC.getRestaurantData(businessId, rootGetters.locationHash);
+    async getRestaurantData({commit, rootState}, {businessId}) {
+      const [productsMessage, locationMessage] = await RPC.getRestaurantData(businessId, rootState.locationHash);
 
       RPC.preventError(productsMessage, () => {
         const {

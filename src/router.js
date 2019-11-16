@@ -10,9 +10,11 @@ import Translate from './pages/Translation/Translate';
 import Receipt from './pages/Receipt/Receipt';
 import Cart from './pages/Cart/Cart';
 
+import store from './store';
+
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -58,3 +60,11 @@ export default new Router({
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  store.commit('SET_LOCATION_HASH', to.params.location);
+
+  next();
+});
+
+export default router;

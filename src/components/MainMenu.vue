@@ -54,7 +54,7 @@
 </template>
 
 <script>
-  import {mapState, mapGetters, mapActions} from 'vuex';
+  import {mapState, mapActions} from 'vuex';
 
   import book from '../assets/icons/book-light.svg';
   import basket from '../assets/icons/basket-light.svg';
@@ -70,8 +70,7 @@
       };
     },
     computed: {
-      ...mapState(['isMenuOpened']),
-      ...mapGetters(['locationHash'])
+      ...mapState(['isMenuOpened', 'locationHash']),
     },
     methods: {
       ...mapActions(['closeMenu'])

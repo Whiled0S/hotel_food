@@ -3,7 +3,7 @@
     <div class="header__language">
       <router-link
         tag="button"
-        to="/translate"
+        :to="`/${locationHash}/translate`"
       >
         {{ language }} <span class="ti-angle-down"></span>
       </router-link>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex';
+  import { mapState, mapActions } from 'vuex';
 
   export default {
     name: 'Header',
@@ -24,6 +24,9 @@
       return {
         language: 'Eng'
       };
+    },
+    computed: {
+      ...mapState(['locationHash'])
     },
     methods: {
       ...mapActions(['openMenu'])

@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import router from "./router";
 
 import home from './store/home';
 import restaurant from "./store/restaurant";
@@ -11,15 +10,20 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: () => ({
     isMenuOpened: false,
+    locationHash: ''
   }),
 
   getters: {
-    locationHash: () => router.history.current.params.location
+
   },
 
   mutations: {
     SET_MENU_STATUS(state, status) {
       state.isMenuOpened = status;
+    },
+
+    SET_LOCATION_HASH(state, hash) {
+      state.locationHash = hash;
     }
   },
 

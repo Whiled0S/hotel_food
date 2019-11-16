@@ -47,8 +47,8 @@ export default {
   },
 
   actions: {
-    async getIndexData({commit, rootGetters}) {
-      const responseMessage = await RPC.getIndexData(rootGetters.locationHash);
+    async getIndexData({commit, rootState}) {
+      const responseMessage = await RPC.getIndexData(rootState.locationHash);
 
       RPC.preventError(responseMessage, () => {
         const {
@@ -67,8 +67,8 @@ export default {
       commit('SET_BUSINESSES', null);
     },
 
-    async getBlocks({commit, rootGetters}) {
-      const responseMessage = await RPC.getIndexData(rootGetters.locationHash);
+    async getBlocks({commit, rootState}) {
+      const responseMessage = await RPC.getIndexData(rootState.locationHash);
 
       RPC.preventError(responseMessage, () => {
         const {payload: {blocks}} = responseMessage;
@@ -77,8 +77,8 @@ export default {
       });
     },
 
-    async getBusinessesByCategory({commit, rootGetters}, {categoryId}) {
-      const responseMessage = await RPC.getBusinessesByCategory(rootGetters.locationHash, categoryId);
+    async getBusinessesByCategory({commit, rootState}, {categoryId}) {
+      const responseMessage = await RPC.getBusinessesByCategory(rootState.locationHash, categoryId);
 
       RPC.preventError(responseMessage, () => {
         const {payload: {items}} = responseMessage;
