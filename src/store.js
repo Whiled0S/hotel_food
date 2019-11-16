@@ -4,6 +4,7 @@ import router from "./router";
 
 import home from './store/home';
 import restaurant from "./store/restaurant";
+import dish from './store/dish';
 
 Vue.use(Vuex);
 
@@ -17,23 +18,24 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    SET_MENU_STATUS (state, status) {
+    SET_MENU_STATUS(state, status) {
       state.isMenuOpened = status;
     }
   },
 
   actions: {
-    openMenu ({ commit }) {
+    openMenu({commit}) {
       commit('SET_MENU_STATUS', true);
     },
 
-    closeMenu ({ commit }) {
+    closeMenu({commit}) {
       commit('SET_MENU_STATUS', false);
     }
   },
 
   modules: {
     home,
-    restaurant
+    restaurant,
+    dish
   }
 });

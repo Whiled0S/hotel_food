@@ -63,4 +63,13 @@ export default class RPC {
 
     return Worker.getResponseMessage('getProductByCategory', response);
   }
+
+  static async getProduct(productId) {
+    const message = Worker.createMessage('getProduct', {productId});
+    const request = Worker.createRequest([message]);
+
+    const response = await Worker.sendRequest(request);
+
+    return Worker.getResponseMessage('getProduct', response);
+  }
 }

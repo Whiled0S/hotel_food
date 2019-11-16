@@ -1,37 +1,24 @@
 <template>
-  <div class="dish">
+  <div v-if="!loading" class="dish">
     <Header/>
 
     <div class="dish__content">
       <Carousel class="dish__carousel" :perPage="1">
-        <Slide>
-          <img class="dish__slide" :src="img" alt="img">
-        </Slide>
-        <Slide>
-          <img class="dish__slide" :src="img" alt="img">
-        </Slide>
-        <Slide>
-          <img class="dish__slide" :src="img" alt="img">
+        <Slide
+          v-for="{id, src} in product.images"
+          :key="id"
+        >
+          <img class="dish__slide" :src="src" alt="img">
         </Slide>
       </Carousel>
 
       <div class="dish__info">
         <div class="dish__main">
-          <span class="dish__price">EUR 110</span>
-          <span class="dish__parameters">140g, 250 cal</span>
+          <span class="dish__price">{{ product.currency.name | upper }} {{ product.precisionPrice | price }}</span>
+          <span class="dish__parameters">{{ product.weight }}g, {{product.calories}} cal</span>
         </div>
-        <h3 class="dish__name">Burrata with sticky roasted tomatoes, pine nuts and basil</h3>
-        <article class="dish__description">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-          make
-          a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-          containing
-          Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
-          versions
-          of Lorem Ipsum.
-        </article>
+        <h3 class="dish__name">{{ product.name }}</h3>
+        <article class="dish__description">{{ product.description }}</article>
       </div>
     </div>
 
@@ -53,19 +40,44 @@
 </template>
 
 <script>
+  import {mapMutations, mapActions, mapState} from 'vuex';
+
   import Header from '../../components/headers/Header';
-  import { Carousel, Slide } from 'vue-carousel';
+  import {Carousel, Slide} from 'vue-carousel';
   import dish from '../../assets/Salad.jpg';
   import Button from '../../components/Button';
+  import {upper, price} from "../../helpers/common";
 
   export default {
     name: 'Dish',
-    components: { Button, Header, Carousel, Slide },
-    data () {
+    components: {Button, Header, Carousel, Slide},
+    data() {
       return {
         img: dish,
         isAdded: false
       };
+    },
+    async created() {
+      this.SET_LOADING(true);
+
+      await this.getProduct({productId: this.productId});
+
+      this.SET_LOADING(false);
+    },
+    filters: {
+      upper,
+      price
+    },
+    computed: {
+      ...mapState('dish', ['product', 'loading']),
+
+      productId() {
+        return this.$route.params.id;
+      }
+    },
+    methods: {
+      ...mapMutations('dish', ['SET_LOADING']),
+      ...mapActions('dish', ['getProduct']),
     }
   };
 </script>
