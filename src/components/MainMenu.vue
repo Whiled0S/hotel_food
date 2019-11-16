@@ -11,20 +11,50 @@
     <transition name="slide">
       <ul v-if="isMenuOpened" class="main-menu__list">
         <router-link
-          v-for="{ icon, title, link } in items"
-          :key="title"
           tag="li"
-          :to="link"
+          :to="`/${locationHash}`"
           class="main-menu__list-item"
           @click.native="closeMenu"
-        ><img v-if="icon" :src="icon" alt="icon"> {{ title }}</router-link>
+        >
+          <img :src="book" alt="icon">
+          <span> Menu</span>
+        </router-link>
+
+        <router-link
+          tag="li"
+          :to="`/${locationHash}/cart`"
+          class="main-menu__list-item"
+          @click.native="closeMenu"
+        >
+          <img :src="basket" alt="icon">
+          <span> Cart</span>
+        </router-link>
+
+        <router-link
+          tag="li"
+          :to="`/${locationHash}/history`"
+          class="main-menu__list-item"
+          @click.native="closeMenu"
+        >
+          <img :src="user" alt="icon">
+          <span> History</span>
+        </router-link>
+
+        <router-link
+          tag="li"
+          :to="`/${locationHash}/terms`"
+          class="main-menu__list-item"
+          @click.native="closeMenu"
+        >
+          <span> Terms of use</span>
+        </router-link>
       </ul>
     </transition>
   </div>
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex';
+  import {mapState, mapGetters, mapActions} from 'vuex';
 
   import book from '../assets/icons/book-light.svg';
   import basket from '../assets/icons/basket-light.svg';
@@ -32,33 +62,16 @@
 
   export default {
     name: 'MainMenu',
-    data () {
+    data() {
       return {
-        items: [
-          {
-            icon: book,
-            title: 'Menu',
-            link: '/'
-          },
-          {
-            icon: basket,
-            title: 'Cart',
-            link: '/cart'
-          },
-          {
-            icon: user,
-            title: 'History',
-            link: '/history'
-          },
-          {
-            title: 'Terms of use',
-            link: '/terms'
-          }
-        ]
+        book,
+        basket,
+        user
       };
     },
     computed: {
-      ...mapState(['isMenuOpened'])
+      ...mapState(['isMenuOpened']),
+      ...mapGetters(['locationHash'])
     },
     methods: {
       ...mapActions(['closeMenu'])

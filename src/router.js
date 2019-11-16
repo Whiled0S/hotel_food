@@ -32,27 +32,27 @@ export default new Router({
       component: Dish
     },
     {
-      path: '/history',
+      path: '/:location/history',
       name: 'history',
       component: History
     },
     {
-      path: '/terms',
+      path: '/:location/terms',
       name: 'terms',
       component: Terms
     },
     {
-      path: '/translate',
+      path: '/:location/translate',
       name: 'translate',
       component: Translate
     },
     {
-      path: '/receipt',
+      path: '/:location/receipt',
       name: 'receipt',
       component: Receipt
     },
     {
-      path: '/cart',
+      path: '/:location/cart',
       name: 'cart',
       component: Cart
     }
