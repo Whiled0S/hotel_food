@@ -31,6 +31,8 @@
     },
     methods: {
       select(itemId) {
+        if (this.selected === itemId) return;
+
         this.selected = itemId;
 
         this.$emit('select', this.selected);
