@@ -7,6 +7,10 @@
     {
       "src": "/_projects/site/(.*)",
       "dest": "https://quar.beskhlebnyy.ru/_projects/site/$1"
+    },
+    {
+      "src": "/uploads/products/images/(.*)",
+      "dest": "https://quar.beskhlebnyy.ru/_projects/site/$1"
     }
   ]
 }
