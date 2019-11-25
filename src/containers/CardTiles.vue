@@ -3,6 +3,7 @@
     <div class="card-tiles">
       <Card
         v-for="{ id, image: { src }, name } in tiles"
+        :id="id"
         :key="id"
         :img="src"
         :name="name"
