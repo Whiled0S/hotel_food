@@ -3,7 +3,7 @@
     <router-link
       tag="span"
       class="ti-arrow-left"
-      to="/"
+      :to="`/${$route.params.location}`"
     />
     <h4>{{ text }}</h4>
   </div>
@@ -11,7 +11,7 @@
 
 <script>
   export default {
-    name: 'HomeLink',
+    name: 'SubheaderBack',
     props: {
       text: String
     }
