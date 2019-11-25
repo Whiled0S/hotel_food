@@ -13,7 +13,8 @@ export default {
     products: null,
 
     defaultCategories,
-    loading: true
+    loading: true,
+    itemsLoading: false
   }),
 
   getters: {
@@ -43,6 +44,10 @@ export default {
 
     SET_LOADING(state, status) {
       state.loading = status;
+    },
+
+    SET_ITEMS_LOADING(state, status) {
+      state.itemsLoading = status;
     }
   },
 
@@ -82,6 +87,8 @@ export default {
     },
 
     async getBlocks({commit}, {businessId}) {
+      commit('SET_ITEMS_LOADING', true);
+
       const responseMessage = await RPC.getProductsByBusiness(businessId);
 
       RPC.preventError(responseMessage, () => {
@@ -90,10 +97,13 @@ export default {
         } = responseMessage;
 
         commit('SET_BLOCKS', blocks);
+        commit('SET_ITEMS_LOADING', false);
       });
     },
 
     async getProductByCategory({commit}, {businessId, categoryId}) {
+      commit('SET_ITEMS_LOADING', true);
+
       const responseMessage = await RPC.getProductByCategory(businessId, categoryId);
 
       RPC.preventError(responseMessage, () => {
@@ -102,6 +112,7 @@ export default {
         } = responseMessage;
 
         commit('SET_PRODUCTS', items);
+        commit('SET_ITEMS_LOADING', false);
       });
     },
 

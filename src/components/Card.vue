@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="`${link}/${id}`"
+    :to="id ? `${link}/${id}` : ''"
     tag="div"
     class="card"
   >

@@ -13,7 +13,8 @@ export default {
     businesses: null,
 
     defaultCategories,
-    loading: true
+    loading: true,
+    itemsLoading: false
   }),
 
   getters: {
@@ -43,6 +44,10 @@ export default {
 
     SET_LOADING(state, status) {
       state.loading = status;
+    },
+
+    SET_ITEMS_LOADING(state, status) {
+      state.itemsLoading = status;
     }
   },
 
@@ -68,22 +73,28 @@ export default {
     },
 
     async getBlocks({commit, rootState}) {
+      commit('SET_ITEMS_LOADING', true);
+
       const responseMessage = await RPC.getIndexData(rootState.locationHash);
 
       RPC.preventError(responseMessage, () => {
         const {payload: {blocks}} = responseMessage;
 
         commit('SET_BLOCKS', blocks);
+        commit('SET_ITEMS_LOADING', false);
       });
     },
 
     async getBusinessesByCategory({commit, rootState}, {categoryId}) {
+      commit('SET_ITEMS_LOADING', true);
+
       const responseMessage = await RPC.getBusinessesByCategory(rootState.locationHash, categoryId);
 
       RPC.preventError(responseMessage, () => {
         const {payload: {items}} = responseMessage;
 
         commit('SET_BUSINESSES', items);
+        commit('SET_ITEMS_LOADING', false);
       });
     }
   }

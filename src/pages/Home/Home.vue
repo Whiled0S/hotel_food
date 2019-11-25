@@ -14,21 +14,27 @@
         @select="getBusinesses"
       />
 
-      <template v-if="blocks">
-        <CardList
-          v-for="{ name, items } in blocks"
-          :key="name"
-          :header="name"
-          :cards="items"
-          :link="`/${locationHash}/restaurant`"
-        />
+      <template v-if="!itemsLoading">
+        <template v-if="blocks">
+          <CardList
+            v-for="{ name, items } in blocks"
+            :key="name"
+            :header="name"
+            :cards="items"
+            :link="`/${locationHash}/restaurant`"
+          />
+        </template>
+
+        <template v-else-if="businesses">
+          <CardTiles
+            :tiles="businesses"
+            :link="`/${locationHash}/restaurant`"
+          />
+        </template>
       </template>
 
-      <template v-else-if="businesses">
-        <CardTiles
-          :tiles="businesses"
-          :link="`/${locationHash}/restaurant`"
-        />
+      <template v-else>
+        <Loader/>
       </template>
     </Main>
   </div>
@@ -43,10 +49,12 @@
 
   import {mapActions, mapState, mapMutations, mapGetters} from 'vuex';
   import CardTiles from "../../containers/CardTiles";
+  import Loader from "../../components/Loader";
 
   export default {
     name: 'Home',
     components: {
+      Loader,
       CardTiles,
       Header,
       SubheaderHotel,
@@ -62,7 +70,7 @@
       this.SET_LOADING(false);
     },
     computed: {
-      ...mapState('home', ['company', 'location', 'blocks', 'businesses', 'loading']),
+      ...mapState('home', ['company', 'location', 'blocks', 'businesses', 'loading', 'itemsLoading']),
       ...mapState(['locationHash']),
       ...mapGetters('home', ['categories'])
     },

@@ -18,21 +18,27 @@
         @select="getDishes"
       />
 
-      <template v-if="blocks">
-        <CardList
-          v-for="{ name, items } in blocks"
-          :key="name"
-          :header="name"
-          :cards="items"
-          :link="`/${locationHash}/dish`"
-        />
+      <template v-if="!itemsLoading">
+        <template v-if="blocks">
+          <CardList
+            v-for="{ name, items } in blocks"
+            :key="name"
+            :header="name"
+            :cards="items"
+            :link="`/${locationHash}/dish`"
+          />
+        </template>
+
+        <template v-else-if="products">
+          <CardTiles
+            :tiles="products"
+            :link="`/${locationHash}/dish`"
+          />
+        </template>
       </template>
 
-      <template v-else-if="products">
-        <CardTiles
-          :tiles="products"
-          :link="`/${locationHash}/dish`"
-        />
+      <template v-else>
+        <Loader/>
       </template>
     </Main>
   </div>
@@ -49,10 +55,12 @@
   import CardTiles from "../../containers/CardTiles";
 
   import SubheaderBack from '../../components/subheaders/SubheaderBack';
+  import Loader from "../../components/Loader";
 
   export default {
     name: 'Home',
     components: {
+      Loader,
       SubheaderBack,
       Header,
       SubheaderHotel,
@@ -69,7 +77,7 @@
       this.SET_LOADING(false);
     },
     computed: {
-      ...mapState('restaurant', ['location', 'loading', 'blocks', 'products']),
+      ...mapState('restaurant', ['location', 'loading', 'blocks', 'products', 'itemsLoading']),
       ...mapState(['locationHash']),
       ...mapGetters('restaurant', ['categories']),
 
