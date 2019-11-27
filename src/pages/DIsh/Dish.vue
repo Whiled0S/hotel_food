@@ -24,15 +24,15 @@
 
     <div class="container dish__buttons">
       <div
-        :style="{ width: isAdded ? '130px' : '0', opacity: isAdded ? '1' : '0' }"
+        :style="{ width: productQuantity > 0 ? '130px' : '0', opacity: productQuantity > 0 ? '1' : '0' }"
         class="dish__buttons-control"
       >
-        <button class="dish__buttons-control-minus"></button>
-        <span class="dish__buttons-control-amount">1</span>
-        <button class="dish__buttons-control-plus"></button>
+        <button class="dish__buttons-control-minus"/>
+        <span class="dish__buttons-control-amount">{{ productQuantity }}</span>
+        <button class="dish__buttons-control-plus"/>
       </div>
-      <div @click="isAdded = !isAdded" class="dish__buttons-add"
-           :style="{ width: isAdded ? 'calc(100% - 130px)' : '100%' }">
+      <div @click="addIntoCart({ productId })" class="dish__buttons-add"
+           :style="{ width: productQuantity > 0 ? 'calc(100% - 130px)' : '100%' }">
         <Button>{{ isAdded ? 'Go to cart' : 'Add to cart' }}</Button>
       </div>
     </div>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-  import {mapMutations, mapActions, mapState} from 'vuex';
+  import {mapMutations, mapActions, mapState, mapGetters} from 'vuex';
 
   import Header from '../../components/headers/Header';
   import {Carousel, Slide} from 'vue-carousel';
@@ -70,14 +70,20 @@
     },
     computed: {
       ...mapState('dish', ['product', 'loading']),
+      ...mapGetters('cart', ['getProductQuantity']),
 
       productId() {
         return this.$route.params.id;
+      },
+
+      productQuantity() {
+        return this.getProductQuantity(this.$route.params.id);
       }
     },
     methods: {
       ...mapMutations('dish', ['SET_LOADING']),
       ...mapActions('dish', ['getProduct']),
+      ...mapActions('cart', ['addIntoCart'])
     }
   };
 </script>

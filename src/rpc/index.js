@@ -72,4 +72,14 @@ export default class RPC {
 
     return Worker.getResponseMessage('getProduct', response);
   }
+
+  static async addIntoCart(location, productId, quantity) {
+    const message = Worker.createMessage('addIntoCart', {location, productId, quantity});
+    const request = Worker.createRequest([message]);
+
+    const response = await Worker.sendRequest(request);
+
+    console.log(Worker.getResponseMessage('addIntoCart', response));
+    return Worker.getResponseMessage('addIntoCart', response);
+  }
 }

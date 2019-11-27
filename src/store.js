@@ -4,13 +4,15 @@ import Vuex from 'vuex';
 import home from './store/home';
 import restaurant from "./store/restaurant";
 import dish from './store/dish';
+import cart from './store/cart';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: () => ({
     isMenuOpened: false,
-    locationHash: ''
+    locationHash: '',
+    sessionId: null
   }),
 
   getters: {
@@ -40,6 +42,7 @@ export default new Vuex.Store({
   modules: {
     home,
     restaurant,
-    dish
+    dish,
+    cart
   }
 });
