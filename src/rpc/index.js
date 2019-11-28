@@ -79,7 +79,6 @@ export default class RPC {
 
     const response = await Worker.sendRequest(request);
 
-    console.log(Worker.getResponseMessage('addIntoCart', response));
     return Worker.getResponseMessage('addIntoCart', response);
   }
 }

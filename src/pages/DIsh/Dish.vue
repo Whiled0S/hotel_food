@@ -27,19 +27,22 @@
         :style="{ width: productQuantity > 0 ? '130px' : '0', opacity: productQuantity > 0 ? '1' : '0' }"
         class="dish__buttons-control"
       >
-        <button class="dish__buttons-control-minus"/>
+        <button class="dish__buttons-control-minus" @click="removeFromCart"/>
         <span class="dish__buttons-control-amount">{{ productQuantity }}</span>
-        <button class="dish__buttons-control-plus"/>
+        <button class="dish__buttons-control-plus" @click="addToCart"/>
       </div>
-      <div @click="addIntoCart({ productId })" class="dish__buttons-add"
+      <div class="dish__buttons-add"
            :style="{ width: productQuantity > 0 ? 'calc(100% - 130px)' : '100%' }">
-        <Button>{{ isAdded ? 'Go to cart' : 'Add to cart' }}</Button>
+        <Button @click="productQuantity > 0 ? goToCart() : addToCart()">
+          {{ productQuantity > 0 ? 'Go to cart' : 'Add to cart' }}
+        </Button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import debounce from 'lodash/debounce';
   import {mapMutations, mapActions, mapState, mapGetters} from 'vuex';
 
   import Header from '../../components/headers/Header';
@@ -54,7 +57,8 @@
     data() {
       return {
         img: dish,
-        isAdded: false
+        isAdded: false,
+        productBuffer: 0
       };
     },
     async created() {
@@ -82,8 +86,29 @@
     },
     methods: {
       ...mapMutations('dish', ['SET_LOADING']),
+      ...mapMutations('cart', ['REMOVE_PRODUCT', 'ADD_PRODUCT']),
       ...mapActions('dish', ['getProduct']),
-      ...mapActions('cart', ['addIntoCart'])
+      ...mapActions('cart', ['addIntoCart']),
+
+      sendAddIntoCartRequest: debounce(function () {
+        // eslint-disable-next-line no-console
+        console.log(this.getProductQuantity(this.productId));
+        // this.addIntoCart({productId: this.productId, amount: this.getProductQuantity(this.productId)});
+      }, 300),
+
+      addToCart() {
+        this.ADD_PRODUCT(this.productId);
+        this.sendAddIntoCartRequest();
+      },
+
+      removeFromCart() {
+        this.REMOVE_PRODUCT(this.productId);
+        this.sendAddIntoCartRequest();
+      },
+
+      goToCart() {
+        this.$router.push(`/${this.$route.params.location}/cart`);
+      }
     }
   };
 </script>
