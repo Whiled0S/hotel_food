@@ -8,7 +8,7 @@
       <div class="product-list-item__info">
         <div class="product-list-item__col-1">
           <h4 class="product-list-item__name">{{ name }}</h4>
-          <p class="product-list-item__parameters">{{ parameters | commaSeparated }}</p>
+          <p class="product-list-item__parameters">{{ weight }} g, {{ calories }} cal</p>
         </div>
         <div class="product-list-item__col-2">
           <span class="product-list-item__cost">{{ cost }} AED</span>
@@ -19,17 +19,17 @@
         <div class="product-list-item__col-1">
           <div class="product-list-item__amount">
             <button class="button">
-              <span class="button__horizontal"></span>
+              <span class="button__horizontal"/>
             </button>
             <span class="amount">{{ amount }}</span>
             <button class="button">
-              <span class="button__horizontal"></span>
-              <span class="button__horizontal button__horizontal_rotated"></span>
+              <span class="button__horizontal"/>
+              <span class="button__horizontal button__horizontal_rotated"/>
             </button>
           </div>
         </div>
         <div class="product-list-item__col-2">
-          <button class="product-list-item__remove ti-trash"></button>
+          <button class="product-list-item__remove ti-trash"/>
         </div>
       </div>
     </div>
@@ -44,9 +44,10 @@
     props: {
       img: String,
       name: String,
-      parameters: Array,
       amount: Number,
-      price: Number
+      price: Number,
+      calories: Number,
+      weight: Number
     },
     filters: {
       commaSeparated

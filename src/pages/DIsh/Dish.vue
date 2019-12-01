@@ -58,7 +58,6 @@
       return {
         img: dish,
         isAdded: false,
-        productBuffer: 0
       };
     },
     async created() {
@@ -77,11 +76,11 @@
       ...mapGetters('cart', ['getProductQuantity']),
 
       productId() {
-        return this.$route.params.id;
+        return parseInt(this.$route.params.id);
       },
 
       productQuantity() {
-        return this.getProductQuantity(this.$route.params.id);
+        return this.getProductQuantity(this.productId);
       }
     },
     methods: {
@@ -91,13 +90,11 @@
       ...mapActions('cart', ['addIntoCart']),
 
       sendAddIntoCartRequest: debounce(function () {
-        // eslint-disable-next-line no-console
-        console.log(this.getProductQuantity(this.productId));
-        // this.addIntoCart({productId: this.productId, amount: this.getProductQuantity(this.productId)});
+        this.addIntoCart({productId: this.productId, amount: this.getProductQuantity(this.productId)});
       }, 300),
 
       addToCart() {
-        this.ADD_PRODUCT(this.productId);
+        this.ADD_PRODUCT(this.product);
         this.sendAddIntoCartRequest();
       },
 

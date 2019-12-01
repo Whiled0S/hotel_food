@@ -7,6 +7,7 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex';
   import Page from './containers/Page';
 
   export default {
@@ -14,6 +15,12 @@
     components: {
       Page,
     },
+    methods: {
+      ...mapActions('cart', ['getCart'])
+    },
+    created() {
+      this.getCart();
+    }
   };
 </script>
 

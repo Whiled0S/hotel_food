@@ -18,14 +18,18 @@
         <div class="cart-comment">
           <label for="comment" class="cart-comment__title">Comments</label>
 
-          <textarea id="comment" name="comment" class="cart-comment__area"
-                    placeholder="Put your comments here…"></textarea>
+          <textarea
+            id="comment"
+            name="comment"
+            class="cart-comment__area"
+            placeholder="Put your comments here…"
+          />
 
           <label class="cart-comment__agreement">
             <span>I agree with Terms and Conditions</span>
             <input type="checkbox" v-model="isAgreementChecked">
             <span class="cart-comment__checkmark">
-              <span v-show="isAgreementChecked" class="ti-check"></span>
+              <span v-show="isAgreementChecked" class="ti-check"/>
             </span>
           </label>
         </div>
@@ -47,51 +51,37 @@
     <div class="cart-offers">
       <p class="cart-offers__title">You might also like</p>
       <div class="cart-offers__container">
-        <span class="scroll-padding"></span>
+        <span class="scroll-padding"/>
         <MiniCard
           v-for="i in 5"
           :key="i"
         />
-        <span class="scroll-padding"></span>
+        <span class="scroll-padding"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import {mapState} from 'vuex';
+
   import HeaderBack from '../../components/headers/HeaderBack';
   import ProductList from './components/ProductList';
 
-  import img from '../../assets/Dish.png';
   import Button from '../../components/Button';
   import MiniCard from './components/MiniCard';
 
   export default {
     name: 'Cart',
-    components: { MiniCard, Button, ProductList, HeaderBack },
-    data () {
+    components: {MiniCard, Button, ProductList, HeaderBack},
+    data() {
       return {
-        isAgreementChecked: true,
-        items: [
-          {
-            id: 1,
-            img: img,
-            name: 'Tomato Mozarella Salad',
-            parameters: ['140g', '250 cal'],
-            amount: 1,
-            price: 220
-          },
-          {
-            id: 2,
-            img: img,
-            name: 'Tomato Mozarella Salad',
-            parameters: ['140g', '250 cal'],
-            amount: 3,
-            price: 120
-          }
-        ]
+        isAgreementChecked: true
       };
     },
+    computed: {
+      ...mapState('cart', ['items'])
+    }
   };
 </script>
 

@@ -4,51 +4,52 @@ export default {
   namespaced: true,
 
   state: () => ({
-    products: {}
+    products: {},
+    items: []
   }),
 
   getters: {
     getProductQuantity(state) {
-      return id => state.products[id] || 0;
+      return id => state.items.find(item => item.id === id)?.quantityInCart || 0;
     }
   },
 
   mutations: {
-    ADD_PRODUCT(state, productId) {
-      state.products = {
-        ...state.products,
-        [productId]: (state.products[productId] || 0) + 1
-      };
+    ADD_PRODUCT(state, product) {
+      const itemIndex = state.items.findIndex(item => item.id === product.id);
+
+      if (itemIndex === -1) {
+        state.items.push({...product, quantityInCart: 1, image: product.images[0]});
+      } else {
+        state.items[itemIndex].quantityInCart++;
+      }
+
+      state.items = [...state.items];
     },
 
     REMOVE_PRODUCT(state, productId) {
-      if (!state.products[productId]) return;
+      const itemIndex = state.items.findIndex(item => item.id === productId);
 
-      const amount = state.products[productId] - 1;
+      if (itemIndex !== -1) {
+        const quantity = state.items[itemIndex].quantityInCart - 1;
 
-      if (amount <= 0) {
-        delete state.products[productId];
-        state.products = { ...state.products };
-      } else {
-        state.products = {
-          ...state.products,
-          [productId]: amount
-        };
+        if (quantity <= 0) {
+          state.items.splice(itemIndex, 1);
+        } else {
+          state.items[itemIndex].quantityInCart = quantity;
+          state.items = [...state.items];
+        }
       }
     },
 
-    SET_CART(state, cart) {
-      // eslint-disable-next-line no-console
-      console.log(cart);
+    SET_CART_ITEMS(state, items) {
+      state.items = items;
     }
   },
 
   actions: {
-    addIntoCart({getters, rootState}, {productId, amount}) {
-      const productQuantity = getters.getProductQuantity(productId);
-      const quantity = productQuantity ? productQuantity + amount : amount;
-
-      RPC.addIntoCart(rootState.locationHash, productId, quantity);
+    addIntoCart({rootState}, {productId, amount}) {
+      RPC.addIntoCart(rootState.locationHash, productId, amount);
     },
 
     async getCart({commit, rootState}) {
@@ -56,10 +57,10 @@ export default {
 
       RPC.preventError(responseMessage, () => {
         const {
-          payload: {cart}
+          payload: {cart: {items}}
         } = responseMessage;
 
-        commit('SET_CART', cart);
+        commit('SET_CART_ITEMS', items);
       });
     }
   }

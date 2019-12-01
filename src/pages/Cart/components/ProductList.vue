@@ -1,22 +1,24 @@
 <template>
   <div class="product-list">
     <ProductListItem
-      v-for="{id, img, name, parameters, amount, price} in items"
+      v-for="{id, image: {src}, name, quantityInCart, precisionPrice, calories, weight} in items"
       :key="id"
-      :img="img"
+      :img="src"
       :name="name"
-      :parameters="parameters"
-      :amount="amount"
-      :price="price"
+      :calories="calories"
+      :weight="weight"
+      :amount="quantityInCart"
+      :price="precisionPrice / 100"
     />
   </div>
 </template>
 
 <script>
   import ProductListItem from './ProductListItem';
+
   export default {
     name: 'ProductList',
-    components: { ProductListItem },
+    components: {ProductListItem},
     props: {
       items: Array
     }
