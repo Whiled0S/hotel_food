@@ -42,8 +42,20 @@ export default {
       }
     },
 
+    DELETE_PRODUCT(state, productId) {
+      const itemIndex = state.items.findIndex(item => item.id === productId);
+
+      if (itemIndex !== -1) {
+        state.items.splice(itemIndex, 1);
+      }
+    },
+
     SET_CART_ITEMS(state, items) {
       state.items = items;
+    },
+
+    CLEAR_CART(state) {
+      state.items = [];
     }
   },
 
@@ -62,6 +74,16 @@ export default {
 
         commit('SET_CART_ITEMS', items);
       });
+    },
+
+    deleteFromCart({commit}, {productId}) {
+      commit('DELETE_PRODUCT', productId);
+      RPC.deleteFromCart(productId);
+    },
+
+    clearCart({commit}) {
+      commit('CLEAR_CART');
+      RPC.clearCart();
     }
   }
 };

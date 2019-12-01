@@ -3,6 +3,7 @@
     <ProductListItem
       v-for="{id, image: {src}, name, quantityInCart, precisionPrice, calories, weight} in items"
       :key="id"
+      :id="id"
       :img="src"
       :name="name"
       :calories="calories"

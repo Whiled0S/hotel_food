@@ -1,7 +1,7 @@
 <template>
   <div class="cart">
     <HeaderBack text="Cart">
-      <button class="cart__clear">Clear all</button>
+      <button class="cart__clear" @click="clearCart">Clear all</button>
     </HeaderBack>
 
     <div class="container">
@@ -63,7 +63,7 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex';
+  import {mapState, mapActions} from 'vuex';
 
   import HeaderBack from '../../components/headers/HeaderBack';
   import ProductList from './components/ProductList';
@@ -81,6 +81,9 @@
     },
     computed: {
       ...mapState('cart', ['items'])
+    },
+    methods: {
+      ...mapActions('cart', ['clearCart'])
     }
   };
 </script>

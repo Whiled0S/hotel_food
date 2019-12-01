@@ -18,18 +18,20 @@
       <div class="product-list-item__buttons">
         <div class="product-list-item__col-1">
           <div class="product-list-item__amount">
-            <button class="button">
+            <button class="button" @click="this.removeFromCart">
               <span class="button__horizontal"/>
             </button>
+
             <span class="amount">{{ amount }}</span>
-            <button class="button">
+
+            <button class="button" @click="this.addToCart">
               <span class="button__horizontal"/>
               <span class="button__horizontal button__horizontal_rotated"/>
             </button>
           </div>
         </div>
         <div class="product-list-item__col-2">
-          <button class="product-list-item__remove ti-trash"/>
+          <button class="product-list-item__remove ti-trash" @click="deleteFromCart({productId: id})"/>
         </div>
       </div>
     </div>
@@ -37,11 +39,14 @@
 </template>
 
 <script>
-  import { commaSeparated } from '../../../helpers/common';
+  import {mapActions, mapMutations} from 'vuex';
+  import {commaSeparated} from '../../../helpers/common';
+  import debounce from "lodash/debounce";
 
   export default {
     name: 'ProductListItem',
     props: {
+      id: Number,
       img: String,
       name: String,
       amount: Number,
@@ -53,8 +58,26 @@
       commaSeparated
     },
     computed: {
-      cost () {
+      cost() {
         return this.amount * this.price;
+      }
+    },
+    methods: {
+      ...mapMutations('cart', ['REMOVE_PRODUCT', 'ADD_PRODUCT']),
+      ...mapActions('cart', ['addIntoCart', 'deleteFromCart']),
+
+      sendAddIntoCartRequest: debounce(function () {
+        this.addIntoCart({productId: this.id, amount: this.amount});
+      }, 300),
+
+      addToCart() {
+        this.ADD_PRODUCT({id: this.id});
+        this.sendAddIntoCartRequest();
+      },
+
+      removeFromCart() {
+        this.REMOVE_PRODUCT(this.id);
+        this.sendAddIntoCartRequest();
       }
     }
   };

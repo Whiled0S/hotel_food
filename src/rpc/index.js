@@ -90,4 +90,18 @@ export default class RPC {
 
     return Worker.getResponseMessage('getCart', response);
   }
+
+  static deleteFromCart(productId) {
+    const message = Worker.createMessage('deleteFromCart', {productId});
+    const request = Worker.createRequest([message]);
+
+    Worker.sendRequest(request);
+  }
+
+  static clearCart() {
+    const message = Worker.createMessage('clearCart', {});
+    const request = Worker.createRequest([message]);
+
+    Worker.sendRequest(request);
+  }
 }
