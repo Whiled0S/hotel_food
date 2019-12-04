@@ -4,14 +4,17 @@ export default {
   namespaced: true,
 
   state: () => ({
-    products: {},
-    items: []
+    items: null,
+    order: null
   }),
 
   getters: {
     getProductQuantity(state) {
       return id => state.items.find(item => item.id === id)?.quantityInCart || 0;
-    }
+    },
+
+    itemsSet: state => state.items instanceof Array,
+    orderSet: state => state.items instanceof Object
   },
 
   mutations: {
@@ -54,8 +57,17 @@ export default {
       state.items = items;
     },
 
+    SET_CART_ORDER(state, order) {
+      state.order = order;
+    },
+
     CLEAR_CART(state) {
       state.items = [];
+    },
+
+    RESET_CART(state) {
+      state.items = null;
+      state.order = null;
     }
   },
 
@@ -69,10 +81,15 @@ export default {
 
       RPC.preventError(responseMessage, () => {
         const {
-          payload: {cart: {items}}
+          payload: {cart}
         } = responseMessage;
 
-        commit('SET_CART_ITEMS', items);
+        if (cart) {
+          commit('SET_CART_ITEMS', cart.items);
+          commit('SET_CART_ORDER', cart.order);
+        } else {
+          commit('SET_CART_ITEMS', []);
+        }
       });
     },
 
@@ -84,6 +101,10 @@ export default {
     clearCart({commit}) {
       commit('CLEAR_CART');
       RPC.clearCart();
+    },
+
+    resetCart({commit}) {
+      commit('RESET_CART');
     }
   }
 };

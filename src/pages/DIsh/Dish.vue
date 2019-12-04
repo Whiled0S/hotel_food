@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!loading" class="dish">
+  <div v-if="!loading && itemsSet" class="dish">
     <Header/>
 
     <div class="dish__content">
@@ -73,7 +73,7 @@
     },
     computed: {
       ...mapState('dish', ['product', 'loading']),
-      ...mapGetters('cart', ['getProductQuantity']),
+      ...mapGetters('cart', ['getProductQuantity', 'itemsSet']),
 
       productId() {
         return parseInt(this.$route.params.id);

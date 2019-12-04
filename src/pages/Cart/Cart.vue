@@ -1,5 +1,5 @@
 <template>
-  <div class="cart">
+  <div class="cart" v-if="itemsSet && orderSet">
     <HeaderBack text="Cart">
       <button class="cart__clear" @click="clearCart">Clear all</button>
     </HeaderBack>
@@ -63,7 +63,7 @@
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
+  import {mapState, mapGetters, mapActions} from 'vuex';
 
   import HeaderBack from '../../components/headers/HeaderBack';
   import ProductList from './components/ProductList';
@@ -80,7 +80,8 @@
       };
     },
     computed: {
-      ...mapState('cart', ['items'])
+      ...mapState('cart', ['items', 'order']),
+      ...mapGetters('cart', ['itemsSet', 'orderSet']),
     },
     methods: {
       ...mapActions('cart', ['clearCart'])

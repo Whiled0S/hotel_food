@@ -76,6 +76,8 @@
       },
 
       removeFromCart() {
+        if (this.amount === 1) return;
+
         this.REMOVE_PRODUCT(this.id);
         this.sendAddIntoCartRequest();
       }

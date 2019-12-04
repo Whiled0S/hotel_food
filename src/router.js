@@ -56,7 +56,15 @@ const router = new Router({
     {
       path: '/:location/cart',
       name: 'cart',
-      component: Cart
+      component: Cart,
+      beforeEnter(to, from, next) {
+        if (from.name) {
+          store.dispatch('cart/resetCart').then(() => {
+            store.dispatch('cart/getCart');
+          });
+        }
+        next();
+      }
     }
   ]
 });
