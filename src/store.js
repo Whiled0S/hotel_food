@@ -11,8 +11,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: () => ({
     isMenuOpened: false,
-    locationHash: '',
-    sessionId: null
+    locationHash: ''
   }),
 
   getters: {

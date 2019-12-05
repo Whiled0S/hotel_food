@@ -1,5 +1,5 @@
 <template>
-  <div class="cart" v-if="itemsSet && orderSet">
+  <div class="cart" v-if="itemsSet && orderSet && items.length">
     <HeaderBack text="Cart">
       <button class="cart__clear" @click="clearCart">Clear all</button>
     </HeaderBack>
@@ -60,6 +60,13 @@
       </div>
     </div>
   </div>
+  <div v-else-if="itemsSet">
+    <Header/>
+
+    <div class="container">
+      <Empty/>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -71,10 +78,12 @@
 
   import Button from '../../components/Button';
   import MiniCard from './components/MiniCard';
+  import Header from "../../components/headers/Header";
+  import Empty from "./components/Empty";
 
   export default {
     name: 'Cart',
-    components: {MiniCard, Button, ProductList, HeaderBack},
+    components: {Empty, Header, MiniCard, Button, ProductList, HeaderBack},
     filters: {
       upper
     },
