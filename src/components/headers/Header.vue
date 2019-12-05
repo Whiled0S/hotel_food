@@ -5,21 +5,24 @@
         tag="button"
         :to="`/${locationHash}/translate`"
       >
-        {{ language }} <span class="ti-angle-down"></span>
+        {{ language }} <span class="ti-angle-down"/>
       </router-link>
     </div>
 
     <div class="header__items">
-      <button @click="openMenu" class="header__menu-button ti-menu"></button>
+      <CartAmount class="header__cart-amount" />
+      <button @click="openMenu" class="header__menu-button ti-menu"/>
     </div>
   </header>
 </template>
 
 <script>
   import { mapState, mapActions } from 'vuex';
+  import CartAmount from "../CartAmount";
 
   export default {
     name: 'Header',
+    components: {CartAmount},
     data () {
       return {
         language: 'Eng'
@@ -81,6 +84,10 @@
       border: none;
       outline: none;
       background-color: transparent;
+    }
+
+    &__cart-amount {
+      margin-right: 10px;
     }
   }
 </style>

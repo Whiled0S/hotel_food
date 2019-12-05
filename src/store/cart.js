@@ -14,7 +14,9 @@ export default {
     },
 
     itemsSet: state => state.items instanceof Array,
-    orderSet: state => state.items instanceof Object
+    orderSet: state => state.items instanceof Object,
+
+    total: state => state.items.reduce((acc, item) => acc + item.precisionPrice / 100 * item.quantityInCart, 0)
   },
 
   mutations: {

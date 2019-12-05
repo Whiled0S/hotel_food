@@ -28,6 +28,7 @@
         >
           <img :src="basket" alt="icon">
           <span> Cart</span>
+          <CartAmount class="main-menu__cart-amount" />
         </router-link>
 
         <router-link
@@ -59,9 +60,11 @@
   import book from '../assets/icons/book-light.svg';
   import basket from '../assets/icons/basket-light.svg';
   import user from '../assets/icons/user-light-thin.svg';
+  import CartAmount from "./CartAmount";
 
   export default {
     name: 'MainMenu',
+    components: {CartAmount},
     data() {
       return {
         book,
@@ -118,6 +121,10 @@
         height: 20px;
         margin-right: 10px;
       }
+    }
+
+    &__cart-amount {
+      margin-left: 10px;
     }
   }
 </style>

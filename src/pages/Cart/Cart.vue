@@ -11,7 +11,7 @@
         <table class="cart__total">
           <tr>
             <td>Total:</td>
-            <td>AED 243</td>
+            <td>{{ order.currency.name | upper }} {{ total }}</td>
           </tr>
         </table>
 
@@ -64,6 +64,7 @@
 
 <script>
   import {mapState, mapGetters, mapActions} from 'vuex';
+  import {upper} from "../../helpers/common";
 
   import HeaderBack from '../../components/headers/HeaderBack';
   import ProductList from './components/ProductList';
@@ -74,6 +75,9 @@
   export default {
     name: 'Cart',
     components: {MiniCard, Button, ProductList, HeaderBack},
+    filters: {
+      upper
+    },
     data() {
       return {
         isAgreementChecked: true
@@ -81,7 +85,7 @@
     },
     computed: {
       ...mapState('cart', ['items', 'order']),
-      ...mapGetters('cart', ['itemsSet', 'orderSet']),
+      ...mapGetters('cart', ['itemsSet', 'orderSet', 'total']),
     },
     methods: {
       ...mapActions('cart', ['clearCart'])
