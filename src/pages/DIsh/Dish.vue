@@ -27,9 +27,9 @@
         :style="{ width: productQuantity > 0 ? '130px' : '0', opacity: productQuantity > 0 ? '1' : '0' }"
         class="dish__buttons-control"
       >
-        <button tabindex="-1" class="dish__buttons-control-minus" @click="removeFromCart"/>
+        <button class="dish__buttons-control-minus" @click="removeFromCart"/>
         <span class="dish__buttons-control-amount">{{ productQuantity }}</span>
-        <button tabindex="-1" class="dish__buttons-control-plus" @click="addToCart"/>
+        <button class="dish__buttons-control-plus" @click="addToCart"/>
       </div>
       <div class="dish__buttons-add"
            :style="{ width: productQuantity > 0 ? 'calc(100% - 130px)' : '100%' }">
@@ -169,6 +169,8 @@
       position: sticky;
       bottom: 0;
       background-color: #fff;
+      user-focus: none;
+      user-select: none;
     }
 
     &__buttons-control {
