@@ -5,7 +5,8 @@ export default {
 
   state: () => ({
     items: null,
-    order: null
+    order: null,
+    suggestedItems: null
   }),
 
   getters: {
@@ -63,6 +64,10 @@ export default {
       state.order = order;
     },
 
+    SET_SUGGESTED_ITEMS(state, items) {
+      state.suggestedItems = items;
+    },
+
     CLEAR_CART(state) {
       state.items = [];
     },
@@ -79,18 +84,28 @@ export default {
     },
 
     async getCart({commit, rootState}) {
-      const responseMessage = await RPC.getCart(rootState.locationHash);
+      const [cartResponse, suggestedResponse] = await RPC.getCart(rootState.locationHash);
 
-      RPC.preventError(responseMessage, () => {
+      RPC.preventError(cartResponse, () => {
         const {
           payload: {cart}
-        } = responseMessage;
+        } = cartResponse;
 
         if (cart) {
           commit('SET_CART_ITEMS', cart.items);
           commit('SET_CART_ORDER', cart.order);
         } else {
           commit('SET_CART_ITEMS', []);
+        }
+      });
+
+      RPC.preventError(suggestedResponse, () => {
+        const {
+          payload: {items}
+        } = suggestedResponse;
+
+        if (items && items.length) {
+          commit('SET_SUGGESTED_ITEMS', items);
         }
       });
     },

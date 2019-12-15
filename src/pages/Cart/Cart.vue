@@ -36,25 +36,24 @@
 
         <div class="cart-buttons">
           <div class="cart-buttons__block">
-            <Button>Apple Pay</Button>
-          </div>
-          <div class="cart-buttons__block">
-            <Button>Google Pay</Button>
-          </div>
-          <div class="cart-buttons__block">
             <Button>Credit Card</Button>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="cart-offers">
+    <div v-if="suggestedItems" class="cart-offers">
       <p class="cart-offers__title">You might also like</p>
       <div class="cart-offers__container">
         <span class="scroll-padding"/>
         <MiniCard
-          v-for="i in 5"
-          :key="i"
+          v-for="{ id, name, currency: {unicode}, image: {src}, precisionPrice } in suggestedItems"
+          :key="id"
+          :name="name"
+          :currency="unicode"
+          :image="src"
+          :price="precisionPrice"
+          :link="`/${locationHash}/dish/${id}`"
         />
         <span class="scroll-padding"/>
       </div>
@@ -93,7 +92,8 @@
       };
     },
     computed: {
-      ...mapState('cart', ['items', 'order']),
+      ...mapState(['locationHash']),
+      ...mapState('cart', ['items', 'order', 'suggestedItems']),
       ...mapGetters('cart', ['itemsSet', 'orderSet', 'total']),
     },
     methods: {
@@ -208,25 +208,7 @@
   }
 
   .cart-buttons {
-    display: grid;
-    grid-template: 'apple-pay google-pay' 1fr 'credit-card credit-card' 1fr;
-    grid-gap: 10px 6px;
     margin-bottom: 20px;
-
-    &__block {
-
-      &:first-child {
-        grid-area: apple-pay;
-      }
-
-      &:nth-child(2) {
-        grid-area: google-pay;
-      }
-
-      &:last-child {
-        grid-area: credit-card;
-      }
-    }
   }
 
   .cart-offers {

@@ -1,22 +1,27 @@
 <template>
-	<div class="mini-card">
+  <router-link tag="div" :to="link" class="mini-card">
     <div class="mini-card__media-container">
-      <img class="mini-card__image" :src="img" alt="dish">
-      <span class="mini-card__price">400$</span>
+      <img class="mini-card__image" :src="image" alt="dish">
+      <span class="mini-card__price">{{ price | priceFilter }} {{ currency }}</span>
     </div>
-    <p class="mini-card__title">Margarita</p>
-  </div>
+    <p class="mini-card__title">{{ name }}</p>
+  </router-link>
 </template>
 
 <script>
-  import salad from '../../../assets/Salad.jpg';
+  import {price} from '../../../helpers/common';
 
   export default {
     name: 'MiniCard',
-    data() {
-      return {
-        img: salad
-      };
+    filters: {
+      priceFilter: price
+    },
+    props: {
+      name: String,
+      currency: String,
+      image: String,
+      price: Number,
+      link: String
     }
   };
 </script>

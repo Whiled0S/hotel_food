@@ -83,12 +83,17 @@ export default class RPC {
   }
 
   static async getCart(location) {
-    const message = Worker.createMessage('getCart', {location});
-    const request = Worker.createRequest([message]);
+    const cartMessage = Worker.createMessage('getCart', {location});
+    const suggestedMessage = Worker.createMessage('getSuggestedProducts', {location});
+
+    const request = Worker.createRequest([cartMessage, suggestedMessage]);
 
     const response = await Worker.sendRequest(request);
 
-    return Worker.getResponseMessage('getCart', response);
+    return [
+      Worker.getResponseMessage('getCart', response),
+      Worker.getResponseMessage('getSuggestedProducts', response)
+    ];
   }
 
   static deleteFromCart(productId) {
