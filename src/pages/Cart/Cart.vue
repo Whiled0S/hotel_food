@@ -25,10 +25,15 @@
             placeholder="Put your comments here…"
           />
 
-          <label class="cart-comment__agreement">
-            <span>I agree with Terms and Conditions</span>
+          <label
+            class="cart-comment__agreement"
+            :class="{'cart-comment__agreement_highlighted': highlightTermsOfUse}"
+            @click="processTermsClick"
+          >
+            <span class="text">I agree with Terms and Conditions</span>
+
             <input type="checkbox" v-model="isAgreementChecked">
-            <span class="cart-comment__checkmark">
+            <span class="checkmark">
               <span v-show="isAgreementChecked" class="ti-check"/>
             </span>
           </label>
@@ -36,7 +41,10 @@
 
         <div class="cart-buttons">
           <div class="cart-buttons__block">
-            <Button>Credit Card</Button>
+            <Button
+              @click="processCheckout({ acceptTermsOfUse: isAgreementChecked })"
+            >Credit Card
+            </Button>
           </div>
         </div>
       </div>
@@ -69,7 +77,7 @@
 </template>
 
 <script>
-  import {mapState, mapGetters, mapActions} from 'vuex';
+  import {mapState, mapGetters, mapActions, mapMutations} from 'vuex';
   import {upper} from "../../helpers/common";
 
   import HeaderBack from '../../components/headers/HeaderBack';
@@ -93,11 +101,18 @@
     },
     computed: {
       ...mapState(['locationHash']),
-      ...mapState('cart', ['items', 'order', 'suggestedItems']),
+      ...mapState('cart', ['items', 'order', 'suggestedItems', 'highlightTermsOfUse']),
       ...mapGetters('cart', ['itemsSet', 'orderSet', 'total']),
     },
     methods: {
-      ...mapActions('cart', ['clearCart'])
+      ...mapActions('cart', ['clearCart', 'processCheckout']),
+      ...mapMutations('cart', ['SET_HIGHLIGHT_TERMS']),
+
+      processTermsClick() {
+        if (this.highlightTermsOfUse) {
+          this.SET_HIGHLIGHT_TERMS(false);
+        }
+      }
     }
   };
 </script>
@@ -190,20 +205,36 @@
         height: 0;
         width: 0;
       }
-    }
 
-    &__checkmark {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 21px;
-      width: 21px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: transparent;
-      border: 1px solid #d8d8d8;
-      border-radius: 4px;
+      .text {
+        transition: color .3s;
+      }
+
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 21px;
+        width: 21px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        border: 1px solid #d8d8d8;
+        border-radius: 4px;
+        transition: bordr-color .3s;
+      }
+
+      &_highlighted {
+
+        .text {
+          color: #e74c3c;
+        }
+
+        .checkmark {
+          border-color: #e74c3c;
+        }
+      }
     }
   }
 

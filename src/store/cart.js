@@ -6,7 +6,9 @@ export default {
   state: () => ({
     items: null,
     order: null,
-    suggestedItems: null
+    suggestedItems: null,
+
+    highlightTermsOfUse: false
   }),
 
   getters: {
@@ -68,6 +70,10 @@ export default {
       state.suggestedItems = items;
     },
 
+    SET_HIGHLIGHT_TERMS(state, status) {
+      state.highlightTermsOfUse = status;
+    },
+
     CLEAR_CART(state) {
       state.items = [];
     },
@@ -122,6 +128,22 @@ export default {
 
     resetCart({commit}) {
       commit('RESET_CART');
+    },
+
+    async processCheckout({commit, rootState}, {acceptTermsOfUse}) {
+      const responseMessage = await RPC.processCheckout(rootState.locationHash, acceptTermsOfUse);
+
+      if (!responseMessage) {
+        commit('SET_HIGHLIGHT_TERMS', true);
+      }
+
+      RPC.preventError(responseMessage, () => {
+        const {
+          payload: {url}
+        } = responseMessage;
+
+        window.location.href = url;
+      });
     }
   }
 };

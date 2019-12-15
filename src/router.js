@@ -19,6 +19,11 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: '/thank-you/:id',
+      name: 'receipt',
+      component: Receipt
+    },
+    {
       path: '/:location',
       name: 'home',
       component: Home
@@ -47,11 +52,6 @@ const router = new Router({
       path: '/:location/translate',
       name: 'translate',
       component: Translate
-    },
-    {
-      path: '/:location/receipt',
-      name: 'receipt',
-      component: Receipt
     },
     {
       path: '/:location/cart',
