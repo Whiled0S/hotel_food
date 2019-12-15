@@ -1,12 +1,21 @@
 <template>
-	<ul class="order-list">
+  <ul class="order-list">
     <OrderListItem
-      v-for="({ name, parameters, price, amount }, index) in items"
+      v-for="({
+        name,
+        calories,
+        weight,
+        precisionPrice,
+        quantity,
+        currency: { name: cName }
+      }, index) in items"
       :key="index"
       :name="name"
-      :parameters="parameters"
-      :price="price"
-      :amount="amount"
+      :calories="calories"
+      :weight="weight"
+      :price="precisionPrice"
+      :amount="quantity"
+      :currency="cName"
       :number="index + 1"
     />
   </ul>
@@ -14,9 +23,10 @@
 
 <script>
   import OrderListItem from '../components/OrderListItem';
+
   export default {
     name: 'OrderList',
-    components: { OrderListItem },
+    components: {OrderListItem},
     props: {
       items: Array
     }

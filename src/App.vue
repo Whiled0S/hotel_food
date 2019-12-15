@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex';
+  import {mapState, mapActions} from 'vuex';
   import Page from './containers/Page';
 
   export default {
@@ -15,10 +15,15 @@
     components: {
       Page,
     },
+    computed: {
+      ...mapState(['locationHash'])
+    },
     methods: {
       ...mapActions('cart', ['getCart'])
     },
     created() {
+      if (!this.locationHash) return;
+
       this.getCart();
     }
   };

@@ -5,6 +5,7 @@ import home from './store/home';
 import restaurant from "./store/restaurant";
 import dish from './store/dish';
 import cart from './store/cart';
+import receipt from "./store/receipt";
 
 Vue.use(Vuex);
 
@@ -42,6 +43,7 @@ export default new Vuex.Store({
     home,
     restaurant,
     dish,
-    cart
+    cart,
+    receipt
   }
 });

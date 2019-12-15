@@ -118,4 +118,13 @@ export default class RPC {
 
     return Worker.getResponseMessage('processCheckout', response);
   }
+
+  static async getOrder(orderId) {
+    const message = Worker.createMessage('getOrder', {orderId});
+    const request = Worker.createRequest([message]);
+
+    const response = await Worker.sendRequest(request);
+
+    return Worker.getResponseMessage('getOrder', response);
+  }
 }

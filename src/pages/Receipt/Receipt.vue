@@ -1,24 +1,24 @@
 <template>
-  <div class="receipt">
+  <div v-if="location && order && products" class="receipt">
     <HeaderClose
-      text="Order Receipt #20"
+      :text="`Order Receipt #${order.id}`"
       @close="goHome"
     />
 
     <div class="container">
       <div class="receipt__list-container">
         <OrderList
-          :items="items"
+          :items="products"
         />
       </div>
 
       <div class="receipt__total">
         <span class="receipt__total-text">Total:</span>
-        <span class="receipt__total-text">AED 243</span>
+        <span class="receipt__total-text">{{ order.currency.name | upper }} {{ order.totalPrecisionAmount | price }}</span>
       </div>
 
       <ReceiptInfo
-        :point="point"
+        :point="location.name"
         :method="method"
         :date="date"
         :code="code"
@@ -32,6 +32,10 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex';
+
+  import { price, upper } from '../../helpers/common';
+
   import HeaderClose from '../../components/headers/HeaderClose';
   import OrderList from '../../containers/OrderList';
   import ReceiptInfo from './components/ReceiptInfo';
@@ -39,40 +43,27 @@
 
   export default {
     name: 'Receipt',
-    components: { ReceiptComment, ReceiptInfo, OrderList, HeaderClose },
+    components: {ReceiptComment, ReceiptInfo, OrderList, HeaderClose},
     data() {
       return {
         point: 'Room 404',
         method: 'Card',
         date: 'December, 12 09:20',
         code: 4317,
-        comment: 'Hey! I’m allergic to pineapples. Exclude them from fruit dessert, please.',
-        items: [
-          {
-            name: 'Buffalo burrata with cherry tomatoes and pesto',
-            parameters: ['140g', '250 cal'],
-            price: 35,
-            amount: 4
-          },
-          {
-            name: 'Mozzarella curd',
-            parameters: ['140g', '250 cal'],
-            price: 78,
-            amount: 2
-          },
-          {
-            name: 'Mozzarella curd',
-            parameters: ['140g', '250 cal'],
-            price: 35,
-            amount: 2
-          }
-        ]
+        comment: 'Hey! I’m allergic to pineapples. Exclude them from fruit dessert, please.'
       };
+    },
+    computed: {
+      ...mapState('receipt', ['location', 'order', 'products'])
     },
     methods: {
       goHome() {
         this.$router.push('/');
       }
+    },
+    filters: {
+      price,
+      upper
     }
   };
 </script>

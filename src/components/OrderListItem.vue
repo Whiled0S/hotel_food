@@ -5,29 +5,32 @@
     <div class="order-item__info">
       <div class="order-item__left">
         <p class="order-item__name">{{ name }}</p>
-        <span class="order-item__parameters">{{ parameters | commaSeparated }}</span>
+        <span class="order-item__parameters">{{ calories }} cal, {{ weight }} g</span>
       </div>
       <div class="order-item__right">
-        <p class="order-item__price">{{ price }} x {{ amount }} AED</p>
+        <p class="order-item__price">{{ price | priceFilter }} x {{ amount }} {{ currency | upper }}</p>
       </div>
     </div>
   </li>
 </template>
 
 <script>
-  import { commaSeparated } from '../helpers/common';
+  import { price, upper } from '../helpers/common';
 
   export default {
     name: 'OrderListItem',
     props: {
       name: String,
-      parameters: Array,
+      calories: Number,
+      weight: Number,
       price: Number,
       amount: Number,
-      number: Number
+      number: Number,
+      currency: String
     },
     filters: {
-      commaSeparated
+      priceFilter: price,
+      upper
     }
   };
 </script>

@@ -20,8 +20,13 @@ const router = new Router({
   routes: [
     {
       path: '/thank-you/:id',
-      name: 'receipt',
-      component: Receipt
+      name: 'thank-you',
+      component: Receipt,
+      beforeEnter(to, from, next) {
+        store.dispatch('receipt/getOrder', {orderId: to.params.id});
+
+        next();
+      }
     },
     {
       path: '/:location',
@@ -70,7 +75,9 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  store.commit('SET_LOCATION_HASH', to.params.location);
+  if (to.name !== 'thank-you') {
+    store.commit('SET_LOCATION_HASH', to.params.location);
+  }
 
   next();
 });
