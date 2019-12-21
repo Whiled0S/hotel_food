@@ -12,7 +12,7 @@
     <tr class="spacer"/>
     <tr>
       <td>Date & Time</td>
-      <td>{{ date | dateFilter(timezone) }}</td>
+      <td>{{ date | dateFilter }}</td>
     </tr>
     <tr class="spacer"/>
     <tr>
@@ -31,7 +31,6 @@
       point: String,
       method: String,
       date: String,
-      timezone: String,
       code: Number
     },
     filters: {

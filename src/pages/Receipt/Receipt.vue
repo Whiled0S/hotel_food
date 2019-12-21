@@ -21,7 +21,6 @@
         :point="location.name"
         :method="method"
         :date="order.createdAt.date"
-        :timezone="order.createdAt.timezone"
         :code="code"
       />
 
