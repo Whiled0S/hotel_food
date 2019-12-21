@@ -14,6 +14,10 @@ export default class Worker {
     return response.messages.find(message => message.type === type);
   }
 
+  static getErrorMessage(response) {
+    return response.messages.find(message => message.type === 'error');
+  }
+
   static createMessage(type, payload) {
     return {type, payload};
   }

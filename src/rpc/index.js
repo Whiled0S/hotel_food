@@ -116,7 +116,7 @@ export default class RPC {
 
     const response = await Worker.sendRequest(request);
 
-    return Worker.getResponseMessage('processCheckout', response);
+    return Worker.getResponseMessage('processCheckout', response) || Worker.getErrorMessage(response);
   }
 
   static async getOrder(orderId) {

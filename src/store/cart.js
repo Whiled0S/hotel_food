@@ -139,18 +139,29 @@ export default {
       commit('SET_CHECKOUT_PENDING', true);
       const responseMessage = await RPC.processCheckout(rootState.locationHash, acceptTermsOfUse, comment);
 
-      if (!responseMessage) {
-        commit('SET_HIGHLIGHT_TERMS', true);
+      if (responseMessage.type === 'error') {
         commit('SET_CHECKOUT_PENDING', false);
+
+        const {payload: {context}} = responseMessage;
+
+        if (context) {
+          const {attribute} = context;
+
+          if (attribute === 'acceptTermsOfUse') {
+            commit('SET_HIGHLIGHT_TERMS', true);
+          }
+        } else {
+          alert(responseMessage.payload.message);
+        }
+      } else {
+        RPC.preventError(responseMessage, () => {
+          const {
+            payload: {url}
+          } = responseMessage;
+
+          window.location.href = url;
+        });
       }
-
-      RPC.preventError(responseMessage, () => {
-        const {
-          payload: {url}
-        } = responseMessage;
-
-        window.location.href = url;
-      });
     }
   }
 };
