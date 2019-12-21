@@ -8,7 +8,7 @@
     <div class="container order-history__container">
       <Order
         v-for="{
-          order: { id, createdAt: { date }, totalPrecisionAmount },
+          order: { id, createdAt: { date }, totalPrecisionAmount, currency: { name: curName } },
           location: { name: address },
           products
         } in orders"
@@ -16,6 +16,7 @@
         :number="id"
         :date="date"
         :address="address"
+        :currency="curName"
         :cost="totalPrecisionAmount"
       >
         <div class="order-history__list-container">

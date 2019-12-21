@@ -10,14 +10,14 @@
         <p class="order-bill__address">{{ address }}</p>
       </div>
       <div class="order-bill__cost">
-        <span>{{ cost | price }} AED</span>
+        <span>{{ cost | price }} {{ currency | upper }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import {date, price} from "../../../helpers/common";
+  import {date, price, upper} from "../../../helpers/common";
 
   export default {
     name: 'Order',
@@ -26,10 +26,12 @@
       date: String,
       address: String,
       cost: Number,
+      currency: String
     },
     filters: {
       date,
-      price
+      price,
+      upper
     }
   };
 </script>
