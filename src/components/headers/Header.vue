@@ -39,7 +39,7 @@
   .header {
     position: sticky;
     top: 0;
-    height: 70px;
+    height: 50px;
     width: 100%;
     display: flex;
     justify-content: space-between;

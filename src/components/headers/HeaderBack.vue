@@ -26,7 +26,8 @@
   .back-header {
     position: sticky;
     top: 0;
-    padding: 25px 16px;
+    height: 50px;
+    padding: 0 16px;
     display: flex;
     align-items: center;
     background-color: #ffffff;

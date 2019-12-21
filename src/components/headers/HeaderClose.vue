@@ -29,7 +29,8 @@
     position: sticky;
     top: 0;
     background-color: #fff;
-    padding: 25px 16px;
+    height: 50px;
+    padding: 0 16px;
     z-index: 1;
 
     &__text {
