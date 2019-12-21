@@ -12,7 +12,7 @@
     <tr class="spacer"/>
     <tr>
       <td>Date & Time</td>
-      <td>{{ date | dateFilter }}</td>
+      <td>{{ date | dateFilter(timezone) }}</td>
     </tr>
     <tr class="spacer"/>
     <tr>
@@ -31,6 +31,7 @@
       point: String,
       method: String,
       date: String,
+      timezone: String,
       code: Number
     },
     filters: {
@@ -61,6 +62,10 @@
       padding: 0;
       border: none;
       line-height: 1;
+    }
+
+    td:first-child {
+      min-width: 110px;
     }
 
     td:last-child {

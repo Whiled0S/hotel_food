@@ -21,12 +21,18 @@
         :point="location.name"
         :method="method"
         :date="order.createdAt.date"
+        :timezone="order.createdAt.timezone"
         :code="code"
       />
 
       <ReceiptComment
         :comment="order.comment"
       />
+    </div>
+  </div>
+  <div v-else-if="error" class="receipt__error">
+    <div class="container">
+      <h2>An error occurred.<br>Please, try again later.</h2>
     </div>
   </div>
 </template>
@@ -52,7 +58,7 @@
       };
     },
     computed: {
-      ...mapState('receipt', ['location', 'order', 'products'])
+      ...mapState('receipt', ['location', 'order', 'products', 'error'])
     },
     methods: {
       goHome() {
@@ -88,6 +94,10 @@
 
     &__button-container {
       padding-bottom: 20px;
+    }
+
+    &__error {
+      text-align: center;
     }
   }
 </style>

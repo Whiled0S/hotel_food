@@ -24,10 +24,11 @@ export const price = function (number) {
 
 /**
  * @param date {String}
+ * @param timezone {String}
  * @returns {String}
  */
-export const date = function (date) {
-  const options = { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+export const date = function (date, timezone) {
+  const options = { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', timezone, hour12: false };
 
   return new Date(date).toLocaleDateString('en-us', options);
 };
