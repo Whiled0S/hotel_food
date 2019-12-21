@@ -29,5 +29,5 @@ export const price = function (number) {
 export const date = function (date) {
   const options = { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false };
 
-  return new Date(date).toLocaleDateString('en-us', options);
+  return new Date(Date.parse(date)).toLocaleDateString('en-us', options);
 };
