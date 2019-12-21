@@ -2,6 +2,8 @@
  * @param stringArray {Array<String>}
  * @returns {String}
  */
+import moment from "moment";
+
 export const commaSeparated = function (stringArray) {
   return stringArray.join(', ');
 };
@@ -24,10 +26,8 @@ export const price = function (number) {
 
 /**
  * @param date {String}
- * @returns {Number}
+ * @returns {String}
  */
 export const date = function (date) {
-  const options = { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false };
-
-  return new Date(Date.parse(date)).toLocaleDateString('en-us', options);
+  return moment(date).format('MMMM, D kk:mm');
 };
