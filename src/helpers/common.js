@@ -21,3 +21,13 @@ export const upper = function (string) {
 export const price = function (number) {
   return number / 100;
 };
+
+/**
+ * @param date {String}
+ * @returns {String}
+ */
+export const date = function (date) {
+  const options = { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+
+  return new Date(date).toLocaleDateString('en-us', options);
+};

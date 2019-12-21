@@ -6,7 +6,8 @@ export default {
   state: () => ({
     location: null,
     order: null,
-    products: null
+    products: null,
+    error: false
   }),
 
   getters: {},
@@ -22,11 +23,19 @@ export default {
 
     SET_PRODUCTS(state, products) {
       state.products = products;
+    },
+
+    SET_ERROR(state, status) {
+      state.error = status;
     }
   },
 
   actions: {
     async getOrder({commit}, {orderId}) {
+      const {payload: {status}} = await RPC.checkPayment(orderId);
+
+      if (status !== 'AUTHORIZED') return commit('SET_ERROR', true);
+
       const responseMessage = await RPC.getOrder(orderId);
 
       RPC.preventError(responseMessage, () => {

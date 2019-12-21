@@ -4,17 +4,17 @@
       <td>Order point</td>
       <td>{{ point }}</td>
     </tr>
-    <tr class="spacer"></tr>
+    <tr class="spacer"/>
     <tr>
       <td>Payment method</td>
       <td>{{ method }}</td>
     </tr>
-    <tr class="spacer"></tr>
+    <tr class="spacer"/>
     <tr>
       <td>Date & Time</td>
-      <td>{{ date }}</td>
+      <td>{{ date | dateFilter }}</td>
     </tr>
-    <tr class="spacer"></tr>
+    <tr class="spacer"/>
     <tr>
       <td>Transaction code</td>
       <td>{{ code }}</td>
@@ -23,6 +23,8 @@
 </template>
 
 <script>
+  import {date} from "../../../helpers/common";
+
   export default {
     name: 'ReceiptInfo',
     props: {
@@ -30,6 +32,9 @@
       method: String,
       date: String,
       code: Number
+    },
+    filters: {
+      dateFilter: date
     }
   };
 </script>

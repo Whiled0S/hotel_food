@@ -20,12 +20,12 @@
       <ReceiptInfo
         :point="location.name"
         :method="method"
-        :date="date"
+        :date="order.createdAt.date"
         :code="code"
       />
 
       <ReceiptComment
-        :comment="comment"
+        :comment="order.comment"
       />
     </div>
   </div>
@@ -46,11 +46,9 @@
     components: {ReceiptComment, ReceiptInfo, OrderList, HeaderClose},
     data() {
       return {
-        point: 'Room 404',
         method: 'Card',
         date: 'December, 12 09:20',
-        code: 4317,
-        comment: 'Hey! I’m allergic to pineapples. Exclude them from fruit dessert, please.'
+        code: 1234
       };
     },
     computed: {
@@ -58,7 +56,7 @@
     },
     methods: {
       goHome() {
-        this.$router.push('/');
+        this.$router.push(`/${this.location.hash}`);
       }
     },
     filters: {
