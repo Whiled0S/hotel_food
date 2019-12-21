@@ -36,13 +36,17 @@
       </div>
       <div class="dish__buttons-add"
            :style="{ width: productQuantity > 0 ? 'calc(100% - 130px)' : '100%' }">
-        <Button @click="productQuantity > 0 ? goToCart() : addToCart()">
-          {{ productQuantity > 0 ? 'Go to cart' : 'Add to cart' }}
+        <Button
+          :disabled="isAddRequestPending"
+          @click="productQuantity > 0 ? goToCart() : addToCartFirstTime()"
+        >
+          <Loader v-if="isAddRequestPending" white button/>
+          <template v-else>{{ productQuantity > 0 ? 'Go to cart' : 'Add to cart' }}</template>
         </Button>
       </div>
     </div>
   </div>
-  <PageLoader v-else />
+  <PageLoader v-else/>
 </template>
 
 <script>
@@ -57,14 +61,16 @@
   import HeaderBack from "../../components/headers/HeaderBack";
   import CartAmount from "../../components/CartAmount";
   import OpenMenuButton from "../../components/OpenMenuButton";
+  import Loader from "../../components/Loader";
 
   export default {
     name: 'Dish',
-    components: {OpenMenuButton, CartAmount, HeaderBack, PageLoader, Button, Carousel, Slide},
+    components: {Loader, OpenMenuButton, CartAmount, HeaderBack, PageLoader, Button, Carousel, Slide},
     data() {
       return {
         img: dish,
         isAdded: false,
+        isAddRequestPending: false
       };
     },
     async created() {
@@ -92,13 +98,38 @@
     },
     methods: {
       ...mapMutations('dish', ['SET_LOADING']),
-      ...mapMutations('cart', ['REMOVE_PRODUCT', 'ADD_PRODUCT']),
+      ...mapMutations('cart', ['REMOVE_PRODUCT', 'ADD_PRODUCT', 'CLEAR_CART']),
       ...mapActions('dish', ['getProduct']),
-      ...mapActions('cart', ['addIntoCart']),
+      ...mapActions('cart', ['addIntoCart', 'clearCartAndAddItem']),
 
       sendAddIntoCartRequest: debounce(function () {
         this.addIntoCart({productId: this.productId, amount: this.getProductQuantity(this.productId)});
       }, 300),
+
+      async addToCartFirstTime() {
+        this.isAddRequestPending = true;
+
+        const payload = {
+          productId: this.productId,
+          amount: 1
+        };
+
+        const message = await this.addIntoCart(payload);
+
+        if (message.type === 'notification') {
+          const answer = confirm(message.payload[0].message);
+
+          if (answer) {
+            this.clearCartAndAddItem(payload);
+            this.CLEAR_CART();
+            this.ADD_PRODUCT(this.product);
+          }
+        } else {
+          this.ADD_PRODUCT(this.product);
+        }
+
+        this.isAddRequestPending = false;
+      },
 
       addToCart() {
         this.ADD_PRODUCT(this.product);

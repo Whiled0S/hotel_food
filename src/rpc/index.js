@@ -79,7 +79,7 @@ export default class RPC {
 
     const response = await Worker.sendRequest(request);
 
-    return Worker.getResponseMessage('addIntoCart', response);
+    return Worker.getNotificationMessage(response) || Worker.getResponseMessage('addIntoCart', response);
   }
 
   static async getCart(location) {
@@ -106,6 +106,14 @@ export default class RPC {
   static clearCart() {
     const message = Worker.createMessage('clearCart', {});
     const request = Worker.createRequest([message]);
+
+    Worker.sendRequest(request);
+  }
+
+  static clearCartAndAddItem(location, productId, quantity) {
+    const clearMessage = Worker.createMessage('clearCart', {});
+    const addMessage = Worker.createMessage('addIntoCart', {location, productId, quantity});
+    const request = Worker.createRequest([clearMessage, addMessage]);
 
     Worker.sendRequest(request);
   }

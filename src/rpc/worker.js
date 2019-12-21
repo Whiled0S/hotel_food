@@ -18,6 +18,10 @@ export default class Worker {
     return response.messages.find(message => message.type === 'error');
   }
 
+  static getNotificationMessage(response) {
+    return response.messages.find(message => message.type === 'notification');
+  }
+
   static createMessage(type, payload) {
     return {type, payload};
   }

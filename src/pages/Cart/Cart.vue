@@ -44,6 +44,7 @@
           <div class="cart-buttons__block">
             <Button
               class="cart__button"
+              :disabled="isCheckoutPending"
               @click="processCheckout({ acceptTermsOfUse: isAgreementChecked, comment })"
             >
               <Loader v-if="isCheckoutPending" white button/>

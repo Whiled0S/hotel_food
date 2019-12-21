@@ -93,7 +93,7 @@ export default {
 
   actions: {
     addIntoCart({rootState}, {productId, amount}) {
-      RPC.addIntoCart(rootState.locationHash, productId, amount);
+      return RPC.addIntoCart(rootState.locationHash, productId, amount);
     },
 
     async getCart({commit, rootState}) {
@@ -164,6 +164,10 @@ export default {
           window.location.href = url;
         });
       }
+    },
+
+    async clearCartAndAddItem({rootState}, {productId, amount}) {
+      return RPC.clearCartAndAddItem(rootState.locationHash, productId, amount);
     }
   }
 };

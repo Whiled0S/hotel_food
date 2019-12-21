@@ -19,6 +19,7 @@
     },
     methods: {
       emitClick () {
+        if (this.disabled) return;
         this.$emit('click');
       }
     }
