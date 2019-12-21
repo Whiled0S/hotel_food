@@ -24,10 +24,11 @@ export const price = function (number) {
 
 /**
  * @param date {String}
- * @returns {String}
+ * @returns {Number}
  */
 export const date = function (date) {
-  const options = { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false };
+  // const options = { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false };
 
-  return new Date(Date.parse(date)).toLocaleDateString('en-us', options);
+  return Date.parse(date);
+  // return new Date(Date.parse(date)).toLocaleDateString('en-us', options);
 };
