@@ -3,7 +3,7 @@
     <button
       class="ti-close"
       @click="emitClose"
-    ></button>
+    />
     <h4 class="close-header__text">{{ text }}</h4>
   </div>
 </template>

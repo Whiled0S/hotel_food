@@ -65,7 +65,7 @@
     },
     methods: {
       goHome() {
-        this.$router.push(`/${this.location.hash}`);
+        window.location.href = `/${this.location.hash}`;
       }
     },
     filters: {
