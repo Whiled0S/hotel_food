@@ -6,6 +6,7 @@ import restaurant from "./store/restaurant";
 import dish from './store/dish';
 import cart from './store/cart';
 import receipt from "./store/receipt";
+import history from "./store/history";
 
 Vue.use(Vuex);
 
@@ -44,6 +45,7 @@ export default new Vuex.Store({
     restaurant,
     dish,
     cart,
-    receipt
+    receipt,
+    history
   }
 });

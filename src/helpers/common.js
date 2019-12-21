@@ -27,8 +27,7 @@ export const price = function (number) {
  * @returns {Number}
  */
 export const date = function (date) {
-  // const options = { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false };
+  const options = { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false };
 
-  return Date.parse(date);
-  // return new Date(Date.parse(date)).toLocaleDateString('en-us', options);
+  return new Date(Date.parse(date)).toLocaleDateString('en-us', options);
 };

@@ -24,7 +24,6 @@ const router = new Router({
       component: Receipt,
       beforeEnter(to, from, next) {
         store.dispatch('receipt/getOrder', {orderId: to.params.id});
-
         next();
       }
     },
@@ -46,7 +45,11 @@ const router = new Router({
     {
       path: '/:location/history',
       name: 'history',
-      component: History
+      component: History,
+      beforeEnter(to, from, next) {
+        store.dispatch('history/getOrders');
+        next();
+      }
     },
     {
       path: '/:location/terms',

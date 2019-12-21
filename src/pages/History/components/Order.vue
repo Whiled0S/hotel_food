@@ -6,24 +6,30 @@
 
     <div class="order-bill">
       <div class="order-bill__info">
-        <p class="order-bill__date">{{ date }}</p>
+        <p class="order-bill__date">{{ date | date }}</p>
         <p class="order-bill__address">{{ address }}</p>
       </div>
       <div class="order-bill__cost">
-        <span>{{ cost }} AED</span>
+        <span>{{ cost | price }} AED</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import {date, price} from "../../../helpers/common";
+
   export default {
     name: 'Order',
     props: {
-      number: String,
+      number: Number,
       date: String,
       address: String,
       cost: Number,
+    },
+    filters: {
+      date,
+      price
     }
   };
 </script>

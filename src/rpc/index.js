@@ -136,4 +136,13 @@ export default class RPC {
 
     return Worker.getResponseMessage('checkPayment', response);
   }
+
+  static async getOrders() {
+    const message = Worker.createMessage('getOrders', {});
+    const request = Worker.createRequest([message]);
+
+    const response = await Worker.sendRequest(request);
+
+    return Worker.getResponseMessage('getOrders', response);
+  }
 }

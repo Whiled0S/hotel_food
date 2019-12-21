@@ -1,5 +1,5 @@
 <template>
-  <div class="order-history">
+  <div v-if="!loading" class="order-history">
     <HeaderClose
       text="Order history"
       @close="goToPreviousPage"
@@ -7,122 +7,46 @@
 
     <div class="container order-history__container">
       <Order
-        v-for="{ id, number, date, address, cost, items } in orders"
+        v-for="{
+          order: { id, createdAt: { date }, totalPrecisionAmount },
+          location: { name: address },
+          products
+        } in orders"
         :key="id"
-        :number="number"
+        :number="id"
         :date="date"
         :address="address"
-        :cost="cost"
-        :items="items"
+        :cost="totalPrecisionAmount"
       >
         <div class="order-history__list-container">
           <OrderList
-            :items="items"
+            :items="products"
           />
         </div>
       </Order>
     </div>
   </div>
+  <PageLoader v-else/>
 </template>
 
 <script>
+  import {mapState} from 'vuex';
+
   import HeaderClose from '../../components/headers/HeaderClose';
   import Order from './components/Order';
   import OrderList from '../../containers/OrderList';
+  import PageLoader from "../../components/PageLoader";
 
   export default {
     name: 'OrderHistory',
     components: {
+      PageLoader,
       OrderList,
       Order,
       HeaderClose
     },
-    data () {
-      return {
-        orders: [
-          {
-            id: 1,
-            number: '001',
-            items: [
-              {
-                name: 'Buffalo burrata with cherry tomatoes and pesto',
-                parameters: ['140g', '250 cal'],
-                price: 35,
-                amount: 4
-              },
-              {
-                name: 'Mozzarella curd',
-                parameters: ['140g', '250 cal'],
-                price: 78,
-                amount: 2
-              },
-              {
-                name: 'Mozzarella curd',
-                parameters: ['140g', '250 cal'],
-                price: 35,
-                amount: 2
-              }
-            ],
-            date: '01.02.2019 21:57',
-            address: 'Room 404',
-            cost: 243
-          },
-          {
-            id: 2,
-            number: '002',
-            items: [
-              {
-                name: 'Buffalo burrata with cherry tomatoes and pesto',
-                parameters: ['140g', '250 cal'],
-                price: 35,
-                amount: 4
-              },
-              {
-                name: 'Mozzarella curd',
-                parameters: ['140g', '250 cal'],
-                price: 78,
-                amount: 2
-              },
-              {
-                name: 'Mozzarella curd',
-                parameters: ['140g', '250 cal'],
-                price: 35,
-                amount: 2
-              }
-            ],
-            date: '01.02.2019 21:57',
-            address: 'Room 404',
-            cost: 243
-          },
-          {
-            id: 3,
-            number: '003',
-            items: [
-              {
-                name: 'Buffalo burrata with cherry tomatoes and pesto',
-                parameters: ['140g', '250 cal'],
-                price: 35,
-                amount: 4
-              },
-              {
-                name: 'Mozzarella curd',
-                parameters: ['140g', '250 cal'],
-                price: 78,
-                amount: 2
-              },
-              {
-                name: 'Mozzarella curd',
-                parameters: ['140g', '250 cal'],
-                price: 35,
-                amount: 2
-              }
-            ],
-            date: '01.02.2019 21:57',
-            address: 'Room 404',
-            cost: 243
-          }
-        ]
-      };
+    computed: {
+      ...mapState('history', ['orders', 'loading'])
     },
     methods: {
       goToPreviousPage() {
