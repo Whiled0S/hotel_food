@@ -110,8 +110,8 @@ export default class RPC {
     Worker.sendRequest(request);
   }
 
-  static async processCheckout(location, acceptTermsOfUse) {
-    const message = Worker.createMessage('processCheckout', {location, acceptTermsOfUse});
+  static async processCheckout(location, acceptTermsOfUse, comment) {
+    const message = Worker.createMessage('processCheckout', {location, acceptTermsOfUse, comment});
     const request = Worker.createRequest([message]);
 
     const response = await Worker.sendRequest(request);

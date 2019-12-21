@@ -130,8 +130,8 @@ export default {
       commit('RESET_CART');
     },
 
-    async processCheckout({commit, rootState}, {acceptTermsOfUse}) {
-      const responseMessage = await RPC.processCheckout(rootState.locationHash, acceptTermsOfUse);
+    async processCheckout({commit, rootState}, {acceptTermsOfUse, comment}) {
+      const responseMessage = await RPC.processCheckout(rootState.locationHash, acceptTermsOfUse, comment);
 
       if (!responseMessage) {
         commit('SET_HIGHLIGHT_TERMS', true);

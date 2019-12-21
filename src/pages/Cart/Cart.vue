@@ -21,6 +21,7 @@
           <textarea
             id="comment"
             name="comment"
+            v-model="comment"
             class="cart-comment__area"
             placeholder="Put your comments here…"
           />
@@ -42,7 +43,7 @@
         <div class="cart-buttons">
           <div class="cart-buttons__block">
             <Button
-              @click="processCheckout({ acceptTermsOfUse: isAgreementChecked })"
+              @click="processCheckout({ acceptTermsOfUse: isAgreementChecked, comment })"
             >Credit Card
             </Button>
           </div>
@@ -96,7 +97,8 @@
     },
     data() {
       return {
-        isAgreementChecked: true
+        isAgreementChecked: true,
+        comment: ''
       };
     },
     computed: {

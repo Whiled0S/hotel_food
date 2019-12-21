@@ -26,6 +26,7 @@
       />
 
       <ReceiptComment
+        v-if="order.comment"
         :comment="order.comment"
       />
     </div>
