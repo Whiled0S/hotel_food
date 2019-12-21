@@ -43,8 +43,11 @@
         <div class="cart-buttons">
           <div class="cart-buttons__block">
             <Button
+              class="cart__button"
               @click="processCheckout({ acceptTermsOfUse: isAgreementChecked, comment })"
-            >Credit Card
+            >
+              <Loader v-if="isCheckoutPending" white button/>
+              <span v-else>Credit card</span>
             </Button>
           </div>
         </div>
@@ -90,10 +93,11 @@
   import Header from "../../components/headers/Header";
   import Empty from "./components/Empty";
   import PageLoader from "../../components/PageLoader";
+  import Loader from "../../components/Loader";
 
   export default {
     name: 'Cart',
-    components: {PageLoader, Empty, Header, MiniCard, Button, ProductList, HeaderBack},
+    components: {Loader, PageLoader, Empty, Header, MiniCard, Button, ProductList, HeaderBack},
     filters: {
       upper
     },
@@ -105,7 +109,7 @@
     },
     computed: {
       ...mapState(['locationHash']),
-      ...mapState('cart', ['items', 'order', 'suggestedItems', 'highlightTermsOfUse']),
+      ...mapState('cart', ['items', 'order', 'suggestedItems', 'highlightTermsOfUse', 'isCheckoutPending']),
       ...mapGetters('cart', ['itemsSet', 'orderSet', 'total']),
     },
     methods: {

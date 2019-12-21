@@ -1,12 +1,17 @@
 <template>
-  <div class="loader">
-    <img src="../assets/icons/spinner.svg" alt="spinner">
+  <div class="loader" :class="{'loader_button': button}">
+    <img v-if="white" src="../assets/icons/spinner-white.svg" alt="spinner">
+    <img v-else src="../assets/icons/spinner.svg" alt="spinner">
   </div>
 </template>
 
 <script>
   export default {
-    name: "Loader"
+    name: "Loader",
+    props: {
+      white: Boolean,
+      button: Boolean
+    }
   };
 </script>
 
@@ -25,6 +30,16 @@
       animation-duration: 1s;
       animation-iteration-count: infinite;
       animation-timing-function: linear;
+    }
+
+    &_button {
+      height: 16px;
+      position: relative;
+
+      img {
+        width: 25px;
+        height: 25px;
+      }
     }
   }
 

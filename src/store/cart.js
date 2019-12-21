@@ -8,7 +8,8 @@ export default {
     order: null,
     suggestedItems: null,
 
-    highlightTermsOfUse: false
+    highlightTermsOfUse: false,
+    isCheckoutPending: false
   }),
 
   getters: {
@@ -81,6 +82,10 @@ export default {
     RESET_CART(state) {
       state.items = null;
       state.order = null;
+    },
+
+    SET_CHECKOUT_PENDING(state, status) {
+      state.isCheckoutPending = status;
     }
   },
 
@@ -131,10 +136,12 @@ export default {
     },
 
     async processCheckout({commit, rootState}, {acceptTermsOfUse, comment}) {
+      commit('SET_CHECKOUT_PENDING', true);
       const responseMessage = await RPC.processCheckout(rootState.locationHash, acceptTermsOfUse, comment);
 
       if (!responseMessage) {
         commit('SET_HIGHLIGHT_TERMS', true);
+        commit('SET_CHECKOUT_PENDING', false);
       }
 
       RPC.preventError(responseMessage, () => {
