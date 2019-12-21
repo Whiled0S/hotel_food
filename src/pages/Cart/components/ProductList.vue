@@ -1,7 +1,7 @@
 <template>
   <div class="product-list">
     <ProductListItem
-      v-for="{id, image: {src}, name, quantityInCart, precisionPrice, calories, weight} in items"
+      v-for="{id, image: {src}, name, quantityInCart, precisionPrice, calories, weight, currency} in items"
       :key="id"
       :id="id"
       :img="src"
@@ -10,6 +10,7 @@
       :weight="weight"
       :amount="quantityInCart"
       :price="precisionPrice / 100"
+      :currency="currency.name"
     />
   </div>
 </template>

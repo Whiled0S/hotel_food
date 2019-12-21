@@ -11,7 +11,7 @@
           <p class="product-list-item__parameters">{{ weight }} g, {{ calories }} cal</p>
         </div>
         <div class="product-list-item__col-2">
-          <span class="product-list-item__cost">{{ cost }} AED</span>
+          <span class="product-list-item__cost">{{ cost }} {{ currency | upper }}</span>
         </div>
       </div>
 
@@ -40,7 +40,7 @@
 
 <script>
   import {mapActions, mapMutations} from 'vuex';
-  import {commaSeparated} from '../../../helpers/common';
+  import {upper} from '../../../helpers/common';
   import debounce from "lodash/debounce";
 
   export default {
@@ -52,10 +52,11 @@
       amount: Number,
       price: Number,
       calories: Number,
-      weight: Number
+      weight: Number,
+      currency: String
     },
     filters: {
-      commaSeparated
+      upper
     },
     computed: {
       cost() {
