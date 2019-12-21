@@ -113,7 +113,7 @@
     &__list-item {
       display: flex;
       align-items: center;
-      padding: 10px 0;
+      padding: 15px 0;
       border-bottom: 1px solid #d8d8d8;
 
       img {
