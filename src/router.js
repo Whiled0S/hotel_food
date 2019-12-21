@@ -82,6 +82,10 @@ router.beforeEach((to, from, next) => {
     store.commit('SET_LOCATION_HASH', to.params.location);
   }
 
+  const prevUrl = from.name ? from.fullPath : from.fullPath + to.params.location;
+
+  store.commit('SET_PREVIOUS_URL', prevUrl);
+
   next();
 });
 

@@ -11,15 +11,13 @@
 </template>
 
 <script>
+  import goToPreviousPage from "../../mixins/goToPreviousPage";
+
   export default {
     name: 'HeaderBack',
+    mixins: [goToPreviousPage],
     props: {
       text: String
-    },
-    methods: {
-      goToPreviousPage() {
-        this.$router.go(-1);
-      }
     }
   };
 </script>

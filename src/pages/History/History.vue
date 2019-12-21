@@ -36,9 +36,11 @@
   import Order from './components/Order';
   import OrderList from '../../containers/OrderList';
   import PageLoader from "../../components/PageLoader";
+  import goToPreviousPage from "../../mixins/goToPreviousPage";
 
   export default {
     name: 'OrderHistory',
+    mixins: [goToPreviousPage],
     components: {
       PageLoader,
       OrderList,
@@ -47,11 +49,6 @@
     },
     computed: {
       ...mapState('history', ['orders', 'loading'])
-    },
-    methods: {
-      goToPreviousPage() {
-        this.$router.go(-1);
-      }
     }
   };
 </script>

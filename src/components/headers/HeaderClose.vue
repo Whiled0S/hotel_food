@@ -15,9 +15,6 @@
       text: String
     },
     methods: {
-      goToPreviousPage() {
-        this.$router.go(-1);
-      },
       emitClose() {
         this.$emit('close');
       }

@@ -13,7 +13,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: () => ({
     isMenuOpened: false,
-    locationHash: ''
+    locationHash: '',
+    previousUrl: null
   }),
 
   getters: {
@@ -27,6 +28,10 @@ export default new Vuex.Store({
 
     SET_LOCATION_HASH(state, hash) {
       state.locationHash = hash;
+    },
+
+    SET_PREVIOUS_URL(state, url) {
+      state.previousUrl = url;
     }
   },
 
