@@ -6,7 +6,7 @@
   >
     <div class="card__image">
       <img v-if="img" :src="img" alt="logo">
-      <span v-if="price" class="card__price">{{ price }}$</span>
+      <span v-if="price" class="card__price">{{ price | priceFilter }} {{ currency.unicode }}</span>
     </div>
 
     <p class="card__name">{{ name }}</p>
@@ -14,6 +14,8 @@
 </template>
 
 <script>
+  import {price} from "../helpers/common";
+
   export default {
     name: 'Card',
     props: {
@@ -21,7 +23,11 @@
       name: String,
       img: String,
       price: Number,
+      currency: Object,
       link: String
+    },
+    filters: {
+      priceFilter: price
     }
   };
 </script>

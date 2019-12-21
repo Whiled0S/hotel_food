@@ -7,12 +7,13 @@
 
       <div class="card-list__cards">
         <Card
-          v-for="{id, image: { src }, name, price} in cards"
+          v-for="{id, image: { src }, name, precisionPrice, currency} in cards"
           :key="id"
           :id="id"
           :name="name"
           :img="src"
-          :price="price"
+          :price="precisionPrice"
+          :currency="currency"
           :link="link"
         />
       </div>
