@@ -39,6 +39,7 @@
       </div>
     </div>
   </div>
+  <PageLoader v-else />
 </template>
 
 <script>
@@ -50,10 +51,11 @@
   import dish from '../../assets/Salad.jpg';
   import Button from '../../components/Button';
   import {upper, price} from "../../helpers/common";
+  import PageLoader from "../../components/PageLoader";
 
   export default {
     name: 'Dish',
-    components: {Button, Header, Carousel, Slide},
+    components: {PageLoader, Button, Header, Carousel, Slide},
     data() {
       return {
         img: dish,

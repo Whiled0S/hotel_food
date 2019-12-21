@@ -42,6 +42,7 @@
       </template>
     </Main>
   </div>
+  <PageLoader v-else />
 </template>
 
 <script>
@@ -56,10 +57,12 @@
 
   import SubheaderBack from '../../components/subheaders/SubheaderBack';
   import Loader from "../../components/Loader";
+  import PageLoader from "../../components/PageLoader";
 
   export default {
     name: 'Home',
     components: {
+      PageLoader,
       Loader,
       SubheaderBack,
       Header,

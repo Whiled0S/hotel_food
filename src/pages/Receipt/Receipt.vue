@@ -36,6 +36,7 @@
       <h2>An error occurred.<br>Please, try again later.</h2>
     </div>
   </div>
+  <PageLoader v-else />
 </template>
 
 <script>
@@ -47,10 +48,11 @@
   import OrderList from '../../containers/OrderList';
   import ReceiptInfo from './components/ReceiptInfo';
   import ReceiptComment from './components/ReceiptComment';
+  import PageLoader from "../../components/PageLoader";
 
   export default {
     name: 'Receipt',
-    components: {ReceiptComment, ReceiptInfo, OrderList, HeaderClose},
+    components: {PageLoader, ReceiptComment, ReceiptInfo, OrderList, HeaderClose},
     data() {
       return {
         method: 'Card',

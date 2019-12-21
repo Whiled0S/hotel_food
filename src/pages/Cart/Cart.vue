@@ -75,6 +75,7 @@
       <Empty/>
     </div>
   </div>
+  <PageLoader v-else/>
 </template>
 
 <script>
@@ -88,10 +89,11 @@
   import MiniCard from './components/MiniCard';
   import Header from "../../components/headers/Header";
   import Empty from "./components/Empty";
+  import PageLoader from "../../components/PageLoader";
 
   export default {
     name: 'Cart',
-    components: {Empty, Header, MiniCard, Button, ProductList, HeaderBack},
+    components: {PageLoader, Empty, Header, MiniCard, Button, ProductList, HeaderBack},
     filters: {
       upper
     },

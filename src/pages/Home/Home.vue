@@ -38,6 +38,7 @@
       </template>
     </Main>
   </div>
+  <PageLoader v-else/>
 </template>
 
 <script>
@@ -50,10 +51,12 @@
   import {mapActions, mapState, mapMutations, mapGetters} from 'vuex';
   import CardTiles from "../../containers/CardTiles";
   import Loader from "../../components/Loader";
+  import PageLoader from "../../components/PageLoader";
 
   export default {
     name: 'Home',
     components: {
+      PageLoader,
       Loader,
       CardTiles,
       Header,
