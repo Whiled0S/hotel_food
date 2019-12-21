@@ -17,6 +17,8 @@ export default {
       return id => state.items.find(item => item.id === id)?.quantityInCart || 0;
     },
 
+    totalQuantity: state => state.items.reduce((q, i) => q + i.quantityInCart, 0),
+
     itemsSet: state => state.items instanceof Array,
     orderSet: state => state.order instanceof Object,
 

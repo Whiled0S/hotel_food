@@ -11,18 +11,19 @@
 
     <div class="header__items">
       <CartAmount class="header__cart-amount"/>
-      <button @click="openMenu" class="header__menu-button ti-menu"/>
+      <OpenMenuButton/>
     </div>
   </header>
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
+  import {mapState} from 'vuex';
   import CartAmount from "../CartAmount";
+  import OpenMenuButton from "../OpenMenuButton";
 
   export default {
     name: 'Header',
-    components: {CartAmount},
+    components: {OpenMenuButton, CartAmount},
     data() {
       return {
         language: 'Eng'
@@ -30,9 +31,6 @@
     },
     computed: {
       ...mapState(['locationHash'])
-    },
-    methods: {
-      ...mapActions(['openMenu'])
     }
   };
 </script>
@@ -76,14 +74,6 @@
       align-items: center;
       margin: 0;
       padding: 0;
-    }
-
-    &__menu-button {
-      padding: 5px;
-      margin: 0 -5px 0;
-      border: none;
-      outline: none;
-      background-color: transparent;
     }
 
     &__cart-amount {

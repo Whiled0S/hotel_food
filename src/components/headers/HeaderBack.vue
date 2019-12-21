@@ -3,7 +3,7 @@
     <button
       class="ti-angle-left"
       @click="goToPreviousPage"
-    ></button>
+    />
     <h4 class="back-header__text">{{ text }}</h4>
 
     <slot/>

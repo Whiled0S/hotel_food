@@ -1,6 +1,9 @@
 <template>
   <div v-if="!loading && itemsSet" class="dish">
-    <Header/>
+    <HeaderBack>
+      <CartAmount class="dish__cart-amount"/>
+      <OpenMenuButton/>
+    </HeaderBack>
 
     <div class="dish__content">
       <Carousel class="dish__carousel" :perPage="1">
@@ -46,16 +49,18 @@
   import debounce from 'lodash/debounce';
   import {mapMutations, mapActions, mapState, mapGetters} from 'vuex';
 
-  import Header from '../../components/headers/Header';
   import {Carousel, Slide} from 'vue-carousel';
   import dish from '../../assets/Salad.jpg';
   import Button from '../../components/Button';
   import {upper, price} from "../../helpers/common";
   import PageLoader from "../../components/PageLoader";
+  import HeaderBack from "../../components/headers/HeaderBack";
+  import CartAmount from "../../components/CartAmount";
+  import OpenMenuButton from "../../components/OpenMenuButton";
 
   export default {
     name: 'Dish',
-    components: {PageLoader, Button, Header, Carousel, Slide},
+    components: {OpenMenuButton, CartAmount, HeaderBack, PageLoader, Button, Carousel, Slide},
     data() {
       return {
         img: dish,
@@ -116,6 +121,7 @@
   .dish {
     display: flex;
     flex-direction: column;
+    height: 100%;
 
     &__carousel {
       margin-bottom: 20px;
@@ -225,6 +231,10 @@
     &__buttons-add {
       width: 100%;
       transition: width .3s;
+    }
+
+    &__cart-amount {
+      margin-right: 10px;
     }
   }
 </style>

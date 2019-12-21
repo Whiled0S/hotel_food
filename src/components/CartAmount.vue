@@ -1,15 +1,14 @@
 <template>
-  <span v-if="itemsSet && items.length > 0" class="cart-amount">{{ items.length }}</span>
+  <span v-if="itemsSet && totalQuantity > 0" class="cart-amount">{{ totalQuantity }}</span>
 </template>
 
 <script>
-  import {mapGetters, mapState} from "vuex";
+  import {mapGetters} from "vuex";
 
   export default {
     name: "CartAmount",
     computed: {
-      ...mapState('cart', ['items']),
-      ...mapGetters('cart', ['itemsSet'])
+      ...mapGetters('cart', ['itemsSet', 'totalQuantity'])
     }
   };
 </script>
