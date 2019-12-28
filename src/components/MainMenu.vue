@@ -17,7 +17,7 @@
           @click.native="closeMenu"
         >
           <img :src="book" alt="icon">
-          <span> Menu</span>
+          <span>{{ $t('menu.menu') }}</span>
         </router-link>
 
         <router-link
@@ -27,7 +27,7 @@
           @click.native="closeMenu"
         >
           <img :src="basket" alt="icon">
-          <span> Cart</span>
+          <span>{{ $t('menu.cart') }}</span>
           <CartAmount class="main-menu__cart-amount" />
         </router-link>
 
@@ -38,7 +38,7 @@
           @click.native="closeMenu"
         >
           <img :src="user" alt="icon">
-          <span> History</span>
+          <span>{{ $t('menu.history') }}</span>
         </router-link>
 
         <router-link
@@ -47,7 +47,7 @@
           class="main-menu__list-item"
           @click.native="closeMenu"
         >
-          <span> Terms of use</span>
+          <span>{{ $t('menu.terms') }}</span>
         </router-link>
       </ul>
     </transition>

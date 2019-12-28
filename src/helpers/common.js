@@ -1,8 +1,9 @@
+import moment from "moment";
+
 /**
  * @param stringArray {Array<String>}
  * @returns {String}
  */
-import moment from "moment";
 
 export const commaSeparated = function (stringArray) {
   return stringArray.join(', ');
@@ -30,4 +31,9 @@ export const price = function (number) {
  */
 export const date = function (date) {
   return moment(date).format('MMMM, D kk:mm');
+};
+
+export const capitalize = function (str) {
+  if (!str.length) return str;
+  return str[0].toUpperCase() + str.slice(1);
 };

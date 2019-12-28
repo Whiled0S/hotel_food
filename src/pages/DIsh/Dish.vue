@@ -41,7 +41,7 @@
           @click="productQuantity > 0 ? goToCart() : addToCartFirstTime()"
         >
           <Loader v-if="isAddRequestPending" white button/>
-          <template v-else>{{ productQuantity > 0 ? 'Go to cart' : 'Add to cart' }}</template>
+          <template v-else>{{ productQuantity > 0 ? $t('dish.cart.go') : $t('dish.cart.add') }}</template>
         </Button>
       </div>
     </div>

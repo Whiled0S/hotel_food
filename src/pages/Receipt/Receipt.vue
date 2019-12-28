@@ -1,7 +1,7 @@
 <template>
   <div v-if="location && order && products" class="receipt">
     <HeaderClose
-      :text="`Order Receipt #${order.id}`"
+      :text="`${$t('receipt.header')} #${order.id}`"
       @close="goHome"
     />
 
@@ -32,7 +32,7 @@
   </div>
   <div v-else-if="error" class="receipt__error">
     <div class="container">
-      <h2>An error occurred.<br>Please, try again later.</h2>
+      <h2>{{ $t('receipt.error.topText') }}<br>{{ $t('receipt.error.botText') }}</h2>
     </div>
   </div>
   <PageLoader v-else />

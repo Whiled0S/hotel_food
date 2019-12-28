@@ -1,6 +1,6 @@
 <template>
 	<div class="receipt-comment">
-    <h5 class="receipt-comment__header">Comments</h5>
+    <h5 class="receipt-comment__header">{{ $t('receipt.comment.title') }}</h5>
     <p class="receipt-comment__text"><img :src="require('../../../assets/icons/quotes.svg')" alt="quotes">{{ comment }}</p>
   </div>
 </template>

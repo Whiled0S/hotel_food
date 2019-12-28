@@ -1,7 +1,7 @@
 <template>
   <div class="empty">
-    <h3>Your cart is empty</h3>
-    <router-link class="empty__link" :to="`/${locationHash}`">Choose something in our menu</router-link>
+    <h3>{{ $t('cart.empty.topText') }}</h3>
+    <router-link class="empty__link" :to="`/${locationHash}`">{{ $t('cart.empty.botText') }}</router-link>
   </div>
 </template>
 

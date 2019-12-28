@@ -1,7 +1,7 @@
 <template>
   <div v-if="!loading" class="order-history">
     <HeaderClose
-      text="Order history"
+      :text="$t('history.header')"
       @close="goToPreviousPage"
     />
 

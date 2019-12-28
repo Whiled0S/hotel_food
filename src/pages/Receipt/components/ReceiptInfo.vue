@@ -1,22 +1,22 @@
 <template>
   <table class="receipt-info">
     <tr>
-      <td>Order point</td>
+      <td>{{ $t('receipt.info.orderPoint') }}</td>
       <td>{{ point }}</td>
     </tr>
     <tr class="spacer"/>
     <tr>
-      <td>Payment method</td>
+      <td>{{ $t('receipt.info.paymentMethod') }}</td>
       <td>{{ method }}</td>
     </tr>
     <tr class="spacer"/>
     <tr>
-      <td>Date & Time</td>
+      <td>{{ $t('receipt.info.date') }}</td>
       <td>{{ date | dateFilter }}</td>
     </tr>
     <tr class="spacer"/>
     <tr>
-      <td>Transaction code</td>
+      <td>{{ $t('receipt.info.transactionCode') }}</td>
       <td>{{ code }}</td>
     </tr>
   </table>

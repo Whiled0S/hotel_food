@@ -1,6 +1,6 @@
 <template>
   <div class="order">
-    <h5 class="order__header">Order #{{ number }}</h5>
+    <h5 class="order__header">{{ $t('history.orderHeader') }} #{{ number }}</h5>
 
     <slot/>
 

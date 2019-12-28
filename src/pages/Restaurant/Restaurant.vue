@@ -10,7 +10,7 @@
 
     <Main>
       <SubheaderBack
-        text="Restorante Via D’Argento"
+        :text="business.name | capitalize"
       />
 
       <MenuList
@@ -47,6 +47,7 @@
 
 <script>
   import {mapState, mapActions, mapMutations, mapGetters} from 'vuex';
+  import {capitalize} from "../../helpers/common";
 
   import Header from '../../components/headers/Header';
   import SubheaderHotel from '../../components/subheaders/SubheaderHotel';
@@ -72,6 +73,9 @@
       CardList,
       CardTiles
     },
+    filters: {
+      capitalize
+    },
     async created() {
       this.SET_LOADING(true);
 
@@ -80,7 +84,7 @@
       this.SET_LOADING(false);
     },
     computed: {
-      ...mapState('restaurant', ['location', 'loading', 'blocks', 'products', 'itemsLoading']),
+      ...mapState('restaurant', ['location', 'business', 'loading', 'blocks', 'products', 'itemsLoading']),
       ...mapState(['locationHash']),
       ...mapGetters('restaurant', ['categories']),
 

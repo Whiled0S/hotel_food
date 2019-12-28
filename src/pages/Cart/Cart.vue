@@ -1,7 +1,7 @@
 <template>
   <div class="cart" v-if="itemsSet && orderSet && items.length">
-    <HeaderBack text="Cart">
-      <button class="cart__clear" @click="clearCart">Clear all</button>
+    <HeaderBack :text="$t('cart.header')">
+      <button class="cart__clear" @click="clearCart">{{ $t('cart.clear') }}</button>
     </HeaderBack>
 
     <div class="container">
@@ -16,14 +16,14 @@
         </table>
 
         <div class="cart-comment">
-          <label for="comment" class="cart-comment__title">Comments</label>
+          <label for="comment" class="cart-comment__title">{{ $t('cart.comments.header') }}</label>
 
           <textarea
             id="comment"
             name="comment"
             v-model="comment"
             class="cart-comment__area"
-            placeholder="Put your comments here…"
+            :placeholder="$t('cart.comments.placeholder')"
           />
 
           <label
@@ -31,7 +31,7 @@
             :class="{'cart-comment__agreement_highlighted': highlightTermsOfUse}"
             @click="processTermsClick"
           >
-            <span class="text">I agree with Terms and Conditions</span>
+            <span class="text">{{ $t('cart.agreement') }}</span>
 
             <input type="checkbox" v-model="isAgreementChecked">
             <span class="checkmark">
@@ -48,7 +48,7 @@
               @click="processCheckout({ acceptTermsOfUse: isAgreementChecked, comment })"
             >
               <Loader v-if="isCheckoutPending" white button/>
-              <span v-else>Credit card</span>
+              <span v-else>{{ $t('cart.payment.card') }}</span>
             </Button>
           </div>
         </div>
@@ -56,7 +56,7 @@
     </div>
 
     <div v-if="suggestedItems" class="cart-offers">
-      <p class="cart-offers__title">You might also like</p>
+      <p class="cart-offers__title">{{ $t('cart.relatedProducts') }}</p>
       <div class="cart-offers__container">
         <span class="scroll-padding"/>
         <MiniCard
