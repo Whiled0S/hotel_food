@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 import Home from './pages/Home/Home';
 import Restaurant from './pages/Restaurant/Restaurant';
-import Dish from './pages/DIsh/Dish';
+import Dish from './pages/Dish/Dish';
 import History from './pages/History/History';
 import Terms from './pages/Terms/Terms';
 import Translate from './pages/Translation/Translate';
