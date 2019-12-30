@@ -9,6 +9,7 @@ import Terms from './pages/Terms/Terms';
 import Translate from './pages/Translation/Translate';
 import Receipt from './pages/Receipt/Receipt';
 import Cart from './pages/Cart/Cart';
+import Default from "./pages/Default/Default";
 
 import store from './store';
 
@@ -18,6 +19,11 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    {
+      path: '/',
+      name: 'default',
+      component: Default
+    },
     {
       path: '/thank-you/:id',
       name: 'thank-you',
