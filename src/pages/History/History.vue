@@ -25,6 +25,9 @@
           />
         </div>
       </Order>
+      <div v-if="orders.length === 0" class="no-orders">
+        <h3>You don't have any orders so far!!!</h3>
+      </div>
     </div>
   </div>
   <PageLoader v-else/>
@@ -55,6 +58,10 @@
 </script>
 
 <style lang="less" scoped>
+  .no-orders {
+    text-align: center;
+  }
+
   .order-history {
     height: 100%;
     display: flex;
