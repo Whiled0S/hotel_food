@@ -1,4 +1,4 @@
-import RPC from "../rpc";
+import RPC from '../rpc';
 
 export default {
   namespaced: true,
@@ -22,16 +22,12 @@ export default {
   },
 
   actions: {
-    async getProduct({commit}, {productId}) {
+    async getProduct({ commit }, { productId }) {
       const responseMessage = await RPC.getProduct(productId);
 
-      RPC.preventError(responseMessage, () => {
-        const {
-          payload: {product}
-        } = responseMessage;
+      const { payload: { product } } = responseMessage;
 
-        commit('SET_PRODUCT', product);
-      });
+      commit('SET_PRODUCT', product);
     }
   }
 };

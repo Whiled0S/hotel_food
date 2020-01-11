@@ -1,156 +1,74 @@
 /* eslint-disable no-console */
-import Worker from "./worker";
+import Worker from './worker';
 
 export default class RPC {
 
-  static preventError(responseMessage, callback) {
-    if (!responseMessage)
-      return console.error('Ошибка в RPC запросе');
-
-    try {
-      callback();
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   static async getIndexData(location) {
-    const message = Worker.createMessage('getIndexData', {location});
-    const request = Worker.createRequest([message]);
-
-    const response = await Worker.sendRequest(request);
-
-    return Worker.getResponseMessage('getIndexData', response);
+    return Worker.sendOneMessage('getIndexData', { location });
   }
 
   static async getBusinessesByCategory(location, categoryId) {
-    const message = Worker.createMessage('getBusinessesByCategory', {location, categoryId});
-    const request = Worker.createRequest([message]);
-
-    const response = await Worker.sendRequest(request);
-
-    return Worker.getResponseMessage('getBusinessesByCategory', response);
+    return Worker.sendOneMessage('getBusinessesByCategory', { location, categoryId });
   }
 
   static async getRestaurantData(businessId, location) {
-    const productsMessage = Worker.createMessage('getProductsByBusiness', {businessId});
-    const locationMessage = Worker.createMessage('getLocationInfo', {location});
+    const types = ['getProductsByBusiness', 'getLocationInfo'];
+    const payloads = [{ businessId }, { location }];
 
-    const request = Worker.createRequest([productsMessage, locationMessage]);
-
-    const response = await Worker.sendRequest(request);
-
-    return [
-      Worker.getResponseMessage('getProductsByBusiness', response),
-      Worker.getResponseMessage('getLocationInfo', response)
-    ];
+    return Worker.sendMessageGroup(types, payloads);
   }
 
   static async getProductsByBusiness(businessId) {
-    const message = Worker.createMessage('getProductsByBusiness', {businessId});
-    const request = Worker.createRequest([message]);
-
-    const response = await Worker.sendRequest(request);
-
-    return Worker.getResponseMessage('getProductsByBusiness', response);
+    return Worker.sendOneMessage('getProductsByBusiness', { businessId });
   }
 
   static async getProductByCategory(businessId, categoryId) {
-    const message = Worker.createMessage('getProductByCategory', {businessId, categoryId});
-    const request = Worker.createRequest([message]);
-
-    const response = await Worker.sendRequest(request);
-
-    return Worker.getResponseMessage('getProductByCategory', response);
+    return Worker.sendOneMessage('getProductByCategory', { businessId, categoryId });
   }
 
   static async getProduct(productId) {
-    const message = Worker.createMessage('getProduct', {productId});
-    const request = Worker.createRequest([message]);
-
-    const response = await Worker.sendRequest(request);
-
-    return Worker.getResponseMessage('getProduct', response);
+    return Worker.sendOneMessage('getProduct', { productId });
   }
 
   static async addIntoCart(location, productId, quantity) {
-    const message = Worker.createMessage('addIntoCart', {location, productId, quantity});
-    const request = Worker.createRequest([message]);
-
-    const response = await Worker.sendRequest(request);
-
-    return Worker.getNotificationMessage(response) || Worker.getResponseMessage('addIntoCart', response);
+    return Worker.sendOneMessageNotificationPriority('addIntoCart', { location, productId, quantity });
   }
 
   static async getCart(location) {
-    const cartMessage = Worker.createMessage('getCart', {location});
-    const suggestedMessage = Worker.createMessage('getSuggestedProducts', {location});
+    const types = ['getCart', 'getSuggestedProducts'];
+    const payloads = [{ location }, { location }];
 
-    const request = Worker.createRequest([cartMessage, suggestedMessage]);
-
-    const response = await Worker.sendRequest(request);
-
-    return [
-      Worker.getResponseMessage('getCart', response),
-      Worker.getResponseMessage('getSuggestedProducts', response)
-    ];
+    return Worker.sendMessageGroup(types, payloads);
   }
 
   static deleteFromCart(productId) {
-    const message = Worker.createMessage('deleteFromCart', {productId});
-    const request = Worker.createRequest([message]);
-
-    Worker.sendRequest(request);
+    Worker.sendOneMessage('deleteFromCart', { productId });
   }
 
   static clearCart() {
-    const message = Worker.createMessage('clearCart', {});
-    const request = Worker.createRequest([message]);
-
-    Worker.sendRequest(request);
+    Worker.sendOneMessage('clearCart', {});
   }
 
   static clearCartAndAddItem(location, productId, quantity) {
-    const clearMessage = Worker.createMessage('clearCart', {});
-    const addMessage = Worker.createMessage('addIntoCart', {location, productId, quantity});
-    const request = Worker.createRequest([clearMessage, addMessage]);
+    const types = ['clearCart', 'addIntoCart'];
+    const payloads = [{}, { location, productId, quantity }];
 
-    Worker.sendRequest(request);
+    Worker.sendMessageGroup(types, payloads);
   }
 
   static async processCheckout(location, acceptTermsOfUse, comment) {
-    const message = Worker.createMessage('processCheckout', {location, acceptTermsOfUse, comment});
-    const request = Worker.createRequest([message]);
-
-    const response = await Worker.sendRequest(request);
-
-    return Worker.getResponseMessage('processCheckout', response) || Worker.getErrorMessage(response);
-  }
-
-  static async getOrder(orderId) {
-    const message = Worker.createMessage('getOrder', {orderId});
-    const request = Worker.createRequest([message]);
-
-    const response = await Worker.sendRequest(request);
-
-    return Worker.getResponseMessage('getOrder', response);
+    return Worker.sendOneMessage('processCheckout', { location, acceptTermsOfUse, comment });
   }
 
   static async checkPayment(orderId) {
-    const message = Worker.createMessage('checkPayment', {orderId});
-    const request = Worker.createRequest([message]);
+    return Worker.sendOneMessage('checkPayment', { orderId });
+  }
 
-    const response = await Worker.sendRequest(request);
-
-    return Worker.getResponseMessage('checkPayment', response);
+  static async getOrder(orderId) {
+    return Worker.sendOneMessage('getOrder', { orderId });
   }
 
   static async getOrders() {
-    const message = Worker.createMessage('getOrders', {});
-    const request = Worker.createRequest([message]);
-
-    const response = await Worker.sendRequest(request);
-
-    return Worker.getResponseMessage('getOrders', response);
+    return Worker.sendOneMessage('getOrders', {});
   }
 }

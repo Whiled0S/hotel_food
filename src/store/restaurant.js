@@ -1,6 +1,6 @@
-import RPC from "../rpc";
+import RPC from '../rpc';
 
-const defaultCategories = [{name: 'All', id: -1}];
+const defaultCategories = [{ name: 'All', id: -1 }];
 
 export default {
   namespaced: true,
@@ -52,71 +52,51 @@ export default {
   },
 
   actions: {
-    async getRestaurantData({commit, rootState}, {businessId}) {
+    async getRestaurantData({ commit, rootState }, { businessId }) {
       const [productsMessage, locationMessage] = await RPC.getRestaurantData(businessId, rootState.locationHash);
 
-      RPC.preventError(productsMessage, () => {
-        const {
-          payload: {blocks, business, categories}
-        } = productsMessage;
+      const { payload: { blocks, business, categories } } = productsMessage;
+      const { payload } = locationMessage;
 
-        commit('SET_BLOCKS', blocks);
-        commit('SET_BUSINESS', business);
-        commit('SET_CATEGORIES', categories);
-      });
-
-      RPC.preventError(locationMessage, () => {
-        const {payload} = locationMessage;
-
-        commit('SET_LOCATION', payload);
-      });
+      commit('SET_BLOCKS', blocks);
+      commit('SET_BUSINESS', business);
+      commit('SET_CATEGORIES', categories);
+      commit('SET_LOCATION', payload);
     },
 
-    async getProductsByBusiness({commit}, {businessId}) {
+    async getProductsByBusiness({ commit }, { businessId }) {
       const responseMessage = await RPC.getProductsByBusiness(businessId);
 
-      RPC.preventError(responseMessage, () => {
-        const {
-          payload: {blocks, business, categories}
-        } = responseMessage;
+      const { payload: { blocks, business, categories } } = responseMessage;
 
-        commit('SET_BLOCKS', blocks);
-        commit('SET_BUSINESS', business);
-        commit('SET_CATEGORIES', categories);
-      });
+      commit('SET_BLOCKS', blocks);
+      commit('SET_BUSINESS', business);
+      commit('SET_CATEGORIES', categories);
     },
 
-    async getBlocks({commit}, {businessId}) {
+    async getBlocks({ commit }, { businessId }) {
       commit('SET_ITEMS_LOADING', true);
 
       const responseMessage = await RPC.getProductsByBusiness(businessId);
 
-      RPC.preventError(responseMessage, () => {
-        const {
-          payload: {blocks}
-        } = responseMessage;
+      const { payload: { blocks } } = responseMessage;
 
-        commit('SET_BLOCKS', blocks);
-        commit('SET_ITEMS_LOADING', false);
-      });
+      commit('SET_BLOCKS', blocks);
+      commit('SET_ITEMS_LOADING', false);
     },
 
-    async getProductByCategory({commit}, {businessId, categoryId}) {
+    async getProductByCategory({ commit }, { businessId, categoryId }) {
       commit('SET_ITEMS_LOADING', true);
 
       const responseMessage = await RPC.getProductByCategory(businessId, categoryId);
 
-      RPC.preventError(responseMessage, () => {
-        const {
-          payload: {items}
-        } = responseMessage;
+      const { payload: { items } } = responseMessage;
 
-        commit('SET_PRODUCTS', items);
-        commit('SET_ITEMS_LOADING', false);
-      });
+      commit('SET_PRODUCTS', items);
+      commit('SET_ITEMS_LOADING', false);
     },
 
-    cleanDishes({commit}) {
+    cleanDishes({ commit }) {
       commit('SET_BLOCKS', null);
       commit('SET_PRODUCTS', null);
     }

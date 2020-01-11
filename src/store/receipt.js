@@ -1,4 +1,4 @@
-import RPC from "../rpc";
+import RPC from '../rpc';
 
 export default {
   namespaced: true,
@@ -31,24 +31,18 @@ export default {
   },
 
   actions: {
-    async getOrder({commit}, {orderId}) {
-      const {payload: {status}} = await RPC.checkPayment(orderId);
+    async getOrder({ commit }, { orderId }) {
+      const { payload: { status } } = await RPC.checkPayment(orderId);
 
       if (status !== 'AUTHORIZED') return commit('SET_ERROR', true);
 
       const responseMessage = await RPC.getOrder(orderId);
 
-      RPC.preventError(responseMessage, () => {
-        const {
-          payload: {
-            item: {location, order, products}
-          }
-        } = responseMessage;
+      const { payload: { item: { location, order, products } } } = responseMessage;
 
-        commit('SET_LOCATION', location);
-        commit('SET_ORDER', order);
-        commit('SET_PRODUCTS', products);
-      });
+      commit('SET_LOCATION', location);
+      commit('SET_ORDER', order);
+      commit('SET_PRODUCTS', products);
     }
   }
 };

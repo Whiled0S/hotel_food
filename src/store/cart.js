@@ -1,4 +1,4 @@
-import RPC from "../rpc";
+import RPC from '../rpc';
 
 export default {
   namespaced: true,
@@ -30,7 +30,7 @@ export default {
       const itemIndex = state.items.findIndex(item => item.id === product.id);
 
       if (itemIndex === -1) {
-        state.items.push({...product, quantityInCart: 1, image: product.images[0]});
+        state.items.push({ ...product, quantityInCart: 1, image: product.images[0] });
       } else {
         state.items[itemIndex].quantityInCart++;
       }
@@ -92,62 +92,53 @@ export default {
   },
 
   actions: {
-    addIntoCart({rootState}, {productId, amount}) {
+    addIntoCart({ rootState }, { productId, amount }) {
       return RPC.addIntoCart(rootState.locationHash, productId, amount);
     },
 
-    async getCart({commit, rootState}) {
+    async getCart({ commit, rootState }) {
       const [cartResponse, suggestedResponse] = await RPC.getCart(rootState.locationHash);
 
-      RPC.preventError(cartResponse, () => {
-        const {
-          payload: {cart}
-        } = cartResponse;
+      const { payload: { cart } } = cartResponse;
+      const { payload: { items } } = suggestedResponse;
 
-        if (cart) {
-          commit('SET_CART_ITEMS', cart.items);
-          commit('SET_CART_ORDER', cart.order);
-        } else {
-          commit('SET_CART_ITEMS', []);
-        }
-      });
+      if (cart) {
+        commit('SET_CART_ITEMS', cart.items);
+        commit('SET_CART_ORDER', cart.order);
+      } else {
+        commit('SET_CART_ITEMS', []);
+      }
 
-      RPC.preventError(suggestedResponse, () => {
-        const {
-          payload: {items}
-        } = suggestedResponse;
-
-        if (items && items.length) {
-          commit('SET_SUGGESTED_ITEMS', items);
-        }
-      });
+      if (items && items.length) {
+        commit('SET_SUGGESTED_ITEMS', items);
+      }
     },
 
-    deleteFromCart({commit}, {productId}) {
+    deleteFromCart({ commit }, { productId }) {
       commit('DELETE_PRODUCT', productId);
       RPC.deleteFromCart(productId);
     },
 
-    clearCart({commit}) {
+    clearCart({ commit }) {
       commit('CLEAR_CART');
       RPC.clearCart();
     },
 
-    resetCart({commit}) {
+    resetCart({ commit }) {
       commit('RESET_CART');
     },
 
-    async processCheckout({commit, rootState}, {acceptTermsOfUse, comment}) {
+    async processCheckout({ commit, rootState }, { acceptTermsOfUse, comment }) {
       commit('SET_CHECKOUT_PENDING', true);
       const responseMessage = await RPC.processCheckout(rootState.locationHash, acceptTermsOfUse, comment);
 
       if (responseMessage.type === 'error') {
         commit('SET_CHECKOUT_PENDING', false);
 
-        const {payload: {context}} = responseMessage;
+        const { payload: { context } } = responseMessage;
 
         if (context) {
-          const {attribute} = context;
+          const { attribute } = context;
 
           if (attribute === 'acceptTermsOfUse') {
             commit('SET_HIGHLIGHT_TERMS', true);
@@ -156,17 +147,12 @@ export default {
           alert(responseMessage.payload.message);
         }
       } else {
-        RPC.preventError(responseMessage, () => {
-          const {
-            payload: {url}
-          } = responseMessage;
-
-          window.location.href = url;
-        });
+        const { payload: { url } } = responseMessage;
+        window.location.href = url;
       }
     },
 
-    async clearCartAndAddItem({rootState}, {productId, amount}) {
+    async clearCartAndAddItem({ rootState }, { productId, amount }) {
       return RPC.clearCartAndAddItem(rootState.locationHash, productId, amount);
     }
   }

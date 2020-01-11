@@ -29,6 +29,7 @@
 <style lang="less" scoped>
   .mini-card {
     width: 35vw;
+    min-width: 35vw;
 
     &:not(:last-of-type) {
       margin-right: 20px;

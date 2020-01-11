@@ -1,6 +1,6 @@
-import RPC from "../rpc";
+import RPC from '../rpc';
 
-const defaultCategories = [{name: 'All', id: -1}];
+const defaultCategories = [{ name: 'All', id: -1 }];
 
 export default {
   namespaced: true,
@@ -52,50 +52,42 @@ export default {
   },
 
   actions: {
-    async getIndexData({commit, rootState}) {
+    async getIndexData({ commit, rootState }) {
       const responseMessage = await RPC.getIndexData(rootState.locationHash);
 
-      RPC.preventError(responseMessage, () => {
-        const {
-          payload: {company, location, categories, blocks}
-        } = responseMessage;
+      const { payload: { company, location, categories, blocks } } = responseMessage;
 
-        commit('SET_COMPANY', company);
-        commit('SET_LOCATION', location);
-        commit('SET_CATEGORIES', categories);
-        commit('SET_BLOCKS', blocks);
-      });
+      commit('SET_COMPANY', company);
+      commit('SET_LOCATION', location);
+      commit('SET_CATEGORIES', categories);
+      commit('SET_BLOCKS', blocks);
     },
 
-    cleanRestaurants({commit}) {
+    cleanRestaurants({ commit }) {
       commit('SET_BLOCKS', null);
       commit('SET_BUSINESSES', null);
     },
 
-    async getBlocks({commit, rootState}) {
+    async getBlocks({ commit, rootState }) {
       commit('SET_ITEMS_LOADING', true);
 
       const responseMessage = await RPC.getIndexData(rootState.locationHash);
 
-      RPC.preventError(responseMessage, () => {
-        const {payload: {blocks}} = responseMessage;
+      const { payload: { blocks } } = responseMessage;
 
-        commit('SET_BLOCKS', blocks);
-        commit('SET_ITEMS_LOADING', false);
-      });
+      commit('SET_BLOCKS', blocks);
+      commit('SET_ITEMS_LOADING', false);
     },
 
-    async getBusinessesByCategory({commit, rootState}, {categoryId}) {
+    async getBusinessesByCategory({ commit, rootState }, { categoryId }) {
       commit('SET_ITEMS_LOADING', true);
 
       const responseMessage = await RPC.getBusinessesByCategory(rootState.locationHash, categoryId);
 
-      RPC.preventError(responseMessage, () => {
-        const {payload: {items}} = responseMessage;
+      const { payload: { items } } = responseMessage;
 
-        commit('SET_BUSINESSES', items);
-        commit('SET_ITEMS_LOADING', false);
-      });
+      commit('SET_BUSINESSES', items);
+      commit('SET_ITEMS_LOADING', false);
     }
   }
 };
