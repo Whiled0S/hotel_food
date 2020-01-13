@@ -84,6 +84,7 @@ export default {
     RESET_CART(state) {
       state.items = null;
       state.order = null;
+      state.suggestedItems = null;
     },
 
     SET_CHECKOUT_PENDING(state, status) {
